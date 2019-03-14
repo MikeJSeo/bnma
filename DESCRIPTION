@@ -1,0 +1,14 @@
+Package: bnma
+Type: Package
+Title: Bayesian Network Meta-Analysis using JAGS
+Version: 1.0.0
+Depends: R (>= 2.10)
+Imports: rjags (>= 4-6), graphics, stats, utils, coda (>= 0.13), ggplot2, grid, igraph
+Authors@R: c( 
+	person("Michael", "Seo", email = "swj8874@gmail.com", role = c("aut", "cre")),
+	person("Christopher", "Schmid", email = "christopher_schmid@brown.edu", role = "aut")) 
+Description: Network meta-analyses using Bayesian framework. Based on the data input, creates prior, model file, and initial values needed to run models in rjags. Able to handle binomial, normal and multinomial arm-based data. Can handle multi-arm trials and includes methods to incorporate covariate and baseline risk effects. Includes standard diagnostics and visualization tools to evaluate the results.
+License: GPL-3
+LazyData: true
+RoxygenNote: 6.1.1
+Encoding: UTF-8

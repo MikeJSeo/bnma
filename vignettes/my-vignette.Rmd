@@ -34,7 +34,9 @@ In order to run network meta analysis in JAGS, we need to change the arm-level d
 
 
 ```{r}
-data <- with(fake_data, preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial"))
+new <- with(fake_data, preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial"))
+new$data
+
 ```
 
 We describe how to 

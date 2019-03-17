@@ -15,4 +15,5 @@ Encoding: UTF-8
 Suggests: 
     knitr,
     rmarkdown
-VignetteBuilder: knitr
+VignetteBuilder: knitr  
+   

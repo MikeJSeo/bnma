@@ -163,7 +163,7 @@ check.for.errors <- function(network){
     if(any(na == 1)) stop("study cannot have only 1 arm or arms have to be next to each other in each study")
     
     
-    if(length(unique(paste(Study, Treat))) == length(Treat)){
+    if(length(unique(paste(Study, Treat))) != length(Treat)){
       stop("There is repetitive treatment in a single study; Each study should have only one treatment")
     }
     

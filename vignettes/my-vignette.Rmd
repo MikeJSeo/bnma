@@ -24,19 +24,17 @@ library(bnma)
 
 ## Preprocessing
 
-It is essential to specify the input data in a correct format. We have chosen to use arm-level data with following input variable names: Outcomes, N or SE, Study, and Treat. Outcomes is the trial results. N is the number of respondents used for binary or multinomial model. SE is the standard error used for normal model. Study is the study indicator for the meta analysis. Lastly, Treat is the treatment indicator for each arm. we generated a fake dataset `fake_dataset` for illustration.
+It is essential to specify the input data in a correct format. We have chosen to use arm-level data with following input variable names: Outcomes, N or SE, Study, and Treat. Outcomes is the trial results. N is the number of respondents used for binary or multinomial model. SE is the standard error used for normal model. Study is the study indicator for the meta analysis. Lastly, Treat is the treatment indicator for each arm. we generated a fake dataset `fake_data` for illustration.
 
 ```{r}
-fake_dataset
+fake_data
 ```
 
-Once we 
-
-In order to run network meta analysis using arm-level format, we need to make couple changes in the format and define necessary variables. This is what `preprocessing.data` call does. However, you do not need to call this function. Instead, `network.data` is a wrapper function that calls `preprocessing.data` and other functions. The reasoning behind making a function `preprocessing.data` is to make it more transparent for users to see how their data is being transformed and also possibly locate the error with ease.
+In order to run network meta analysis in JAGS, we need to change the arm-level data into study-level data, relabel Study names into to a numeric sequence, and relabel the treatment according to treatment order specified. This is what `preprocessing.data` function does. However, you do not need to call this function. Instead, `network.data` is a wrapper function that calls `preprocessing.data` and other functions. The reasoning behind making a function `preprocessing.data` is to make it more transparent for users to see how their data is being transformed and also locate possible errors with ease. Also basic error checks are done in `preprocessing.data`.
 
 
 ```{r}
-#preprocess.data()
+data <- with(fake_data, preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial"))
 ```
 
 We describe how to 

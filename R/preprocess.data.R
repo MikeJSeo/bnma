@@ -25,7 +25,7 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
   }
 
   list(data = data, Treat.order = transform$Treat.order, Study.order = transform$Study.order,
-       response = response, Treat.order = Treat.order, type = type, baseline = baseline, baseline.risk = baseline.risk,
+       response = response, type = type, baseline = baseline, baseline.risk = baseline.risk,
        covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model)
 
 }

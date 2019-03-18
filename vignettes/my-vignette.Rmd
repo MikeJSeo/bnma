@@ -24,23 +24,25 @@ library(bnma)
 
 ## Preprocessing
 
-It is essential to specify the input data in a correct format. We have chosen to use arm-level data with following input variable names: Outcomes, N or SE, Study, and Treat. Outcomes is the trial results. N is the number of respondents used for binary or multinomial model. SE is the standard error used for normal model. Study is the study indicator for the meta analysis. Lastly, Treat is the treatment indicator for each arm. we generated a fake dataset `fake_data` for illustration.
+It is essential to specify the input data in a correct format. We have chosen to use arm-level data with following input variable names: Outcomes, N or SE, Study, and Treat. Outcomes is the trial results. N is the number of respondents used for binary or multinomial model. SE is the standard error used for normal model. Study is the study indicator for the meta analysis. Lastly, Treat is the treatment indicator for each arm. We generated a fake dataset `fake_data` for illustration.
 
 ```{r}
 fake_data
 ```
 
-In order to run network meta analysis in JAGS, we need to change the arm-level data into study-level data, relabel Study names into to a numeric sequence, and relabel the treatment according to treatment order specified. This is what `preprocessing.data` function does. However, you do not need to call this function. Instead, `network.data` is a wrapper function that calls `preprocessing.data` and other functions. The reasoning behind making a function `preprocessing.data` is to make it more transparent for users to see how their data is being transformed and also locate possible errors with ease. Also basic error checks are done in `preprocessing.data`.
-
+In order to run network meta analysis in JAGS, we need to relabel study names into to a numeric sequence, i.e. 1 to total number of studies, and relabel the treatment into a numeric sequence according to treatment order specified. If treatment order is not specified, default is to use alphabetical order. In the example below, we set "Placebo" as the baseline treatment.
 
 ```{r}
-new <- with(fake_data, preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial"))
-new$data
-
+network <- with(fake_data, network.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial", Treat.order = c("Placebo", "Treatment")))
+network$Treat.order 
+network$Study.order
 ```
 
-We describe how to 
-Quite often, it is most time consuming to prepare the data in the right format before running algorithm in R. We go over in more detail what inputs are expected to run network meta analysis in R. Firstly, 
+Another important preprocessing step that is done through `network.data` function is to change the arm-level data into study-level data. We store the study-level data of Outcomes as r, Treat as t, N or SE as n or se.
+
+
+
+
 
 
 Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:

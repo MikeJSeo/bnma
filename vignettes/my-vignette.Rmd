@@ -44,6 +44,9 @@ Another important preprocessing step that is done through `network.data` functio
 network$r
 ```
 
+## Priors
+
+Section for priors
 
 
 

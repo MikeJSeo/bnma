@@ -13,7 +13,7 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
                             hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL){
 
   network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type,
-                  baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model
+                  baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model,
                   hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior)
           
   check.for.errors(network) # check for errors in the data specified

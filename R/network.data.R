@@ -65,7 +65,7 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   # rename the variables and order them based on specified treatment order
   network <- preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type,
                   baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model,
-                  hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior)
+                  hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior)
 
   # find characteristic values associated with the network, i.e. number of studies, number of treatments, etc
   characteristics <- find.characteristics(network)

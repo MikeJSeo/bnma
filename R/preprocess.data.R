@@ -10,7 +10,7 @@
 
 preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random",
                             baseline = "none", baseline.risk = "independent", covariate = NULL, covariate.type = NULL, covariate.model = NULL,
-                            hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL)}
+                            hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL){
 
   network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type,
                   baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model

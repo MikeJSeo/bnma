@@ -75,7 +75,7 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   new.inputs <- change.dimensions(network)
   network <- append(network, new.inputs)
 
-  # check hy.prior, generate default priors if not specified - TODO
+  # generate default priors if not specified - TODO
 
   
   

@@ -38,7 +38,7 @@ network$Treat.order
 network$Study.order
 ```
 
-Another important preprocessing step that is done through `network.data` function is to change the arm-level data into study-level data. We store the study-level data of Outcomes as r, Treat as t, N or SE as n or se. We can see how Outcomes changed into a matrix from below. Similarly, if the Outcomes are multinomial, it will be 3 dimensional array.
+Another important preprocessing step that is done through `network.data` function is to change the arm-level data into study-level data. We store the study-level data of Outcomes as r, Treat as t, N or SE as n or se. We can see how Outcomes changed into a matrix from below. Similarly, if the Outcomes are multinomial, it will change to a 3 dimensional array.
 
 ```{r}
 network$r

@@ -7,12 +7,15 @@
 #'
 #' @export
 
+
 preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random",
-                            baseline = "none", baseline.risk = "independent", covariate = NULL, covariate.type = NULL, covariate.model = NULL){
+                            baseline = "none", baseline.risk = "independent", covariate = NULL, covariate.type = NULL, covariate.model = NULL,
+                            hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL)}
 
   network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type,
-                  baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model)
-
+                  baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model
+                  hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior)
+          
   check.for.errors(network) # check for errors in the data specified
 
   # changes treatment and study names and order it based on treat.order or alphabetical order if left unspecified
@@ -166,5 +169,33 @@ check.for.errors <- function(network){
       stop("There are repetitive treatments in a single study. Each study should have only one treatment")
     }
     
+    
+    # check heterogeneity priors
+    if(!is.null(hy.prior)){
+      check.hy.prior(hy.prior, response)
+    }
+    if(!is.null(hy.prior.bl)){
+      check.hy.prior(hy.prior.bl, response)
+    }
+    if(!is.null(hy.prior.cov)){
+      check.hy.prior(hy.prior.cov, response)
+    }
+    
+
   })
+}
+
+
+check.hy.prior <- function(hy.prior, response){
+  
+  if(length(hy.prior) != 3) stop("length of the hy.prior has to be 3 (Distribution, and two parameters for the distribution)")
+  
+  distr = hy.prior[[1]]
+  stopifnot(distr %in% c("dunif", "dgamma", "dhnorm", "dwish"))
+  
+  if(response == "normal" || response == "binomial"){
+    stopifnot(distr %in% c("dunif", "dgamma", "dhnorm"))
+  } else if(response == "multinomial"){
+    stopifnot(distr %in% c("dwish"))
+  }
 }

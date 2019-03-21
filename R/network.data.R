@@ -75,8 +75,13 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   new.inputs <- change.dimensions(network)
   network <- append(network, new.inputs)
 
-  # generate default priors if not specified - TODO
-
+  # generate default priors for heterogeneity if not specified
+  hy.prior <- hy.prior.update(network = network, hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior)
+  network <- append(network, hy.prior)
+    
+  # generate prior data that will be used for running JAGS model
+  prior.data <- network.prior.default(network, mean.d, prec.d, mean.Eta, prec.Eta, hy.prior.Eta, mean.bl, prec.bl, hy.prior.bl, mean.cov, prec.cov, hy.prior.cov, hy.prior)
+  network <- append(network, prior.data)
   
   
   # generate JAGS code - TODO

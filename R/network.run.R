@@ -71,7 +71,6 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
     if(baseline != "none"){
       data$mx_bl = mx_bl
     }
-    print(data)
     
     ########## parameters to save in the model
     pars.save <-
@@ -137,7 +136,7 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
           indiv.data$SE <- network$data[,"SE"]
         }
         network2 <- append(network, indiv.data)
-        inits <- network.inits(network2, n.chains) 
+        #inits <- network.inits(network2, n.chains) 
       }
     }
     

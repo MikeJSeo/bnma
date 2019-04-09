@@ -39,9 +39,9 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
   }
   
   # change covariate as a matrix if it exists
-  if(is.null(covariate)){
-    covariate <- as.matrix(covariate)  
-  }
+ # if(is.null(covariate)){
+#    covariate <- as.matrix(covariate)  
+ # }
 
   list(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, SE = SE,
        data = data, Treat.order = transform$Treat.order, Study.order = transform$Study.order,

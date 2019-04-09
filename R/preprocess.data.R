@@ -37,6 +37,9 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
   } else if(response == "normal"){
     SE <- data[,"SE"]
   }
+  
+  # change covariate as a matrix
+  covariate <- as.matrix(covariate)
 
   list(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, SE = SE,
        data = data, Treat.order = transform$Treat.order, Study.order = transform$Study.order,

@@ -82,9 +82,13 @@ result <- network.run(network)
 summary(result)
 ```
 
+## Adding covariates
+
+
+
 ## Baseline Risk
 
-One important addition to the network package that most packages don't have is the ability to add baseline risk. Here we show how to add common treatment x baseline risk interactions (slopes) and independent baseline. Depending on how we select parameters `baseline` and `baseline.risk`, we can fit a differnt baseline risk model. Please refer to Achana et al (2013) for details.
+Another important addition to this network package is the ability to add baseline risk. Here we show how to add common treatment x baseline risk interactions (slopes) and independent baseline risk. Depending on how we select parameters `baseline` and `baseline.risk`, we can fit a differnt baseline risk model. Please refer to Achana et al (2013) for more details.
 
 ```{r}
 network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "common", baseline.risk = "independent"))

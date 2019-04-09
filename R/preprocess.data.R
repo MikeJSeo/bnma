@@ -28,14 +28,14 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
   }
   
   # add in outcomes, study, treat N, SE again
-  Outcomes <- as.matrix(network$data[,1:(ncol(network$data) - 3)])
-  Treat <- network$data[,"Treat"]
-  Study <- network$data[,"Study"]
+  Outcomes <- as.matrix(data[,1:(ncol(data) - 3)])
+  Treat <- data[,"Treat"]
+  Study <- data[,"Study"]
   store <- list(Outcomes = Outcomes, Treat = Treat, Study = Study)
   if(response == "binomial" || response == "multinomial"){
-    N <- network$data[,"N"]
+    N <- data[,"N"]
   } else if(response == "normal"){
-    SE <- network$data[,"SE"]
+    SE <- data[,"SE"]
   }
 
   list(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, SE = SE,

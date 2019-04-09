@@ -26,12 +26,26 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
   if(baseline.risk == "exchangeable"){
     data <- add.fictitious.row(network, data)
   }
+  
+  # add in outcomes, study, treat N, SE again
+  Outcomes <- as.matrix(network$data[,1:(ncol(network$data) - 3)])
+  Treat <- network$data[,"Treat"]
+  Study <- network$data[,"Study"]
+  store <- list(Outcomes = Outcomes, Treat = Treat, Study = Study)
+  if(response == "binomial" || response == "multinomial"){
+    N <- network$data[,"N"]
+  } else if(response == "normal"){
+    SE <- network$data[,"SE"]
+  }
 
-  list(data = data, Treat.order = transform$Treat.order, Study.order = transform$Study.order,
+  list(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, SE = SE,
+       data = data, Treat.order = transform$Treat.order, Study.order = transform$Study.order,
        response = response, type = type, rank.preference = rank.preference, baseline = baseline, baseline.risk = baseline.risk,
        covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model)
 
 }
+
+
 
 add.fictitious.row <- function(network, data){
 

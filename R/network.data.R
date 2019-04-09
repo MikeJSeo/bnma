@@ -229,10 +229,10 @@ calculate.covariate.mean <- function(network){
         nam <- paste("mx",i, sep = "")
         nam <- assign(nam, mean(covariate[,i], na.rm = TRUE))
         
-        network[[paste("mx",i, sep = "")]] <- ifelse(covariate.type[i] == "continuous", nam, 0)
+        store[[paste("mx",i, sep = "")]] <- ifelse(covariate.type[i] == "continuous", nam, 0)
+        
         nam2 <- paste("x", i, sep = "")
         nam2 <- assign(nam2, covariate[,i])
-        
         store[[paste("x", i, sep = "")]] <- nam2
       }
     }

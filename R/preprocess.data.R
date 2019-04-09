@@ -38,8 +38,15 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
     SE <- data[,"SE"]
   }
   
+  # covariate modifications
   if(!is.null(covariate)){
+    if(is.null(covariate.model)){
+      covariate.model <- "common"
+    }
     covariate <- as.matrix(covariate)
+    if(is.null(covariate.type)){
+      covariate.type = rep("continuous", dim(covariate)[2])
+    }
   }
   
   list(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, SE = SE,
@@ -159,13 +166,7 @@ check.for.errors <- function(network){
       if(!is.matrix(covariate) && !is.vector(covariate)){
         stop("covariate has to be vector if there is only one and it is a matrix if there is more than one")
       }
-      if(is.null(covariate.model)){
-        covariate.model <- "common"
-      }
-      covariate <- as.matrix(covariate)
-      if(is.null(covariate.type)){
-        covariate.type = rep("continuous", dim(covariate)[2])
-      }
+
       if(!all(apply(covariate, 2, is.numeric))){
         stop("covariate has to be numeric type")
       }

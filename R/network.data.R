@@ -35,7 +35,7 @@
 #' @return Creates list of variables that are used to run the model using \code{\link{network.run}}
 #' \item{data}{Data combining all the input data. User can check this to insure the data is correctly specified. For modelling purposes, character valued studies or treatment variables are changed to numeric values based on alphabetical order.}
 #' \item{nrow}{Total number of arms in the meta-analysis}
-#' \item{ncol}{Number of columns in the Outcomes. Will equal 1 for binary and normal and number of categories for multinomial}
+#' \item{ncat}{Number of columns in the Outcomes. Will equal 1 for binary and normal and number of categories for multinomial}
 #' \item{nstudy}{Number of study}
 #' \item{na}{Number of arms for each study}
 #' \item{ntreat}{Number of treatment}
@@ -124,12 +124,13 @@ change.dimensions <- function(network){
 find.characteristics <- function(network){
 
   with(network,{
-    ncol <- dim(data)[2] - 3
+    ncat <- dim(data)[2] - 3
     nrow <- dim(data)[1]
     nstudy <- length(Study.order)
     ntreat <- length(Treat.order)
     na <- rle(data[,"Study"])$lengths
-
+    ncat <- ifelse(is.null(miss.matrix), ncol, dim(miss.matrix)[2])
+    
     ends <- cumsum(na) # End row of trials
     starts <- c(1, ends[-length(ends)] + 1) # Start row of trials
     b.Treat <- rep(NA, length(na))
@@ -140,7 +141,7 @@ find.characteristics <- function(network){
       b.id[limits[b.Treat[i] == data[,"Treat"][limits]]] <- T
     }
 
-    return(list(ncol = ncol, nrow = nrow, nstudy = nstudy, ntreat = ntreat, na = na, b.id = b.id))
+    return(list(ncat = ncat, nrow = nrow, nstudy = nstudy, ntreat = ntreat, na = na, b.id = b.id))
   })
 }
 

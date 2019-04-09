@@ -57,7 +57,6 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
     
     data <- append(data, prior.data)
   
-    
     # add covariate info
     if(!is.null(covariate)){
       for(i in seq(dim(covariate)[2])){
@@ -93,13 +92,7 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
     } else if(response == "normal"){
       pars.save <- c(pars.save, "theta", "dev")
     } else if(response == "multinomial"){
-      if(is.null(miss.matrix)){
-        pars.save <- c(pars.save, "rhat", "dev")
-      } else{
-        for(i in 1:npattern){
-          pars.save <- c(pars.save, paste0("rhat", i), paste0("dev", i))
-        }        
-      }
+      pars.save <- c(pars.save, "rhat", "dev")
     }
     
     if(baseline != "none"){

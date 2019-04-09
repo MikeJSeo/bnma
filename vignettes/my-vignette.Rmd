@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 We describe how to run Bayesian network meta analysis using this package. First we'll need to load the package.
 
 ```{r}
-#
+devtools::install_github("MikeJSeo/bnma")
 library(bnma)
 ```
 

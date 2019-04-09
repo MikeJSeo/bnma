@@ -123,11 +123,22 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
     }
     pars.save <- unique(pars.save)
     
-    #if(is.null(inits)){
-    #  if(!any(is.na(network$data))){
-    #    inits <- network.inits(network, n.chains)  
-    #  }
-    #}
+    if(is.null(inits)){
+      if(!any(is.na(network$data))){
+        #quick fix
+        Outcomes <- as.matrix(data[,1:ncol])
+        Treat <- data$Treat
+        Study <- data$Study
+        indiv.data <- list(Outcomes = Outcomes, Treat = Treat, Study = Study)
+        if(response == "binomial" || response == "multinomial"){
+          indiv.data$N <- data$N
+        } else if(response == "normal"){
+          indiv.data$SE <- data$SE
+        }
+        network2 <- append(network, indiv.data)
+        inits <- network.inits(network2, n.chains)  
+      }
+    }
     
     samples <- jags.fit(network, data, pars.save, inits, n.chains, max.run, setsize, n.run, conv.limit)
     

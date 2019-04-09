@@ -46,56 +46,25 @@ network$r
 
 ## Priors
 
-Section for priors
+Priors can be set in the data step. Most of the parameters for the priors are self-explanatory. For heterogeneity parameters for random effects model, we follow the data format from R package `gemtc`. It should be a list of length 3 where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. Here is an example
 
-
-
-
-
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r}
+network <- with(smoking, network.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial", mean.d = 0.1, hy.prior = list("dhnorm", 0, 5)))
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+## Running the model
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+Now to run the network, we use the function `network.run`. There are many parameters that can be modified, but the most important is the parameter `n.run` which determines how many final observations the user wants. Gelman-Rubin statitics is checked automatically every `setsize` number of iterations and once the series have converged we take the last half of the sequence. If the number of iteration is less than the number of observations user wanted (`n.runs`), it will sample more to fill the requirement. One of the neat thing about this package is it checks for convergence automatically and will give an error if the sequence has not converged.
+The number that is printed during the running of the model is the Gelman-Rubin statistics.
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r}
+result <- network.run(network, n.run = 60000)
 ```
 
-Also a quote using `>`:
+## Summarizing the model
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+Package include many summary tools that can be used. Some of the more useful ones can be the forest plot. Please read the R package guide for more possible options
+
+```{r}
+network.forest.plot(result)
+```

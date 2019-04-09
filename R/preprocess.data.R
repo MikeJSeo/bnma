@@ -8,11 +8,11 @@
 #' @export
 
 
-preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random",
+preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random", rank.preference = "higher",
                             baseline = "none", baseline.risk = "independent", covariate = NULL, covariate.type = NULL, covariate.model = NULL,
                             hy.prior.Eta = NULL, hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL){
 
-  network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type,
+  network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type, rank.preference = rank.preference,
                   baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model,
                   hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior)
           
@@ -28,7 +28,7 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
   }
 
   list(data = data, Treat.order = transform$Treat.order, Study.order = transform$Study.order,
-       response = response, type = type, baseline = baseline, baseline.risk = baseline.risk,
+       response = response, type = type, rank.preference = rank.preference, baseline = baseline, baseline.risk = baseline.risk,
        covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model)
 
 }

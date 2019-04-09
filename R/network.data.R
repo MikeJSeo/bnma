@@ -14,6 +14,7 @@
 #' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial".
 #' @param Treat.order Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.
 #' @param type Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".
+#' @param rank.preference Set it equal to "higher" if higher values are preferred (i.e. assumes events are good). Set it equal to "lower" if lower values are preferred (i.e. assumes events are bad). Default is "higher".
 #' @param baseline Three different assumptions for treatment x baseline risk interactions (slopes): "independent", "common", or "exchangeable". Default is "none" which doesn't incorporate baseline risk.
 #' @param baseline.risk Two different assumptions for baseline risk: "independent" or "exchangeable". See Achana et al. (2012) for more information about baseline risk.
 #' @param covariate A covariate matrix with each row representing each trial and column representing each covariate. This is a study-level data, meaning that the user doesn't need to repeatedly specify covariates for each arm.
@@ -57,13 +58,13 @@
 #' @references N.J. Cooper, A.J. Sutton, D. Morris, A.E. Ades, N.J. Welton (2009), \emph{Addressing between-study heterogeneity and inconsistency in mixed treatment comparisons: Application to stroke prevention treatments in individuals with non-rheumatic atrial fibrillation}, Statistics in Medicine 28:1861-1881. [\url{https://doi.org/10.1002/sim.3594}]
 #' @export
 
-network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random",
+network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random", rank.preference = "higher",
                          baseline = "none", baseline.risk = "independent", covariate = NULL, covariate.type = NULL, covariate.model = NULL,
                          mean.d = NULL, prec.d = NULL, mean.Eta = NULL, prec.Eta = NULL, hy.prior.Eta = NULL, mean.bl = NULL, prec.bl = NULL, hy.prior.bl = NULL,
                          mean.cov = NULL, prec.cov = NULL, hy.prior.cov = NULL, hy.prior = NULL) {
 
   # rename the variables and order them based on specified treatment order
-  network <- preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type,
+  network <- preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type, rank.preference = rank.preference,
                   baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model,
                   hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior)
 
@@ -83,8 +84,11 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   prior.data <- network.prior.default(network, mean.d, prec.d, mean.Eta, prec.Eta, hy.prior.Eta, mean.bl, prec.bl, hy.prior.bl, mean.cov, prec.cov, hy.prior.cov, hy.prior)
   network <- append(network, prior.data)
   
-  # generate JAGS code - TODO
-
+  # generate JAGS code
+  code <- network.rjags(network)
+  network$code <- code
+  
+  class(network) <- "network.data"
   return(network)
 }
 

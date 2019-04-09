@@ -185,7 +185,7 @@ calculate.baseline.log.odds <- function(network){
   with(network,{
     if(baseline %in% c("independent", "common", "exchangeable")){
       if(response == "normal"){
-        mean(r[,1][t[,1]==1], na.rm = TRUE)
+        return(mean(r[,1][t[,1]==1], na.rm = TRUE))
       }
       if(response == "binomial"){
         rdummy = r[,1]
@@ -196,7 +196,7 @@ calculate.baseline.log.odds <- function(network){
         #take only the non-active control group (treatment A) to calculate the observed mean log odds
         p = (rdummy[!is.na(rdummy)]/ndummy[!is.na(rdummy)]) #[t[,1][!is.na(rdummy)]==1]
         lodds = log(p/(1-p))
-        mean(lodds, na.rm = TRUE)
+        return(mean(lodds, na.rm = TRUE))
       }
       if(response == "multinomial"){
         #the first response in the multinomial is the reference, we will call it J
@@ -210,7 +210,7 @@ calculate.baseline.log.odds <- function(network){
           P_j[,j-1] = (r[,1,category[j]]/n[,1])[t[,1]==1]
         }
         lodds = log(P_j/P_J)
-        apply(lodds, 2, mean, na.rm = TRUE)
+        return(apply(lodds, 2, mean, na.rm = TRUE))
       }
     }
   })

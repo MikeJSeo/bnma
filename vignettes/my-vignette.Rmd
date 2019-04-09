@@ -5,8 +5,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Bayesian network meta analysis}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -47,7 +49,7 @@ network$r
 
 ## Priors
 
-Priors can be set in the data step. Most of the parameters for the priors are self-explanatory. For heterogeneity parameters for random effects model, we follow the data format from R package `gemtc`. It should be a list of length 3 where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. Here is an example
+Priors can be set in the `network.data` function. Most of the parameters for the priors are self-explanatory. For heterogeneity parameters for random effects model, we follow the data format from R package `gemtc`. It should be a list of length 3 where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. Here is an example.
 
 ```{r}
 network <- with(smoking, network.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial", mean.d = 0.1, hy.prior = list("dhnorm", 0, 5)))
@@ -55,17 +57,27 @@ network <- with(smoking, network.data(Outcomes = Outcomes, Study = Study, Treat 
 
 ## Running the model
 
-Now to run the network, we use the function `network.run`. There are many parameters that can be modified, but the most important is the parameter `n.run` which determines how many final observations the user wants. Gelman-Rubin statitics is checked automatically every `setsize` number of iterations and once the series have converged we take the last half of the sequence. If the number of iteration is less than the number of observations user wanted (`n.runs`), it will sample more to fill the requirement. One of the neat thing about this package is it checks for convergence automatically and will give an error if the sequence has not converged.
+Now to run the network, we use the function `network.run`. There are many parameters that can be modified, but the most important is the parameter `n.run` which determines how many final observations the user wants. Gelman-Rubin statitics is checked automatically every `setsize` number of iterations and once the series have converged we store the last half of the sequence. If the number of iteration is less than the number of observations user wanted (`n.runs`), it will sample more to fill the requirement. One of the neat thing about this package is that it checks for convergence automatically and will give an error if the sequence has not converged.
 The number that is printed during the running of the model is the Gelman-Rubin statistics.
 
 ```{r}
-result <- network.run(network, n.run = 60000)
+result <- network.run(network, n.run = 30000)
 ```
 
-## Summarizing the model
+## Model Summary
 
-Package include many summary tools that can be used. Some of the more useful ones can be the forest plot. Please read the R package guide for more possible options
+Package include many summary tools that can be used. One of the more useful summary might be the forest plot. Please look over the R package guide for more possible options.
 
-```{r}
+```{r, fig.width = 6, fig.height = 6}
 network.forest.plot(result)
 ```
+
+## Baseline Risk
+
+We have many features in addition to the general network model. One important addition to the network package that most packages don't have is the ability to add baseline risk. Please read Achana et al (2013) for more theoretical details. Below, we use their example on smoke alarm data. 
+
+```{r}
+network <- with(smoking, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", baseline = "common", baseline.risk = "exchangeable")) #Model A2
+result <- network.run(network)
+```
+

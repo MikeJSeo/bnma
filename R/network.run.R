@@ -136,7 +136,8 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
           indiv.data$SE <- network$data[,"SE"]
         }
         network2 <- append(network, indiv.data)
-        inits <- network.inits(network2, n.chains)  
+        inits <- network.inits(network2, n.chains) 
+        print(inits)
       }
     }
     

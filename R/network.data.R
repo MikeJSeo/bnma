@@ -129,8 +129,7 @@ find.characteristics <- function(network){
     nstudy <- length(Study.order)
     ntreat <- length(Treat.order)
     na <- rle(data[,"Study"])$lengths
-    ncat <- ifelse(is.null(miss.matrix), ncol, dim(miss.matrix)[2])
-    
+   
     ends <- cumsum(na) # End row of trials
     starts <- c(1, ends[-length(ends)] + 1) # Start row of trials
     b.Treat <- rep(NA, length(na))

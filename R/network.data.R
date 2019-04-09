@@ -88,6 +88,14 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   code <- network.rjags(network)
   network$code <- code
   
+  # calculate baseline log odds if baseline effect is specified
+  mx_bl <- calculate.baseline.log.odds(network)
+  network$mx_bl <- mx_bl
+  
+  # calculate covariate mean if covariate is specified
+  cov.mean <- calculate.covariate.mean(network)
+  network <- append(network, cov.mean)
+  
   class(network) <- "network.data"
   return(network)
 }
@@ -168,4 +176,63 @@ make.byStudy.matrix = function(Treat, Study){
     t[Study[i], arms_index[i]] = Treat[i]
   }
   return(t)
+}
+
+
+calculate.baseline.log.odds <- function(network){
+  
+  mx_bl <-
+  with(network,{
+    if(baseline %in% c("independent", "common", "exchangeable")){
+      if(response == "normal"){
+        mean(r[,1][t[,1]==1], na.rm = TRUE)
+      }
+      if(response == "binomial"){
+        rdummy = r[,1]
+        rdummy[r[,1] == 0] = 0.5
+        ndummy = n[,1]
+        ndummy[r[,1] == 0 & !is.na(r[,1])] = ndummy[r[,1] == 0 & !is.na(r[,1])] + 1
+        
+        #take only the non-active control group (treatment A) to calculate the observed mean log odds
+        p = (rdummy[!is.na(rdummy)]/ndummy[!is.na(rdummy)]) #[t[,1][!is.na(rdummy)]==1]
+        lodds = log(p/(1-p))
+        mean(lodds, na.rm = TRUE)
+      }
+      if(response == "multinomial"){
+        #the first response in the multinomial is the reference, we will call it J
+        category = which(apply((miss.patterns[[2]]), 1, sum) == 1)
+        J = category[1]
+        
+        #take only the control group
+        P_J = (r[,1,J]/n[,1])[t[,1]==1]
+        P_j = matrix(0, ncol = ncat-1, nrow = sum(t[,1]==1))
+        for(j in 2:ncat){
+          P_j[,j-1] = (r[,1,category[j]]/n[,1])[t[,1]==1]
+        }
+        lodds = log(P_j/P_J)
+        apply(lodds, 2, mean, na.rm = TRUE)
+      }
+  })
+  return(mx_bl)
+}
+
+calculate.covariate.mean <- function(network){
+  
+  with(network,{
+    # calculate mean of covariate
+    store <- list()
+    if(!is.null(covariate)){
+      for(i in 1:dim(covariate)[2]){
+        nam <- paste("mx",i, sep = "")
+        nam <- assign(nam, mean(covariate[,i], na.rm = TRUE))
+        
+        network[[paste("mx",i, sep = "")]] <- ifelse(covariate.type[i] == "continuous", nam, 0)
+        nam2 <- paste("x", i, sep = "")
+        nam2 <- assign(nam2, covariate[,i])
+        
+        store[[paste("x", i, sep = "")]] <- nam2
+      }
+    }
+    return(store)
+  })
 }

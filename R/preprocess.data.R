@@ -38,6 +38,10 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
     SE <- data[,"SE"]
   }
   
+  if(!is.null(covariate)){
+    covariate <- as.matrix(covariate)
+  }
+  
   list(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, SE = SE,
        data = data, Treat.order = transform$Treat.order, Study.order = transform$Study.order,
        response = response, type = type, rank.preference = rank.preference, baseline = baseline, baseline.risk = baseline.risk,

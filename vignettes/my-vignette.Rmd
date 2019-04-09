@@ -83,6 +83,7 @@ Treat <- c(1, 2, 1, 5, 1, 3, 1, 4, 1, 4, 1, 7, 1, 2, 1, 7, 1, 5, 1, 3, 1, 2, 1, 
 Study <- rep(1:20, each = 2)
 
 network <- network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial") #Model 0
+network <- network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", baseline = "common") #Model A1
 network <- network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", baseline = "common", baseline.risk = "exchangeable", prec.bl = 0.0001, hy.prior = list("dunif", 0, 100)) #Model A2
 result <- network.run(network)
 summary(result)

@@ -126,14 +126,14 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
     if(is.null(inits)){
       if(!any(is.na(network$data))){
         #quick fix
-        Outcomes <- as.matrix(data[,1:ncol])
-        Treat <- data[,"Treat"]
-        Study <- data[,"Study"]
+        Outcomes <- as.matrix(network$data[,1:ncol])
+        Treat <- network$data[,"Treat"]
+        Study <- network$data[,"Study"]
         indiv.data <- list(Outcomes = Outcomes, Treat = Treat, Study = Study)
         if(response == "binomial" || response == "multinomial"){
-          indiv.data$N <- data[,"N"]
+          indiv.data$N <- network$data[,"N"]
         } else if(response == "normal"){
-          indiv.data$SE <- data[,"SE"]
+          indiv.data$SE <- network$data[,"SE"]
         }
         network2 <- append(network, indiv.data)
         inits <- network.inits(network2, n.chains)  

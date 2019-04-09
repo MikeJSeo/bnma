@@ -77,7 +77,14 @@ network.forest.plot(result)
 We have many features in addition to the general network model. One important addition to the network package that most packages don't have is the ability to add baseline risk. Please read Achana et al (2013) for more theoretical details. Below, we use their example on smoke alarm data. 
 
 ```{r}
-network <- with(smoking, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", baseline = "common", baseline.risk = "exchangeable")) #Model A2
+Outcomes <- c(10, 18, 5, 8, 46, 61, 5, 16, 26, 37, 816, 866, 55, 109, 112, 130, 619, 692, 71, 81, 325, 345, 321, 325, 54, 77, 6, 6, 211, 136, 47, 47, 34, 39, 6, 27, 394, 406, 997, 1421)
+N <- c(297, 308, 30, 44, 105, 108, 10, 17, 40, 38, 1060, 902, 71, 139, 138, 140, 737, 764, 82, 83, 375, 384, 363, 361, 56, 80, 12, 12, 211, 136, 56, 58, 38, 41, 50, 47, 469, 482, 1545, 1583)
+Treat <- c(1, 2, 1, 5, 1, 3, 1, 4, 1, 4, 1, 7, 1, 2, 1, 7, 1, 5, 1, 3, 1, 2, 1, 4, 1, 2, 4, 6, 4, 6, 3, 4, 2, 3, 2, 5, 4, 6, 4, 7)
+Study <- rep(1:20, each = 2)
+
+network <- network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial") #Model 0
+network <- network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", baseline = "common", baseline.risk = "exchangeable", prec.bl = 0.0001, hy.prior = list("dunif", 0, 100)) #Model A2
 result <- network.run(network)
+summary(result)
 ```
 

@@ -38,7 +38,7 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
     SE <- data[,"SE"]
   }
   
-  # change covariate as a matrix
+  # change covariate as a matrix if it exists
   if(is.null(covariate)){
     covariate <- as.matrix(covariate)  
   }

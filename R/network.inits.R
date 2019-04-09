@@ -132,7 +132,7 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
           sigma2 <- resid.var * df/random.ISigma
           
           if(hy.prior[[1]] == "dunif"){
-            if(sqrt(sigma2) > network$prior.data$hy.prior.2){
+            if(sqrt(sigma2) > network$hy.prior.2){
               stop("data has more variability than your prior does")
             }
           }

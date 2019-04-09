@@ -212,6 +212,7 @@ calculate.baseline.log.odds <- function(network){
         lodds = log(P_j/P_J)
         apply(lodds, 2, mean, na.rm = TRUE)
       }
+    }
   })
   return(mx_bl)
 }

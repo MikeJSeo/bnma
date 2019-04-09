@@ -112,7 +112,7 @@ change.dimensions <- function(network){
     } else if(response == "normal"){
       se <- make.byStudy.matrix(data[,"SE"], data[,"Study"])
     }
-    r <- make.byStudy.Outcome(as.matrix(data[,1:ncol]), data[,"Study"], nstudy, na)
+    r <- make.byStudy.Outcome(as.matrix(data[,1:ncat]), data[,"Study"], nstudy, na)
     if(response != "multinomial"){
       r <- r[,,1]
     }

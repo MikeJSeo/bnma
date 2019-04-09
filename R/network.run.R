@@ -56,7 +56,10 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
         data$n <- n
       }
     }
-    data <- c(data, "mean.d", "prec.d", "mean.Eta", "prec.Eta", "hy.prior.1", "hy.prior.2") # need to update
+    
+    prior.data < list(mean.d = mean.d, prec.d = prec.d, mean.Eta = mean.Eta, prec.Eta = prec.Eta, 
+                      hy.prior.1 = hy.prior1, hy.prior.2 = hy.prior.2) # need to update
+    data <- append(data, prior.data)
     data <- data[!is.na(data)]
     
     # add covariate info

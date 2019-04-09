@@ -63,7 +63,7 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
     #                   hy.prior.Eta.1 = hy.prior.Eta.1, hy.prior.Eta.2 = hy.prior.Eta.2
     #                   ) # need to update
     data <- append(data, prior.data)
-   E data <- data[!is.na(data)]
+    # data <- data[!is.na(data)]
     
     # add covariate info
     if(!is.null(covariate)){

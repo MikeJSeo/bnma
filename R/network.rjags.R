@@ -538,11 +538,8 @@ model.multinomial <- function(network){
   with(network, {
     
     code <- ""
-    if(is.null(miss.matrix)){
-      code <- paste0(code, model.multinomial.complete(network))
-    } else{
-      code <- paste0(code, model.multinomial.incomplete(network))
-    }
+    code <- paste0(code, model.multinomial.complete(network))
+    
     if(max(na) == 2){
       code <- paste0(code, model.randomeffects.twoarms(network))
     } else{

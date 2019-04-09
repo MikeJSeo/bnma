@@ -209,7 +209,7 @@ calculate.baseline.log.odds <- function(network){
         P_J = (r[,1,1]/n[,1])[t[,1]==1]
         P_j = matrix(0, ncol = ncat-1, nrow = sum(t[,1]==1))
         for(j in 2:ncat){
-          P_j[,j-1] = (r[,1,category[j]]/n[,1])[t[,1]==1]
+          P_j[,j-1] = (r[,1,j]/n[,1])[t[,1]==1]
         }
         lodds = log(P_j/P_J)
         return(apply(lodds, 2, mean, na.rm = TRUE))

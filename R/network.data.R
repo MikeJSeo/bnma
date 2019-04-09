@@ -83,8 +83,7 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   # generate prior data that will be used for running JAGS model
   prior.data <- network.prior.default(network, mean.d, prec.d, mean.Eta, prec.Eta, hy.prior.Eta, mean.bl, prec.bl, hy.prior.bl, mean.cov, prec.cov, hy.prior.cov, hy.prior)
   network <- append(network, prior.data)
-  network$prior.data <- prior.data
-  
+
   # generate JAGS code
   code <- network.rjags(network)
   network$code <- code

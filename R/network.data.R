@@ -225,7 +225,7 @@ calculate.covariate.mean <- function(network){
     # calculate mean of covariate
     store <- list()
     if(!is.null(covariate)){
-      for(i in 1:dim(as.matrix(covariate))[2]){
+      for(i in 1:dim(covariate)[2]){
         nam <- paste("mx",i, sep = "")
         nam <- assign(nam, mean(covariate[,i], na.rm = TRUE))
         

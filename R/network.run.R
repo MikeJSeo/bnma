@@ -55,10 +55,6 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
         data$r <- r
         data$n <- n
       }
-      for(i in 1:length(miss.patterns[[1]])){
-        data[[paste("r",i,sep="")]] <- network[[paste("r",i,sep="")]]
-        data[[paste("n",i,sep="")]] <- network[[paste("n",i,sep="")]]
-      }
     }
     data <- c(data, prior.data)
     

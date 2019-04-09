@@ -6,7 +6,8 @@
 \usage{
 network.data(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL,
   SE = NULL, response = NULL, Treat.order = NULL, type = "random",
-  baseline = "none", baseline.risk = "independent", covariate = NULL,
+  rank.preference = "higher", baseline = "none",
+  baseline.risk = "independent", covariate = NULL,
   covariate.type = NULL, covariate.model = NULL, mean.d = NULL,
   prec.d = NULL, mean.Eta = NULL, prec.Eta = NULL,
   hy.prior.Eta = NULL, mean.bl = NULL, prec.bl = NULL,
@@ -29,6 +30,8 @@ network.data(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL,
 \item{Treat.order}{Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.}
 
 \item{type}{Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".}
+
+\item{rank.preference}{Set it equal to "higher" if higher values are preferred (i.e. assumes events are good). Set it equal to "lower" if lower values are preferred (i.e. assumes events are bad). Default is "higher".}
 
 \item{baseline}{Three different assumptions for treatment x baseline risk interactions (slopes): "independent", "common", or "exchangeable". Default is "none" which doesn't incorporate baseline risk.}
 

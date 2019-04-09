@@ -6,8 +6,10 @@
 \usage{
 preprocess.data(Outcomes = NULL, Study = NULL, Treat = NULL,
   N = NULL, SE = NULL, response = NULL, Treat.order = NULL,
-  type = "random", baseline = "none", baseline.risk = "independent",
-  covariate = NULL, covariate.type = NULL, covariate.model = NULL)
+  type = "random", rank.preference = "higher", baseline = "none",
+  baseline.risk = "independent", covariate = NULL,
+  covariate.type = NULL, covariate.model = NULL, hy.prior.Eta = NULL,
+  hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL)
 }
 \description{
 This is first bit of our code that runs when the user enters the data using \code{\link{network.data}}.

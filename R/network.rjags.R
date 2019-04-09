@@ -37,6 +37,7 @@ model.normal <- function(network){
     }
     
     code <- paste0(code, "\n\t\t\tdev[i,k] <- (r[i,k]-theta[i,k])*(r[i,k]-theta[i,k])*tau[i,k]",
+                         "\n\t\t}",
                          "\n\t\tresdev[i] <- sum(dev[i,1:na[i]])")
 
     if(type == "random"){

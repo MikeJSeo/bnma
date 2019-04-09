@@ -140,6 +140,8 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
     #   }
     # }
     
+    print(data)
+    
     samples <- jags.fit(network, data, pars.save, inits, n.chains, max.run, setsize, n.run, conv.limit)
     
     result <- list(network = network, data.rjags = data, inits = inits, pars.save = pars.save)

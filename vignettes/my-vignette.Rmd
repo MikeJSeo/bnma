@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 We describe how to run Bayesian network meta analysis using this package. First we'll need to load the package.
 
 ```{r}
-devtools::install_github("MikeJSeo/bnma")
+#devtools::install_github("MikeJSeo/bnma")
 library(bnma)
 ```
 
@@ -71,6 +71,11 @@ Package include many summary tools that can be used. One of the more useful summ
 
 ```{r, fig.width = 6, fig.height = 6}
 network.forest.plot(result)
+# network.autocorr.diag(result)
+# network.autocorr.plot(result)
+# network.cumrank.tx.plot(result)
+# network.deviance.plot(result)
+# network.gelman.plot(result)
 ```
 
 ## Multinomial model
@@ -85,14 +90,20 @@ summary(result)
 
 ## Adding covariates
 
-# ToDO: check covariate modelling
+ToDO: check covariate modelling
+
+You can use covariance plot to see how ...
+
+```{r}
+#network.covariate.plot(result, base.treatment = 1, comparison.treatment = 2, base.category = 1, comparison.category = 2)
+```
 
 ## Baseline Risk
 
-Another important addition to this network package is the ability to add baseline risk. Here we show how to add common treatment x baseline risk interactions (slopes) and independent baseline risk. We can have "common", "independent", "exchangeable" assumption for the baseline slopes and "indepednet" and "exchangeable" assumption on the baseline risk.
+Another important addition to this network package is the ability to add baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independenet" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common slope and exchangeable baseline risk model.
 
 ```{r}
-network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "exchangeable", baseline.risk = "exchangeable"))
+network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "common", baseline.risk = "exchangeable"))
 result <- network.run(network)
 summary(result)
 ```

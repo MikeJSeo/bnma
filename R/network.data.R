@@ -202,9 +202,6 @@ calculate.baseline.log.odds <- function(network){
       }
       if(response == "multinomial"){
         #the first response in the multinomial is the reference, we will call it J
-        #category = which(apply((miss.patterns[[2]]), 1, sum) == 1)
-        #J = category[1]
- 
         #take only the control group
         P_J = (r[,1,1]/n[,1])[t[,1]==1]
         P_j = matrix(0, ncol = ncat-1, nrow = sum(t[,1]==1))

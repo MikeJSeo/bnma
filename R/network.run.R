@@ -194,9 +194,6 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
   samples <- window(samples, mid+1, end, 1) #keep the last half of the converged sequence
   samples <- new.mcmc(samples)
   
-  #  conv.save.variables.names <- varnames[conv.save.variables]
-  #  kappa <- calculate_kappa(samples, conv.save.variables.names)
-  
   n.thin <- 1
   if(check == TRUE){
     print("code didn't converge according to gelman-rubin diagnostics")

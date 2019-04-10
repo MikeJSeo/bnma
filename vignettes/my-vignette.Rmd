@@ -59,8 +59,7 @@ network <- with(smoking, network.data(Outcomes = Outcomes, Study = Study, Treat 
 
 ## Running the model
 
-Now to run the network, we use the function `network.run`. There are many parameters that can be modified, but the most important is the parameter `n.run` which determines how many final observations the user wants. Gelman-Rubin statitics is checked automatically every `setsize` number of iterations and once the series have converged we store the last half of the sequence. If the number of iteration is less than the number of observations user wanted (`n.runs`), it will sample more to fill the requirement. One of the neat thing about this package is that it checks for convergence automatically and will give an error if the sequence has not converged.
-The number that is printed during the running of the model is the Gelman-Rubin statistics.
+Now to run the network, we use the function `network.run`. There are many parameters that can be modified, but the most important is the parameter `n.run` which determines how many final observations the user wants. Gelman-Rubin statitics is checked automatically every `setsize` number of iterations and once the series have converged we store the last half of the sequence. If the number of iteration is less than the number of observations user wanted (`n.runs`), it will sample more to fill the requirement. One of the neat thing about this package is that it checks for convergence automatically and will give an error if the sequence has not converged. The parameters tested for convergence are the relative treatment effects, baseline effect, and heterogeneity parameter. The number that is printed during the running of the model is the Gelman-Rubin statistics.
 
 ```{r}
 result <- network.run(network, n.run = 30000)
@@ -90,10 +89,10 @@ summary(result)
 
 ## Baseline Risk
 
-Another important addition to this network package is the ability to add baseline risk. Here we show how to add common treatment x baseline risk interactions (slopes) and independent baseline risk. Depending on how we select parameters `baseline` and `baseline.risk`, we can fit a differnt baseline risk model. Please refer to Achana et al (2013) for more details.
+Another important addition to this network package is the ability to add baseline risk. Here we show how to add common treatment x baseline risk interactions (slopes) and independent baseline risk. We can have "common", "independent", "exchangeable" assumption for the baseline slopes and "indepednet" and "exchangeable" assumption on the baseline risk.
 
 ```{r}
-network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "common", baseline.risk = "independent"))
+network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "exchangeable", baseline.risk = "exchangeable"))
 result <- network.run(network)
 summary(result)
 ```

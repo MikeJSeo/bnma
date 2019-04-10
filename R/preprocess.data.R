@@ -167,7 +167,7 @@ check.for.errors <- function(network){
         stop("covariate has to be vector if there is only one and it is a matrix if there is more than one")
       }
 
-      if(!all(apply(covariate, 2, is.numeric))){
+      if(!all(apply(as.matrix(covariate), 2, is.numeric))){
         stop("covariate has to be numeric type")
       }
     }

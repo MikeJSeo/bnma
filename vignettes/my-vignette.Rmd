@@ -34,10 +34,10 @@ It is essential to specify the input data in a correct format. We have chosen to
 parkinsons
 ```
 
-In order to run network meta analysis in JAGS, we need to relabel study names into to a numeric sequence, i.e. 1 to total number of studies, and relabel the treatment into a numeric sequence according to treatment order specified. If treatment order is not specified, default is to use alphabetical order. In the example below, we set 1 as the baseline treatment.
+In order to run network meta analysis in JAGS, we need to relabel study names into to a numeric sequence, i.e. 1 to total number of studies, and relabel the treatment into a numeric sequence according to treatment order specified. If treatment order is not specified, default is to use alphabetical order. In the example below, we set placebo as the baseline treatment followed by Pramipexole, Ropinirole, Bromocriptine, and Cabergoline as the treatment order.
 
 ```{r}
-network <- with(fake_data, network.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial", Treat.order = c("Placebo", "Treatment")))
+network <- with(parkinsons, network.data(Outcomes = Outcomes, Study = Study, Treat = Treat, SE = SE, response = "normal", Treat.order = Treat.order))
 network$Treat.order 
 network$Study.order
 ```
@@ -100,7 +100,7 @@ summary(result)
 
 Covariance plot shows you how the relative effect changes as the covariate varies.
 
-```{r}
+```{r, fig.width = 6, fig.height = 6}
 network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "Statin")
 ```
 
@@ -114,3 +114,8 @@ result <- network.run(network)
 summary(result)
 ```
 
+## Contrast data
+
+## Unrelated Means Model
+
+## Inconsistency model

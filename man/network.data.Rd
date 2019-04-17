@@ -71,7 +71,7 @@ network.data(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL,
 Creates list of variables that are used to run the model using \code{\link{network.run}}
 \item{data}{Data combining all the input data. User can check this to insure the data is correctly specified. For modelling purposes, character valued studies or treatment variables are changed to numeric values based on alphabetical order.}
 \item{nrow}{Total number of arms in the meta-analysis}
-\item{ncol}{Number of columns in the Outcomes. Will equal 1 for binary and normal and number of categories for multinomial}
+\item{ncat}{Number of columns in the Outcomes. Will equal 1 for binary and normal and number of categories for multinomial}
 \item{nstudy}{Number of study}
 \item{na}{Number of arms for each study}
 \item{ntreat}{Number of treatment}

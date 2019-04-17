@@ -27,15 +27,14 @@ library(bnma)
 
 ## Preprocessing
 
-It is essential to specify the input data in a correct format. We have chosen to use arm-level data with following input variable names: Outcomes, N or SE, Study, and Treat. Outcomes is the trial results. N is the number of respondents used for binary or multinomial model. SE is the standard error used for normal model. Study is the study indicator for the meta analysis. Lastly, Treat is the treatment indicator for each arm. We generated a fake dataset `fake_data` for illustration.
+It is essential to specify the input data in a correct format. We have chosen to use arm-level data with following input variable names: Outcomes, N or SE, Study, and Treat. Outcomes is the trial results. N is the number of respondents used for binary or multinomial model. SE is the standard error used for normal model. Study is the study indicator for the meta analysis. Lastly, Treat is the treatment indicator for each arm. We generated a fake dataset `parkinsons` for illustration.
 
 
 ```{r}
-# use a normal model instead of fake_data
-fake_data
+parkinsons
 ```
 
-In order to run network meta analysis in JAGS, we need to relabel study names into to a numeric sequence, i.e. 1 to total number of studies, and relabel the treatment into a numeric sequence according to treatment order specified. If treatment order is not specified, default is to use alphabetical order. In the example below, we set "Placebo" as the baseline treatment.
+In order to run network meta analysis in JAGS, we need to relabel study names into to a numeric sequence, i.e. 1 to total number of studies, and relabel the treatment into a numeric sequence according to treatment order specified. If treatment order is not specified, default is to use alphabetical order. In the example below, we set 1 as the baseline treatment.
 
 ```{r}
 network <- with(fake_data, network.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial", Treat.order = c("Placebo", "Treatment")))
@@ -90,12 +89,19 @@ summary(result)
 
 ## Adding covariates
 
-ToDO: check covariate modelling
+We can add continuous or discrete covariates to fit a network meta regression. If the covariate is continuous, it is centered. Discrete variables need to be 0-1 dummy format. There are three different assumptions for covariate effect: "common", "independent", and "exchangeable". 
 
-You can use covariance plot to see how ...
 
 ```{r}
-#network.covariate.plot(result, base.treatment = 1, comparison.treatment = 2, base.category = 1, comparison.category = 2)
+network <- with(statins, network.data(Outcomes, Study, Treat, N=N, response = "binomial", Treat.order = c("Placebo", "Statin"), covariate = covariate, covariate.type = "discrete", covariate.model = "common"))
+result <- network.run(network)
+summary(result)
+```
+
+Covariance plot shows you how the relative effect changes as the covariate varies.
+
+```{r}
+network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "Statin")
 ```
 
 ## Baseline Risk

@@ -70,6 +70,7 @@ Package include many summary tools that can be used. One of the more useful summ
 
 ```{r, fig.width = 6, fig.height = 6}
 network.forest.plot(result)
+# draw.network.graph(network)
 # network.autocorr.diag(result)
 # network.autocorr.plot(result)
 # network.cumrank.tx.plot(result)

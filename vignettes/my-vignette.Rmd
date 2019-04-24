@@ -116,12 +116,30 @@ summary(result)
 
 ## Contrast data
 
-We also added model to analyze contrast-level data insetad of arms-level data. Contrast level format uses treatment differences relative to the control arms. 
+We also added model to analyze contrast-level data instead of arms-level data. Contrast level format uses treatment differences relative to the control arms.
 
 ```{r}
-
+network <- with(parkinsons_contrast, {
+  contrast.network.data(Outcomes, Treat, SE, na, V, type = "random", mean.d = 0.01, prec.d = 0.1, hy.prior = list("dhnorm", 0.01, 0.01))
+})
+result <- contrast.network.run(network)
+summary(result)
 ```
 
 ## Unrelated Means Model
 
+Unrelated mean effects (UME) model estimates separate, unrelated basic parameters. We do not assume consistency in this model. We can compare this model with the standard consistency model. If the parameter estimates are similar for both models, and there is considerable overlap in the 95% credible interval, we can conclude that there is no evidence of inconsistency in the network.
+
+```{r}
+
+network <- with(smoking, {
+  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
+})
+result <- ume.network.run(network)
+```
+
 ## Inconsistency model
+
+We included another inconsistency model that is used for testing consistency assumption.
+
+

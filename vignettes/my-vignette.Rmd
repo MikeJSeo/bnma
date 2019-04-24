@@ -104,7 +104,7 @@ Covariance plot shows you how the relative effect changes as the covariate varie
 network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "Statin")
 ```
 
-## Baseline Risk
+## Baseline risk
 
 Another important addition to this network package is the ability to add baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independenet" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common slope and exchangeable baseline risk model.
 
@@ -136,6 +136,7 @@ network <- with(smoking, {
   ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 })
 result <- ume.network.run(network)
+summary(result)
 ```
 
 ## Inconsistency model

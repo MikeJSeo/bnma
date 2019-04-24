@@ -116,6 +116,12 @@ summary(result)
 
 ## Contrast data
 
+We also added model to analyze contrast-level data insetad of arms-level data. Contrast level format uses treatment differences relative to the control arms. 
+
+```{r}
+
+```
+
 ## Unrelated Means Model
 
 ## Inconsistency model

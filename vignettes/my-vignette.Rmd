@@ -66,7 +66,7 @@ result <- network.run(network, n.run = 30000)
 
 ## Model Summary
 
-Package include many summary tools that can be used. One of the more useful summary might be the forest plot. Please look over the R package guide for more possible options.
+Package includes many summary tools that can be used. One of the more useful summary might be the forest plot. Please look over the R package guide for more possible options.
 
 ```{r, fig.width = 6, fig.height = 6}
 network.forest.plot(result)
@@ -141,7 +141,7 @@ summary(result)
 
 ## Inconsistency model
 
-We included another inconsistency model that can be used to test consistency assumption. Here we can specify a pair where we want to nodesplit and test the inconsistency assumptions. For instance if we specify treatment pair = c(3, 9), we are finding the difference in the direct and indirect evidence of treatment 3 and 9. Inconsistency estimate and the corresponding p-value are reported in the summary. Refer to Dias et al. 2010 for more details.
+We included another inconsistency model that can be used to test consistency assumption. Here we can specify a pair where we want to nodesplit and test the inconsistency assumptions. For instance if we specify treatment pair = c(3, 9), we are finding the difference in the direct and indirect evidence of treatment 3 and 9. Inconsistency estimate and the corresponding p-value are reported in the summary. We can repeat for all the pairs in the network and identify pairs that might be inconsistent. Refer to Dias et al. 2010 for more details.
 
 ```{r}
 network <- with(thrombolytic, nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9)))

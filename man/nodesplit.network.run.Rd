@@ -2,7 +2,7 @@
 % Please edit documentation in R/nodesplit.network.R
 \name{nodesplit.network.run}
 \alias{nodesplit.network.run}
-\title{Run the model using the network object}
+\title{Run the model using the nodesplit network object}
 \usage{
 nodesplit.network.run(network, inits = NULL, n.chains = 3,
   max.run = 1e+05, setsize = 10000, n.run = 50000,
@@ -22,8 +22,6 @@ nodesplit.network.run(network, inits = NULL, n.chains = 3,
 \item{n.run}{Final number of iterations that the user wants to store. If after the algorithm converges, user wants less number of iterations, we thin the sequence. If the user wants more iterations, we run extra iterations to reach the specified number of runs}
 
 \item{conv.limit}{Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used to test convergence of parameters for study effect (eta), relative effect (d), and heterogeneity (log variance (logvar)).}
-
-\item{extra.pars.save}{Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.}
 }
 \value{
 \item{data_rjags}{Data that is put into rjags function jags.model}

@@ -1,7 +1,7 @@
 
 #' Make a network object containing data, priors, and a JAGS model file
 #'
-#' This function makes a network object that can be used to run network meta-analysis using \code{\link{network.run}}.
+#' This function makes a network object that can be used to run network meta-analysis using \code{\link{nodesplit.network.run}}.
 #' User needs to specify Outcomes, Study, Treat, N or SE, and response.
 #' Prior parameters are filled in automatically based on the data type if not specified.
 #' The input data should be arm-level so that we have observations for each treatment in each study.
@@ -14,7 +14,7 @@
 #' @param SE A vector of standard error for each arm. Used only for normal response.
 #' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial".
 #' @param Treat.order Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.
-#' @param pair Define a pair to split
+#' @param pair Define a pair to split. Pair has to be a vector of treatment numbers and these numbers correspond to the Treat.order specified (alphabetically if treat.order is not specified)
 #' @return Creates list of variables that are used to run the model using \code{\link{nodesplit.network.run}}
 #' \item{data}{Data combining all the input data. User can check this to insure the data is correctly specified. For modelling purposes, character valued studies or treatment variables are changed to numeric values based on alphabetical order.}
 #' \item{nrow}{Total number of arms in the meta-analysis}
@@ -36,9 +36,7 @@
 #' @export
 
 nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL,  Treat.order = NULL,
-                                  pair = NULL
-                                  
-                                  ){
+                                  pair = NULL){
   
   if(response == "multinomial"){
     stop("Not yet implemented")
@@ -69,7 +67,7 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
 }
 
 
-#' Run the model using the network object
+#' Run the model using the nodesplit network object
 #' 
 #' This is similar to the function \code{\link{network.run}}, except this is used for the nodesplitting model.
 #'
@@ -80,7 +78,6 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
 #' @param setsize Number of iterations that are run between convergence checks. If the algorithm converges fast, user wouldn't need a big setsize. The number that is printed between each convergence checks is the gelman-rubin diagnostics and we would want that to be below the conv.limit the user specifies.
 #' @param n.run Final number of iterations that the user wants to store. If after the algorithm converges, user wants less number of iterations, we thin the sequence. If the user wants more iterations, we run extra iterations to reach the specified number of runs
 #' @param conv.limit Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used to test convergence of parameters for study effect (eta), relative effect (d), and heterogeneity (log variance (logvar)).
-#' @param extra.pars.save Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.
 #' @return
 #' \item{data_rjags}{Data that is put into rjags function jags.model}
 #' \item{inits}{Initial values that are either specified by the user or generated as a default}

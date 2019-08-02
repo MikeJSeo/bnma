@@ -136,6 +136,10 @@ check.for.errors <- function(network){
 
   with(network, {
 
+    if(is.null(response)){
+      stop("Response has to be specified: binomial, multinomial, or normal")
+    }
+    
     if(is.null(Study) || is.null(Treat) || is.null(Outcomes)){
       stop("Study, Treat, and Outcomes have to be all specified")
     }

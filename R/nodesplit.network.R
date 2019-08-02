@@ -161,7 +161,7 @@ nodesplit.model.normal <- function(network){
                    "\n\tfor(k in 1:na[i]) {",
                    "\n\t\tprec[i,k] <- 1/pow(se[i,k],2)",
                    "\n\t\tr[i,k] ~ dnorm(theta[i,k], prec[i,k])", 
-                   "\n\t\ttheta[i,k] <- Eta[i] + delta[i,k]",
+                   "\n\t\ttheta[i,k] <- mu[i] + delta[i,k]",
                    "\n\t\tindex[i,k] <- split[i] * (equals(t[i,k], pair[1]) + equals(t[i,k], pair[2]))",
                    "\n\t}",
                    "\n\tfor(k in 2:na[i]) {",

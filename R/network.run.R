@@ -159,8 +159,10 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
     if(network$type == "fixed"){
       conv.save <- conv.save[!conv.save %in% c("logvar", "sigma_transformed")]
     }  
-  } else if(class(network) == "contrast.network.data" || class(network) == "ume.network.data" || class(network) == "nodesplit.network.data"){
+  } else if(class(network) == "contrast.network.data" || class(network) == "ume.network.data"){
     conv.save <- pars.save
+  } else if(class(network) == "nodesplit.network.data"){
+    conv.save <- c("d", "sd", "diff")
   }
   
   
@@ -213,7 +215,7 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
   max.gelman <- find.max.gelman(samples, conv.save.variables)
   print(max.gelman)
   
-  out <-list(burnin = burnin, n.thin = n.thin, samples = samples, max.gelman = max.gelman, kappa = kappa)
+  out <-list(burnin = burnin, n.thin = n.thin, samples = samples, max.gelman = max.gelman)
   return(out)
 }
 

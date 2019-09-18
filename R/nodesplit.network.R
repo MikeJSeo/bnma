@@ -122,9 +122,9 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
     
     samples <- jags.fit(network, data, pars.save, inits = initv1, n.chains = n.chains, max.run, setsize, n.run, conv.limit)
     
-    dim(samples[[1]])
-    dim(samples[[2]])
-    dim(samples[[3]])
+    print(dim(samples[[1]]))
+    print(dim(samples[[2]]))
+    print(dim(samples[[3]]))
     
     result <- list(network = network, data.rjags = data, inits = inits, pars.save = pars.save)
     result <- c(result, samples)

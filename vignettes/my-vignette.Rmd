@@ -141,7 +141,7 @@ summary(result)
 
 ## Inconsistency model
 
-We included another inconsistency model that can be used to test consistency assumption. Here we can specify a pair where we want to nodesplit and test the inconsistency assumptions. For instance if we specify treatment pair = c(3, 9), we are finding the difference in the direct and indirect evidence of treatment 3 and 9. Inconsistency estimate and the corresponding p-value are reported in the summary. We can repeat for all the pairs in the network and identify pairs that might be inconsistent. Refer to Dias et al. 2010 for more details.
+We included another inconsistency model that can be used to test consistency assumption. Here we can specify a pair where we want to nodesplit and test the inconsistency assumptions. For instance if we specify treatment pair = c(3, 9), we are finding the difference in the direct and indirect evidence of treatment 3 and 9. Inconsistency estimate and the corresponding p-value are reported in the summary. If the p-value is small, it means that we can reject the null hypothesis that direct and indirect evidence agree. We can repeat for all the pairs in the network and identify pairs that might be inconsistent. Refer to Dias et al. 2010 (i.e. Checking consistency in mixed treatment comparison meta-analysis) for more details.
 
 ```{r}
 network <- with(thrombolytic, nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9)))

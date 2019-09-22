@@ -46,6 +46,10 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
     stop("Pair has to be specified")
   }
   
+  if(!all(Pair %in% network$Treat)){
+    stop("Pair name has to be exactly same as one of treatment names specified")
+  }
+  
   # rename the variables and order them based on specified treatment order
   network <- preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order)
   

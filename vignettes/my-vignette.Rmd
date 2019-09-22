@@ -99,7 +99,7 @@ result <- network.run(network)
 summary(result)
 ```
 
-Covariance plot shows you how the relative effect changes as the covariate varies.
+Covariate plot shows you how the relative effect changes as the covariate varies.
 
 ```{r, fig.width = 6, fig.height = 6}
 network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "Statin")

@@ -46,7 +46,7 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
     stop("Pair has to be specified")
   }
   
-  if(!all(Pair %in% network$Treat)){
+  if(!all(pair %in% network$Treat)){
     stop("Pair name has to be exactly same as one of treatment names specified")
   }
   

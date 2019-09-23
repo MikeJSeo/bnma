@@ -517,6 +517,8 @@ network.rank.tx.plot <- function(result, txnames = NULL, catnames = NULL, legend
   }
 }
 
+
+
 #' Create a treatment cumulative rank plot
 #'
 #' This function creates a treatment cumulative rank plot. Rank preference can be specified by the \code{rank.preference} parameter in \code{\link{network.data}}
@@ -1009,7 +1011,7 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
     p <- p + geom_text(aes(label = paste0(sprintf("%0.2f", round(OR, digits = 2)), " [", sprintf("%0.2f", round(lower, digits = 2)) , ", ", sprintf("%0.2f", round(upper, digits = 2)), "]")), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = 1:length(comps[1,]))   # hjust = -1, vjust = 2)
     
     median_name_location <- ifelse(length(odds[,1]) <= 3, length(comps[1,]) + 0.5, length(comps[1,]) + 1)
-    p <- p + geom_text(aes(label = "Median [lower, upper]"), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = median_name_location)
+    p <- p + geom_text(aes(label = "Median [95% Crl]"), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = median_name_location)
     
     gt <- ggplot_gtable(ggplot_build(p))
     gt$layout$clip[gt$layout$name == "panel"] <- "off"

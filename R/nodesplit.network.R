@@ -134,7 +134,8 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
       pars.save <- c(pars.save, "rhat", "dev")
     } else if(response == "normal"){
       pars.save <- c(pars.save, "theta", "dev")
-    # } else if(response == "multinomial"){
+    }
+    # else if(response == "multinomial"){
     #   pars.save <- c(pars.save, "rhat", "dev")
     # }
     

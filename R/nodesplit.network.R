@@ -72,9 +72,9 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
   network <- append(network, nodesplit.inputs)
   
   # generate JAGS code
+  network$type <- type
   code <- nodesplit.network.rjags(network)
   network$code <- code
-  network$type <- type
   network$dic <- dic
   
   class(network) <- "nodesplit.network.data"

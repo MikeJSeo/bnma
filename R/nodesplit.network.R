@@ -243,7 +243,6 @@ nodesplit.model.normal <- function(network){
                    "\nprob <- step(diff)",
                    "\noneminusprob <- 1 - prob")
                    
-    )
     return(code)
   })
 }

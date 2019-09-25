@@ -10,11 +10,11 @@
 #' @param Outcomes Arm-level outcomes. If it is a multinomial response, the matrix would have dimensions treatment arms (row) by multinomial categories (column). If it is binomial or normal, it would be a vector.
 #' @param Study A vector of study indicator for each arm
 #' @param Treat A vector of treatment indicator for each arm
-#' @param N A vector of total number of observations in each arm. Used for binomial and multinomial responses.
-#' @param SE A vector of standard error for each arm. Used only for normal response.
-#' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial".
+#' @param N A vector of total number of observations in each arm. Used for binomial and multinomial responses
+#' @param SE A vector of standard error for each arm. Used only for normal response
+#' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial"
 #' @param Treat.order Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.
-#' @param pair Define a pair to split. Pair has to be a vector of treatment numbers and these numbers correspond to the Treat.order specified (alphabetically if treat.order is not specified)
+#' @param pair Define a pair to split. It has to be a vector of length 2 with treatment names
 #' @return Creates list of variables that are used to run the model using \code{\link{nodesplit.network.run}}
 #' \item{data}{Data combining all the input data. User can check this to insure the data is correctly specified. For modelling purposes, character valued studies or treatment variables are changed to numeric values based on alphabetical order.}
 #' \item{nrow}{Total number of arms in the meta-analysis}
@@ -42,6 +42,14 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
     stop("Not yet implemented")
   }
   
+  if(is.null(pair)){
+    stop("Pair has to be specified")
+  }
+  
+  if(!all(pair %in% Treat)){
+    stop("Pair name has to be exactly same as one of treatment names specified")
+  }
+  
   # rename the variables and order them based on specified treatment order
   network <- preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order)
   
@@ -54,7 +62,10 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
   network <- append(network, new.inputs)
   
   # Nodesplit parameters
-  network <- append(network, list(pair = pair))
+  pair_numeric <- c(which(network$Treat.order == pair[1]), which(network$Treat.order == pair[2]))
+  pair_numeric <- pair_numeric[order(pair_numeric)]
+  
+  network <- append(network, list(pair = pair_numeric))
   nodesplit.inputs <- find.nodesplit.parameters(network)
   network <- append(network, nodesplit.inputs)
   

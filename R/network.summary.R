@@ -517,6 +517,8 @@ network.rank.tx.plot <- function(result, txnames = NULL, catnames = NULL, legend
   }
 }
 
+
+
 #' Create a treatment cumulative rank plot
 #'
 #' This function creates a treatment cumulative rank plot. Rank preference can be specified by the \code{rank.preference} parameter in \code{\link{network.data}}
@@ -931,10 +933,11 @@ variance.tx.effects = function(result)
 #' @param ticks.position Position of the x-axis tick marks. If left unspecified, the function tries to set it at sensible values
 #' @param label.multiplier This is a multiplying factor to move the position of the text associated with median[lower, upper] values. This number is multiplied by the range of x-axis and added to the x-axis limit. Default multiplier is set to 0.2.
 #' @param label.margin This is how much margin space you specify to assign space for the median[lower, upper] values. Default margin is set to 10. 
+#' @param title.name Header name which you can modify
 #' @references W. Viechtbauer (2010), \emph{Conducting meta-analyses in R with the metafor package}, Journal of Statistical Software, 36(3):1-48. [\url{https://doi.org/10.18637/jss.v036.i03}]
 #' @export
 
-network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, label.multiplier = 0.2, label.margin = 10){
+network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, label.multiplier = 0.2, label.margin = 10, title.name = "Network Meta-analysis Forest plot"){
   
   ncat <- ifelse(result$network$response == "multinomial", result$network$ncat, 2)
   
@@ -992,13 +995,13 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
       theme(plot.margin = unit(c(1,label.margin,1,1), "lines")) 
     
     if(result$network$response %in% c("binomial")){
-      p <- p + labs(x = "Treatment comparison", y = "Odds Ratio", title = "Network Meta-analysis Forest plot") +
+      p <- p + labs(x = "Treatment comparison", y = "Odds Ratio", title = title.name) +
         scale_y_log10(breaks = ticks, labels = ticks) 
     } else if(result$network$response %in% c("multinomial")){
-      p <- p + labs(x = "Treatment comparison", y = "Odds Ratio", title = paste0("Network Meta-analysis Forest plot", ": Multinomial Category ", (i+1), " vs 1")) +
+      p <- p + labs(x = "Treatment comparison", y = "Odds Ratio", title = paste0(title.name, ": Multinomial Category ", (i+1), " vs 1")) +
         scale_y_log10(breaks = ticks, labels = ticks) 
     } else if(result$network$response %in% c("normal")){
-      p <- p + labs(x = "Treatment comparison", y = "Continuous Scale", title = "Network Meta-analysis Forest plot") +
+      p <- p + labs(x = "Treatment comparison", y = "Continuous Scale", title = title.name) +
         scale_y_continuous(breaks = ticks, labels = ticks) 
     }
     
@@ -1008,7 +1011,7 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
     p <- p + geom_text(aes(label = paste0(sprintf("%0.2f", round(OR, digits = 2)), " [", sprintf("%0.2f", round(lower, digits = 2)) , ", ", sprintf("%0.2f", round(upper, digits = 2)), "]")), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = 1:length(comps[1,]))   # hjust = -1, vjust = 2)
     
     median_name_location <- ifelse(length(odds[,1]) <= 3, length(comps[1,]) + 0.5, length(comps[1,]) + 1)
-    p <- p + geom_text(aes(label = "Median [lower, upper]"), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = median_name_location)
+    p <- p + geom_text(aes(label = "Median [95% Crl]"), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = median_name_location)
     
     gt <- ggplot_gtable(ggplot_build(p))
     gt$layout$clip[gt$layout$name == "panel"] <- "off"

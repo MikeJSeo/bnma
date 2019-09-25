@@ -6,8 +6,7 @@
 \usage{
 ume.network.data(Outcomes, Study, Treat, N = NULL, SE = NULL,
   response = NULL, type = "random", mean.mu = NULL, prec.mu = NULL,
-  mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5),
-  dic = TRUE)
+  mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5))
 }
 \arguments{
 \item{Outcomes}{Arm-level outcomes. If it is a multinomial response, the matrix would be arms (row) by multinomial categories (column). If it is binomial or normal, it would be a vector.}
@@ -29,8 +28,6 @@ ume.network.data(Outcomes, Study, Treat, N = NULL, SE = NULL,
 \item{prec.d}{Prior precision for the relative effect}
 
 \item{hy.prior}{Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter.}
-
-\item{dic}{This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.}
 }
 \description{
 This is similar to the function \code{\link{network.data}}, except this is used for the unrelated mean effects model.

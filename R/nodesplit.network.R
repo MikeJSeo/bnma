@@ -129,6 +129,15 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
     
     pars.save <- c("direct","d", "sd", "diff", "prob", "oneminusprob")
     
+    pars.save <- c(pars.save, "totresdev")
+    if(response == "binomial"){
+      pars.save <- c(pars.save, "rhat", "dev")
+    } else if(response == "normal"){
+      pars.save <- c(pars.save, "theta", "dev")
+    # } else if(response == "multinomial"){
+    #   pars.save <- c(pars.save, "rhat", "dev")
+    # }
+    
     if(is.null(inits)){
       inits <- list()
       for(i in 1:n.chains){

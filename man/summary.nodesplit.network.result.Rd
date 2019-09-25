@@ -4,10 +4,12 @@
 \alias{summary.nodesplit.network.result}
 \title{Summarize result run by \code{\link{nodesplit.network.run}}}
 \usage{
-\method{summary}{nodesplit.network.result}(object)
+\method{summary}{nodesplit.network.result}(object, ...)
 }
 \arguments{
 \item{object}{Result object created by \code{\link{nodesplit.network.run}} function}
+
+\item{...}{Additional arguments affecting the summary produced}
 }
 \description{
 This function uses summary function in coda package to summarize mcmc.list object. Monte carlo error (Time-series SE) is also obtained using the coda package and is printed in the summary as a default.

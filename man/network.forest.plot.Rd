@@ -5,7 +5,8 @@
 \title{Draws forest plot}
 \usage{
 network.forest.plot(result, level = 0.95, ticks.position = NULL,
-  label.multiplier = 0.2, label.margin = 10)
+  label.multiplier = 0.2, label.margin = 10,
+  title.name = "Network Meta-analysis Forest plot")
 }
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}
@@ -17,6 +18,8 @@ network.forest.plot(result, level = 0.95, ticks.position = NULL,
 \item{label.multiplier}{This is a multiplying factor to move the position of the text associated with median[lower, upper] values. This number is multiplied by the range of x-axis and added to the x-axis limit. Default multiplier is set to 0.2.}
 
 \item{label.margin}{This is how much margin space you specify to assign space for the median[lower, upper] values. Default margin is set to 10.}
+
+\item{title.name}{Header name which you can modify}
 }
 \description{
 Draws forest plot of pooled treatment effect. Reports odds ratio for binomial and multinomial outcomes and continuous scale for normal outcomes.

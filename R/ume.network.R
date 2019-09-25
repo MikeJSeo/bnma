@@ -12,11 +12,12 @@
 #' @param mean.d Prior mean for the relative effect
 #' @param prec.d Prior precision for the relative effect
 #' @param hy.prior Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter.
+#' @param dic This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.
 #' @references S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \emph{Evidence synthesis for decision making 4: inconsistency in networks of evidence based on randomized controlled trials}, Medical Decision Making 33(5):641-656. [\url{https://doi.org/10.1177/0272989X12455847}]
 #' @export
 
 ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, response = NULL, type = "random",
-                             mean.mu = NULL, prec.mu = NULL, mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5)){
+                             mean.mu = NULL, prec.mu = NULL, mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5), dic = TRUE){
   
   if(missing(Study) || missing(Treat) || missing(Outcomes)){
     stop("Study, Treat, and Outcomes have to be all specified")
@@ -342,7 +343,6 @@ ume.hy.prior.rjags <- function(hy.prior, ncat){
 #' @param n.run Final number of iterations that the user wants to store. If after the algorithm converges, user wants less number of iterations, we thin the sequence. If the user wants more iterations, we run extra iterations to reach the specified number of runs
 #' @param conv.limit Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used to test convergence of parameters for study effect (eta), relative effect (d), and heterogeneity (log variance (logvar)).
 #' @param extra.pars.save Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.
-#' @param dic This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.
 #' @return
 #' \item{data_rjags}{Data that is put into rjags function jags.model}
 #' \item{inits}{Initial values that are either specified by the user or generated as a default}
@@ -361,7 +361,7 @@ ume.hy.prior.rjags <- function(hy.prior, ncat){
 #' @export
 
 ume.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,
-                            conv.limit = 1.05, extra.pars.save = NULL, dic = TRUE){
+                            conv.limit = 1.05, extra.pars.save = NULL){
   
   if (!inherits(network, "ume.network.data")) {
     stop('Given network is not ume.network.data. Run ume.network.data function first')

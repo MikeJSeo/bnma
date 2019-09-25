@@ -6,7 +6,7 @@
 \usage{
 nodesplit.network.run(network, inits = NULL, n.chains = 3,
   max.run = 1e+05, setsize = 10000, n.run = 50000,
-  conv.limit = 1.05, extra.pars.save = NULL, dic = TRUE)
+  conv.limit = 1.05, extra.pars.save = NULL)
 }
 \arguments{
 \item{network}{network object created from \code{\link{nodesplit.network.data}} function}
@@ -24,8 +24,6 @@ nodesplit.network.run(network, inits = NULL, n.chains = 3,
 \item{conv.limit}{Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used to test convergence of parameters for study effect (eta), relative effect (d), and heterogeneity (log variance (logvar)).}
 
 \item{extra.pars.save}{Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.}
-
-\item{dic}{This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.}
 }
 \value{
 \item{data_rjags}{Data that is put into rjags function jags.model}

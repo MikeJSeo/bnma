@@ -16,6 +16,7 @@
 #' @param Treat.order Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.
 #' @param pair Define a pair to split. It has to be a vector of length 2 with treatment names
 #' @param type Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".
+#' @param dic This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.
 #' @return Creates list of variables that are used to run the model using \code{\link{nodesplit.network.run}}
 #' \item{data}{Data combining all the input data. User can check this to insure the data is correctly specified. For modelling purposes, character valued studies or treatment variables are changed to numeric values based on alphabetical order.}
 #' \item{nrow}{Total number of arms in the meta-analysis}
@@ -37,7 +38,7 @@
 #' @export
 
 nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL,  Treat.order = NULL,
-                                  pair = NULL, type = "random"){
+                                  pair = NULL, type = "random", dic = TRUE){
   
   if(response == "multinomial"){
     stop("Not yet implemented")
@@ -73,6 +74,8 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
   # generate JAGS code
   code <- nodesplit.network.rjags(network)
   network$code <- code
+  network$type <- type
+  network$dic <- dic
   
   class(network) <- "nodesplit.network.data"
   return(network)
@@ -91,7 +94,6 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
 #' @param n.run Final number of iterations that the user wants to store. If after the algorithm converges, user wants less number of iterations, we thin the sequence. If the user wants more iterations, we run extra iterations to reach the specified number of runs
 #' @param conv.limit Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used to test convergence of parameters for study effect (eta), relative effect (d), and heterogeneity (log variance (logvar)).
 #' @param extra.pars.save Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.
-#' @param dic This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.
 #' @return
 #' \item{data_rjags}{Data that is put into rjags function jags.model}
 #' \item{inits}{Initial values that are either specified by the user or generated as a default}
@@ -109,7 +111,7 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
 #' @export
 
 nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,
-                            conv.limit = 1.05, extra.pars.save = NULL, dic = TRUE){
+                            conv.limit = 1.05, extra.pars.save = NULL){
   
   if (!inherits(network, "nodesplit.network.data")) {
     stop('Given network is not nodesplit.network.data. Run nodesplit.network.data function first')

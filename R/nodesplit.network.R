@@ -15,6 +15,7 @@
 #' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial".
 #' @param Treat.order Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.
 #' @param pair Define a pair to split. Pair has to be a vector of treatment numbers and these numbers correspond to the Treat.order specified (alphabetically if treat.order is not specified)
+#' @param type Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".
 #' @return Creates list of variables that are used to run the model using \code{\link{nodesplit.network.run}}
 #' \item{data}{Data combining all the input data. User can check this to insure the data is correctly specified. For modelling purposes, character valued studies or treatment variables are changed to numeric values based on alphabetical order.}
 #' \item{nrow}{Total number of arms in the meta-analysis}
@@ -36,7 +37,7 @@
 #' @export
 
 nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL,  Treat.order = NULL,
-                                  pair = NULL){
+                                  pair = NULL, type = "random"){
   
   if(response == "multinomial"){
     stop("Not yet implemented")
@@ -166,16 +167,29 @@ nodesplit.model.normal <- function(network){
                    "\n\t\tr[i,k] ~ dnorm(theta[i,t[i,k]], prec[i,k])", 
                    "\n\t\ttheta[i,t[i,k]] <- mu[i] + delta[i,t[i,k]]",
                    "\n\t\tindex[i,k] <- split[i] * (equals(t[i,k], pair[1]) + equals(t[i,k], pair[2]))",
-                   "\n\t}",
-                   "\n\tfor(k in 2:na[i]) {",
-                   "\n\t\tdelta[i, si[i,k]] ~ dnorm(md[i, si[i,k]], taud[i, si[i,k]])",
-                   "\n\t\tmd[i, si[i,k]] <- (d[si[i,k]] - d[bi[i]] + sw[i,k]) * (1 - index[i,m[i,k]]) + direct * index[i,m[i,k]]",
-                   "\n\t\tj[i,k] <- k - (equals(1, split[i]) * step(k-3))",
-                   "\n\t\ttaud[i, si[i,k]] <- tau * 2 * (j[i,k] -1) / j[i,k]",
-                   "\n\t\tw[i,k] <- (delta[i, si[i,k]] - d[si[i,k]] + d[bi[i]]) * (1 - index[i,k])",
-                   "\n\t\tsw[i,k] <- sum(w[i,1:(k-1)])/(j[i,k]-1)",
-                   "\n\t}",
-                   "\n}",
+                   "\n\t}")
+    
+    if(type == "random"){
+      code <- paste0(code, 
+                     "\n\tfor(k in 2:na[i]) {",
+                     "\n\t\tdelta[i, si[i,k]] ~ dnorm(md[i, si[i,k]], taud[i, si[i,k]])",
+                     "\n\t\tmd[i, si[i,k]] <- (d[si[i,k]] - d[bi[i]] + sw[i,k]) * (1 - index[i,m[i,k]]) + direct * index[i,m[i,k]]",
+                     "\n\t\tj[i,k] <- k - (equals(1, split[i]) * step(k-3))",
+                     "\n\t\ttaud[i, si[i,k]] <- tau * 2 * (j[i,k] -1) / j[i,k]",
+                     "\n\t\tw[i,k] <- (delta[i, si[i,k]] - d[si[i,k]] + d[bi[i]]) * (1 - index[i,k])",
+                     "\n\t\tsw[i,k] <- sum(w[i,1:(k-1)])/(j[i,k]-1)",
+                     "\n\t}",
+                     "\n}")
+    } else if(type == "fixed"){
+      
+      code <- paste0(code, 
+                     "\n\tfor(k in 2:na[i]) {",
+                     "\n\t\tdelta[i,si[i,k]] <-(d[si[i,k]] - d[bi[i]] )*(1-index[i,m[i,k]]) + direct*index[i,m[i,k]]",
+                     "\n\t}",
+                     "\n}")
+    }
+    
+    code <- paste0(code,
                    "\nd[1] <- 0",
                    "\ndirect ~ dnorm(0, .0001)",
                    "\nfor(k in 2:", ntreat, ") { d[k] ~ dnorm(0, 0.0001) }",

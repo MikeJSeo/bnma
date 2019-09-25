@@ -89,6 +89,7 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
 #' @param setsize Number of iterations that are run between convergence checks. If the algorithm converges fast, user wouldn't need a big setsize. The number that is printed between each convergence checks is the gelman-rubin diagnostics and we would want that to be below the conv.limit the user specifies.
 #' @param n.run Final number of iterations that the user wants to store. If after the algorithm converges, user wants less number of iterations, we thin the sequence. If the user wants more iterations, we run extra iterations to reach the specified number of runs
 #' @param conv.limit Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used to test convergence of parameters for study effect (eta), relative effect (d), and heterogeneity (log variance (logvar)).
+#' @param extra.pars.save Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.
 #' @return
 #' \item{data_rjags}{Data that is put into rjags function jags.model}
 #' \item{inits}{Initial values that are either specified by the user or generated as a default}
@@ -106,7 +107,7 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
 #' @export
 
 nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,
-                            conv.limit = 1.05){
+                            conv.limit = 1.05, extra.pars.save = NULL){
   
   if (!inherits(network, "nodesplit.network.data")) {
     stop('Given network is not nodesplit.network.data. Run nodesplit.network.data function first')
@@ -138,6 +139,11 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
     # else if(response == "multinomial"){
     #   pars.save <- c(pars.save, "rhat", "dev")
     # }
+    
+    if(!is.null(extra.pars.save)) {
+      extra.pars.save.check(extra.pars.save, pars.save)
+      pars.save <- c(pars.save, extra.pars.save)
+    }
     
     if(is.null(inits)){
       inits <- list()
@@ -375,6 +381,36 @@ Basetreat <- function(treat, b)
   out
 }
 
+
+pick.summary.variables.nodesplit <- function(result, extra.pars = NULL, only.pars = NULL){
+  samples <- result[["samples"]]
+  varnames <- dimnames(samples[[1]])[[2]]
+  varnames.split <- sapply(strsplit(varnames, "\\["), '[[', 1)
+  varnames.split <- gsub("[[:digit:]]","",varnames.split)
+  
+  if(!is.null(only.pars)){
+    if(!all(only.pars %in% varnames.split)){
+      stop(paste0(only.pars, "was not sampled"))
+    }
+  }
+  if(is.null(only.pars)){
+    pars <- c("direct","d", "sd", "diff", "prob", "oneminusprob")
+  } else{
+    pars <- only.pars
+  }
+  if(!is.null(extra.pars)){
+    if(!extra.pars %in% varnames.split){
+      stop(paste0(extra.pars, " is not saved in result"))
+    }
+    pars <- c(pars, extra.pars)
+  }
+  summary.samples <- lapply(samples, function(x){x[,varnames.split %in% pars, drop = F]})
+  summary.samples <- coda::mcmc.list(summary.samples)
+  summary.samples
+}
+
+
+
 #' Summarize result run by \code{\link{nodesplit.network.run}}
 #'
 #' This function uses summary function in coda package to summarize mcmc.list object. Monte carlo error (Time-series SE) is also obtained using the coda package and is printed in the summary as a default.
@@ -391,12 +427,18 @@ Basetreat <- function(treat, b)
 
 summary.nodesplit.network.result <- function(object){
   
+  
   if(!inherits(object, "nodesplit.network.result")) {
     stop('This is not the output from nodesplit.network.run. Need to run nodesplit.network.run function first')
   }
-  rval <- list("summary.samples" = summary(object$samples),
+  
+  summary.samples <- pick.summary.variables.nodesplit(object, ...)
+  
+  rval <- list("summary.samples" = summary(summary.samples),
+               "deviance" = unlist(object$deviance[1:3]),
                "Inconsistency estimate" = summary(object$samples)$statistics["diff","Mean"], 
-               "p_value" = min(summary(object$samples)$statistics["prob", "Mean"], summary(object$samples)$statistics["oneminusprob", "Mean"]))
+               "p_value" = min(summary(object$samples)$statistics["prob", "Mean"], summary(object$samples)$statistics["oneminusprob", "Mean"])
+               )
   class(rval) <- 'summary.nodesplit.network.result'
   rval
 }

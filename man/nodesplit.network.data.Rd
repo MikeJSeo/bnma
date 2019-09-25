@@ -6,7 +6,7 @@
 \usage{
 nodesplit.network.data(Outcomes = NULL, Study = NULL, Treat = NULL,
   N = NULL, SE = NULL, response = NULL, Treat.order = NULL,
-  pair = NULL)
+  pair = NULL, type = "random", dic = TRUE)
 }
 \arguments{
 \item{Outcomes}{Arm-level outcomes. If it is a multinomial response, the matrix would have dimensions treatment arms (row) by multinomial categories (column). If it is binomial or normal, it would be a vector.}
@@ -24,6 +24,10 @@ nodesplit.network.data(Outcomes = NULL, Study = NULL, Treat = NULL,
 \item{Treat.order}{Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.}
 
 \item{pair}{Define a pair to split. It has to be a vector of length 2 with treatment names}
+
+\item{type}{Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".}
+
+\item{dic}{This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.}
 }
 \value{
 Creates list of variables that are used to run the model using \code{\link{nodesplit.network.run}}

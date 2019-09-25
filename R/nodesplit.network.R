@@ -416,6 +416,7 @@ pick.summary.variables.nodesplit <- function(result, extra.pars = NULL, only.par
 #' This function uses summary function in coda package to summarize mcmc.list object. Monte carlo error (Time-series SE) is also obtained using the coda package and is printed in the summary as a default.
 #'
 #' @param object Result object created by \code{\link{nodesplit.network.run}} function
+#' @param ... Additional arguments affecting the summary produced
 #' @examples
 #' ###Thrombolytic data example
 #' network <- with(thrombolytic,{
@@ -425,7 +426,7 @@ pick.summary.variables.nodesplit <- function(result, extra.pars = NULL, only.par
 #' summary(result)
 #' @export
 
-summary.nodesplit.network.result <- function(object){
+summary.nodesplit.network.result <- function(object, ...){
   
   
   if(!inherits(object, "nodesplit.network.result")) {

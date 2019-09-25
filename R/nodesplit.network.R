@@ -224,13 +224,16 @@ nodesplit.model.normal <- function(network){
                      "\n}")
     }
     
+    if(type == "random"){
+      code <- paste0(code, "\nsd ~ dunif(0, 100)",
+                     "\nvarr <- pow(sd,2)",
+                     "\ntau <- 1/varr")
+    }      
+    
     code <- paste0(code,
                    "\nd[1] <- 0",
                    "\ndirect ~ dnorm(0, .0001)",
                    "\nfor(k in 2:", ntreat, ") { d[k] ~ dnorm(0, 0.0001) }",
-                   "\nsd ~ dunif(0, 100)",
-                   "\nvarr <- pow(sd,2)",
-                   "\ntau <- 1/varr",
                    "\nfor(c in 1:", ntreat -1, "){",
                    "\n\tfor(k in (c+1):", ntreat, ") {",
                    "\n\t\tlor[c,k] <- d[k] - d[c]",
@@ -238,7 +241,8 @@ nodesplit.model.normal <- function(network){
                    "\n}",
                    "\ndiff <- direct - lor[pair[1], pair[2]]",
                    "\nprob <- step(diff)",
-                   "\noneminusprob <- 1 - prob"
+                   "\noneminusprob <- 1 - prob")
+                   
     )
     return(code)
   })
@@ -284,14 +288,17 @@ nodesplit.model.binomial <- function(network){
                    "\n}")
   }
   
+  if(type == "random"){
+    code <- paste0(code, "\nsd ~ dunif(0, 100)",
+                   "\nvarr <- pow(sd,2)",
+                   "\ntau <- 1/varr")
+  }      
+  
   code <- paste0(code,          
                  "\nd[1] <- 0",
                  "\ndirect ~ dnorm(0, .0001)",
                  "\nfor(k in 2:", ntreat, ") { d[k] ~ dnorm(0, 0.0001) }",
                  "\ntotresdev<-sum(resdev[])",
-                 "\nsd ~ dunif(0, 10)",
-                 "\nvarr <- pow(sd,2)",
-                 "\ntau <- 1/varr",
                  "\nfor(c in 1:", ntreat -1, "){",
                  "\n\tfor(k in (c+1):", ntreat, ") {",
                  "\n\t\tlor[c,k] <- d[k] - d[c]",

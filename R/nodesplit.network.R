@@ -163,6 +163,7 @@ nodesplit.network.rjags <- function(network){
   return(code)
 }
 
+
 nodesplit.model.normal <- function(network){
   
   with(network, {
@@ -177,16 +178,29 @@ nodesplit.model.normal <- function(network){
                    "\n\t\tr[i,k] ~ dnorm(theta[i,t[i,k]], prec[i,k])", 
                    "\n\t\ttheta[i,t[i,k]] <- mu[i] + delta[i,t[i,k]]",
                    "\n\t\tindex[i,k] <- split[i] * (equals(t[i,k], pair[1]) + equals(t[i,k], pair[2]))",
-                   "\n\t}",
-                   "\n\tfor(k in 2:na[i]) {",
-                   "\n\t\tdelta[i, si[i,k]] ~ dnorm(md[i, si[i,k]], taud[i, si[i,k]])",
-                   "\n\t\tmd[i, si[i,k]] <- (d[si[i,k]] - d[bi[i]] + sw[i,k]) * (1 - index[i,m[i,k]]) + direct * index[i,m[i,k]]",
-                   "\n\t\tj[i,k] <- k - (equals(1, split[i]) * step(k-3))",
-                   "\n\t\ttaud[i, si[i,k]] <- tau * 2 * (j[i,k] -1) / j[i,k]",
-                   "\n\t\tw[i,k] <- (delta[i, si[i,k]] - d[si[i,k]] + d[bi[i]]) * (1 - index[i,k])",
-                   "\n\t\tsw[i,k] <- sum(w[i,1:(k-1)])/(j[i,k]-1)",
-                   "\n\t}",
-                   "\n}",
+                   "\n\t}")
+    
+    if(type == "random"){
+      code <- paste0(code, 
+                     "\n\tfor(k in 2:na[i]) {",
+                     "\n\t\tdelta[i, si[i,k]] ~ dnorm(md[i, si[i,k]], taud[i, si[i,k]])",
+                     "\n\t\tmd[i, si[i,k]] <- (d[si[i,k]] - d[bi[i]] + sw[i,k]) * (1 - index[i,m[i,k]]) + direct * index[i,m[i,k]]",
+                     "\n\t\tj[i,k] <- k - (equals(1, split[i]) * step(k-3))",
+                     "\n\t\ttaud[i, si[i,k]] <- tau * 2 * (j[i,k] -1) / j[i,k]",
+                     "\n\t\tw[i,k] <- (delta[i, si[i,k]] - d[si[i,k]] + d[bi[i]]) * (1 - index[i,k])",
+                     "\n\t\tsw[i,k] <- sum(w[i,1:(k-1)])/(j[i,k]-1)",
+                     "\n\t}",
+                     "\n}")
+    } else if(type == "fixed"){
+      
+      code <- paste0(code, 
+                     "\n\tfor(k in 2:na[i]) {",
+                     "\n\t\tdelta[i,si[i,k]] <-(d[si[i,k]] - d[bi[i]] )*(1-index[i,m[i,k]]) + direct*index[i,m[i,k]]",
+                     "\n\t}",
+                     "\n}")
+    }
+    
+    code <- paste0(code,
                    "\nd[1] <- 0",
                    "\ndirect ~ dnorm(0, .0001)",
                    "\nfor(k in 2:", ntreat, ") { d[k] ~ dnorm(0, 0.0001) }",
@@ -219,16 +233,29 @@ nodesplit.model.binomial <- function(network){
                  "\n\t\tr[i,k] ~ dbin(p[i,t[i,k]], n[i,k])",
                  "\n\t\tlogit(p[i,t[i,k]]) <- mu[i] + delta[i, t[i,k]]",
                  "\n\t\tindex[i,k] <- split[i] * (equals(t[i,k], pair[1]) + equals(t[i,k], pair[2]))",
-                 "\n\t}",
-                 "\n\tfor(k in 2:na[i]) {",
-                 "\n\t\tdelta[i, si[i,k]] ~ dnorm(md[i, si[i,k]], taud[i, si[i,k]])",
-                 "\n\t\tmd[i, si[i,k]] <- (d[si[i,k]] - d[bi[i]] + sw[i,k]) * (1 - index[i,m[i,k]]) + direct * index[i,m[i,k]]",
-                 "\n\t\tj[i,k] <- k - (equals(1, split[i]) * step(k-3))",
-                 "\n\t\ttaud[i, si[i,k]] <- tau * 2 * (j[i,k] -1) / j[i,k]",
-                 "\n\t\tw[i,k] <- (delta[i, si[i,k]] - d[si[i,k]] + d[bi[i]]) * (1 - index[i,k])",
-                 "\n\t\tsw[i,k] <- sum(w[i,1:(k-1)])/(j[i,k]-1)",
-                 "\n\t}",
-                 "\n}",
+                 "\n\t}")
+  
+  if(type == "random"){
+    code <- paste0(code, 
+                   "\n\tfor(k in 2:na[i]) {",
+                   "\n\t\tdelta[i, si[i,k]] ~ dnorm(md[i, si[i,k]], taud[i, si[i,k]])",
+                   "\n\t\tmd[i, si[i,k]] <- (d[si[i,k]] - d[bi[i]] + sw[i,k]) * (1 - index[i,m[i,k]]) + direct * index[i,m[i,k]]",
+                   "\n\t\tj[i,k] <- k - (equals(1, split[i]) * step(k-3))",
+                   "\n\t\ttaud[i, si[i,k]] <- tau * 2 * (j[i,k] -1) / j[i,k]",
+                   "\n\t\tw[i,k] <- (delta[i, si[i,k]] - d[si[i,k]] + d[bi[i]]) * (1 - index[i,k])",
+                   "\n\t\tsw[i,k] <- sum(w[i,1:(k-1)])/(j[i,k]-1)",
+                   "\n\t}",
+                   "\n}"
+                   )
+  } else if(type == "fixed"){
+    code <- paste0(code, 
+                   "\n\tfor(k in 2:na[i]) {",
+                   "\n\t\tdelta[i,si[i,k]] <-(d[si[i,k]] - d[bi[i]] )*(1-index[i,m[i,k]]) + direct*index[i,m[i,k]]",
+                   "\n\t}",
+                   "\n}")
+  }
+  
+  code <- paste0(code,          
                  "\nd[1] <- 0",
                  "\ndirect ~ dnorm(0, .0001)",
                  "\nfor(k in 2:", ntreat, ") { d[k] ~ dnorm(0, 0.0001) }",

@@ -132,7 +132,11 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
     }
     data <- append(data, list(pair = pair, split = split, m =  m, bi = bi, si = si))
     
-    pars.save <- c("direct","d", "sd", "diff", "prob", "oneminusprob")
+    pars.save <- c("direct","d", "diff", "prob", "oneminusprob")
+    
+    if(type == "random"){
+      pars.save <- c(pars.save, "sd")
+    }
     
     if(dic == TRUE){
     pars.save <- c(pars.save, "totresdev")

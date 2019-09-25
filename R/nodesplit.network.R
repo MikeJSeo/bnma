@@ -15,6 +15,8 @@
 #' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial"
 #' @param Treat.order Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.
 #' @param pair Define a pair to split. It has to be a vector of length 2 with treatment names
+#' @param type Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".
+#' @param dic This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.
 #' @return Creates list of variables that are used to run the model using \code{\link{nodesplit.network.run}}
 #' \item{data}{Data combining all the input data. User can check this to insure the data is correctly specified. For modelling purposes, character valued studies or treatment variables are changed to numeric values based on alphabetical order.}
 #' \item{nrow}{Total number of arms in the meta-analysis}
@@ -36,7 +38,7 @@
 #' @export
 
 nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL,  Treat.order = NULL,
-                                  pair = NULL){
+                                  pair = NULL, type = "random", dic = TRUE){
   
   if(response == "multinomial"){
     stop("Not yet implemented")
@@ -130,6 +132,7 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
     
     pars.save <- c("direct","d", "sd", "diff", "prob", "oneminusprob")
     
+    if(dic == TRUE){
     pars.save <- c(pars.save, "totresdev")
     if(response == "binomial"){
       pars.save <- c(pars.save, "rhat", "dev")
@@ -139,6 +142,7 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
     # else if(response == "multinomial"){
     #   pars.save <- c(pars.save, "rhat", "dev")
     # }
+    }
     
     if(!is.null(extra.pars.save)) {
       extra.pars.save.check(extra.pars.save, pars.save)

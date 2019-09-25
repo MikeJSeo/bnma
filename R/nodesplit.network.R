@@ -132,7 +132,7 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
     if(is.null(inits)){
       inits <- list()
       for(i in 1:n.chains){
-        inits[[i]] <- list(direct=0,  d=  c(NA, rep(0, ntreat - 1)), sd=1, mu=rep(0,nstudy))  
+        inits[[i]] <- list(direct=0,  d= c(NA, rep(0, ntreat - 1)), sd=1, mu=rep(0,nstudy))  
       }
     }
 
@@ -140,6 +140,8 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
     
     result <- list(network = network, data.rjags = data, inits = inits, pars.save = pars.save)
     result <- c(result, samples)
+    
+    result$deviance <- calculate.deviance(result)
 
     class(result) <- "nodesplit.network.result"
     return(result)
@@ -233,7 +235,12 @@ nodesplit.model.binomial <- function(network){
                  "\n\t\tr[i,k] ~ dbin(p[i,t[i,k]], n[i,k])",
                  "\n\t\tlogit(p[i,t[i,k]]) <- mu[i] + delta[i, t[i,k]]",
                  "\n\t\tindex[i,k] <- split[i] * (equals(t[i,k], pair[1]) + equals(t[i,k], pair[2]))",
-                 "\n\t}")
+                 "\n\t\trhat[i,k] <- p[i,t[i,k]] * n[i,k]",
+                 "\n\t\tdev[i,k] <- 2 * (r[i,k] * (log(r[i,k])-log(rhat[i,k]))
+                                  + (n[i,k]-r[i,k]) * (log(n[i,k]-r[i,k]) - log(n[i,k]-rhat[i,k])))",
+                 "\n\t}",
+                 "\n\tresdev[i]<-sum(dev[i,1:na[i]])"
+                 )
   
   if(type == "random"){
     code <- paste0(code, 
@@ -259,6 +266,7 @@ nodesplit.model.binomial <- function(network){
                  "\nd[1] <- 0",
                  "\ndirect ~ dnorm(0, .0001)",
                  "\nfor(k in 2:", ntreat, ") { d[k] ~ dnorm(0, 0.0001) }",
+                 "\ntotresdev<-sum(resdev[])",
                  "\nsd ~ dunif(0, 10)",
                  "\nvarr <- pow(sd,2)",
                  "\ntau <- 1/varr",

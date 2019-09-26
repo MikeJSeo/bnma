@@ -717,7 +717,12 @@ calculate.deviance <- function(result){
       for(j in 1:network$na[i]){
         r_value <- network$r[i,j]
         se_value <- network$se[i,j]
-        ybar_arm[i,j] <- ybar[which(paste("theta[", i, ",", j, "]", sep = "") == names(ybar))]
+        
+        if(class(network) == "nodesplit.network.data"){
+          ybar_arm[i,j] <- ybar[which(paste("theta[", i, ",", network$t[i,j], "]", sep = "") == names(ybar))] 
+        } else{
+          ybar_arm[i,j] <- ybar[which(paste("theta[", i, ",", j, "]", sep = "") == names(ybar))] 
+        }
         devtilda_arm[i,j] <- ifelse(se_value != 0, (r_value - ybar_arm[i,j])^2 / se_value^2, 0)
       }
     }

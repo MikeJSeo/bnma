@@ -208,7 +208,7 @@ nodesplit.model.normal <- function(network){
                    "\n\t\tr[i,k] ~ dnorm(theta[i,t[i,k]], prec[i,k])", 
                    "\n\t\ttheta[i,t[i,k]] <- mu[i] + delta[i,t[i,k]]",
                    "\n\t\tindex[i,k] <- split[i] * (equals(t[i,k], pair[1]) + equals(t[i,k], pair[2]))",
-                   "\n\t\tdev[i,k] <- (r[i,k]-theta[i,k])*(r[i,k]-theta[i,k])*tau[i,k]",
+                   "\n\t\tdev[i,k] <- (r[i,k]-theta[i,k])*(r[i,k]-theta[i,k])*prec[i,k]",
                    "\n\t}",
                    "\n\tresdev[i] <- sum(dev[i,1:na[i]])")
     

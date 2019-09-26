@@ -167,8 +167,10 @@ nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run =
     result <- list(network = network, data.rjags = data, inits = inits, pars.save = pars.save)
     result <- c(result, samples)
     
-    result$deviance <- calculate.deviance(result)
-
+    if(dic == TRUE) {
+      result$deviance <- calculate.deviance(result)
+    }
+    
     class(result) <- "nodesplit.network.result"
     return(result)
   })

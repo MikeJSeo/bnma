@@ -208,7 +208,9 @@ nodesplit.model.normal <- function(network){
                    "\n\t\tr[i,k] ~ dnorm(theta[i,t[i,k]], prec[i,k])", 
                    "\n\t\ttheta[i,t[i,k]] <- mu[i] + delta[i,t[i,k]]",
                    "\n\t\tindex[i,k] <- split[i] * (equals(t[i,k], pair[1]) + equals(t[i,k], pair[2]))",
-                   "\n\t}")
+                   "\n\t\tdev[i,k] <- (r[i,k]-theta[i,k])*(r[i,k]-theta[i,k])*tau[i,k]",
+                   "\n\t}",
+                   "\n\tresdev[i] <- sum(dev[i,1:na[i]])")
     
     if(type == "random"){
       code <- paste0(code, 
@@ -240,6 +242,7 @@ nodesplit.model.normal <- function(network){
                    "\nd[1] <- 0",
                    "\ndirect ~ dnorm(0, .0001)",
                    "\nfor(k in 2:", ntreat, ") { d[k] ~ dnorm(0, 0.0001) }",
+                   "\ntotresdev<-sum(resdev[])",
                    "\nfor(c in 1:", ntreat -1, "){",
                    "\n\tfor(k in (c+1):", ntreat, ") {",
                    "\n\t\tlor[c,k] <- d[k] - d[c]",

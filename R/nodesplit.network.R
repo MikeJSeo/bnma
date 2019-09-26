@@ -439,9 +439,9 @@ pick.summary.variables.nodesplit <- function(result, extra.pars = NULL, only.par
 #' @param object Result object created by \code{\link{nodesplit.network.run}} function
 #' @param ... Additional arguments affecting the summary produced
 #' @examples
-#' ###Thrombolytic data example
-#' network <- with(thrombolytic,{
-#'  nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9)))
+#' ###Parkinsons data example
+#' network <- with(parkinsons, {
+#'  nodesplit.network.data(Outcomes, Study, Treat, SE = SE, response = "normal", Treat.order = Treat.order, pair = c("Placebo", "Ropinirole"))
 #' })
 #' result <- nodesplit.network.run(network)
 #' summary(result)

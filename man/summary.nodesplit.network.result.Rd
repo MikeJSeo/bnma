@@ -15,9 +15,9 @@
 This function uses summary function in coda package to summarize mcmc.list object. Monte carlo error (Time-series SE) is also obtained using the coda package and is printed in the summary as a default.
 }
 \examples{
-###Thrombolytic data example
-network <- with(thrombolytic,{
- nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9)))
+###Parkinsons data example
+network <- with(parkinsons, {
+ nodesplit.network.data(Outcomes, Study, Treat, SE = SE, response = "normal", Treat.order = Treat.order, pair = c("Placebo", "Ropinirole"))
 })
 result <- nodesplit.network.run(network)
 summary(result)

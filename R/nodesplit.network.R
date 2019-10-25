@@ -459,7 +459,7 @@ summary.nodesplit.network.result <- function(object, ...){
   rval <- list("summary.samples" = summary(summary.samples),
                "deviance" = unlist(object$deviance[1:3]),
                "Inconsistency estimate" = summary(object$samples)$statistics["diff","Mean"], 
-               "p_value" = min(summary(object$samples)$statistics["prob", "Mean"], summary(object$samples)$statistics["oneminusprob", "Mean"])
+               "p_value" = 2 * min(summary(object$samples)$statistics["prob", "Mean"], summary(object$samples)$statistics["oneminusprob", "Mean"])
                )
   class(rval) <- 'summary.nodesplit.network.result'
   rval

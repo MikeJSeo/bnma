@@ -1086,6 +1086,7 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
 #'
 #' This function draws network graph using igraph package
 #' @param network Object created by \code{\link{network.data}} function
+#' @param label.dist distance of the label from the node. Default is 2.
 #' @examples
 #' #cardiovascular
 #' network <- with(thrombolytic, {
@@ -1094,18 +1095,19 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
 #' draw.network.graph(network)
 #' @export
 
-draw.network.graph = function(network){
+draw.network.graph = function(network, label.dist = 2){
   
   if(class(network) == "contrast.network.data"){
     Treat <- c(t(network$Treat))[!is.na(c(t(network$Treat)))]
     Study <- rep(1:length(network$na), times = network$na)
   } else{
-    Treat <- network$Treat
+    Treat <- network$Treat.order[network$Treat]
     Study <- network$Study
   }
   pairs <- do.call(rbind, lapply(split(Treat, Study),
                                  function(x) t(combn(x,2))))
   pairs <- aggregate(rep(1, length(X1)) ~ X1 + X2, data = data.frame(pairs), sum)
+  colnames(pairs)[3] <- "freq"
   g <- igraph::graph.edgelist(as.matrix(pairs[,1:2]), directed=FALSE)
-  plot(g, edge.curved=FALSE, edge.width=pairs$freq, vertex.label.dist=.7)
+  plot(g, edge.curved=FALSE, edge.width=pairs$freq, vertex.label.dist= label.dist)
 }

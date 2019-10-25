@@ -21,7 +21,8 @@ knitr::opts_chunk$set(
 We describe how to run Bayesian network meta analysis using this package. First we'll need to load the package.
 
 ```{r}
-#devtools::install_github("MikeJSeo/bnma")
+#install.packages("bnma")
+#or devtools::install_github("MikeJSeo/bnma")
 library(bnma)
 ```
 
@@ -50,7 +51,7 @@ network$r
 
 ## Priors
 
-Priors can be set in the `network.data` function. Most of the parameters for the priors are self-explanatory. For heterogeneity parameters for random effects model, we follow the data format from R package `gemtc`. It should be a list of length 3 where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. Here is an example.
+Priors can be set in the `network.data` function. Please take a look at the function description for the prior specifications. For heterogeneity parameters of the random effects model, we follow the data format from a similar Bayesian network meta-analysis R package `gemtc`. It should be a list of length 3 where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. Here is an example.
 
 ```{r}
 network <- with(smoking, network.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial", mean.d = 0.1, hy.prior = list("dhnorm", 0, 5)))
@@ -58,7 +59,7 @@ network <- with(smoking, network.data(Outcomes = Outcomes, Study = Study, Treat 
 
 ## Running the model
 
-Now to run the network, we use the function `network.run`. There are many parameters that can be modified, but the most important is the parameter `n.run` which determines how many final observations the user wants. Gelman-Rubin statitics is checked automatically every `setsize` number of iterations and once the series have converged we store the last half of the sequence. If the number of iteration is less than the number of observations user wanted (`n.runs`), it will sample more to fill the requirement. One of the neat thing about this package is that it checks for convergence automatically and will give an error if the sequence has not converged. The parameters tested for convergence are the relative treatment effects, baseline effect, and heterogeneity parameter. The number that is printed during the running of the model is the Gelman-Rubin statistics.
+Now to run the network, we use the function `network.run`. There are many parameters that can be modified, but the most important is the parameter `n.run` which determines how many final observations the user wants. Gelman-Rubin statitics is checked automatically every `setsize` number of iterations and once the series have converged we store the last half of the sequence. If the number of iteration is less than the number of observations user wanted (`n.runs`), it will sample more to fill the requirement. One of the nice feature of this package is that it checks for convergence automatically and will give an error if the sequence has not converged. The parameters tested for convergence are the relative treatment effects, baseline effect, and heterogeneity parameter. The number that is printed during the running of the model is the point estimate of the Gelman-Rubin statistics.
 
 ```{r}
 result <- network.run(network, n.run = 30000)
@@ -80,7 +81,7 @@ network.forest.plot(result)
 
 ## Multinomial model
 
-One unique aspect of this network package is that multinomial outcome dataset can be analyzed. Here is an example.
+Another nice feature of this network meta analysis package is that multinomial outcome dataset can be analyzed. Here is an example.
 
 ```{r}
 network <- with(cardiovascular, network.data(Outcomes, Study, Treat, N, response = "multinomial"))
@@ -107,7 +108,7 @@ network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment 
 
 ## Baseline risk
 
-Another important addition to this network package is the ability to add baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independenet" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common slope and exchangeable baseline risk model.
+Another useful addition to this network package is the ability to add baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independenet" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common slope and exchangeable baseline risk model.
 
 ```{r}
 network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "common", baseline.risk = "exchangeable"))

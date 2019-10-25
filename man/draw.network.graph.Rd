@@ -4,10 +4,12 @@
 \alias{draw.network.graph}
 \title{Draws network graph using igraph package}
 \usage{
-draw.network.graph(network)
+draw.network.graph(network, label.dist = 2)
 }
 \arguments{
 \item{network}{Object created by \code{\link{network.data}} function}
+
+\item{label.dist}{distance of the label from the node. Default is 2.}
 }
 \description{
 This function draws network graph using igraph package

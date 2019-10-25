@@ -6,7 +6,7 @@
 \usage{
 nodesplit.network.data(Outcomes = NULL, Study = NULL, Treat = NULL,
   N = NULL, SE = NULL, response = NULL, Treat.order = NULL,
-  pair = NULL, type = "random", dic = TRUE)
+  pair = NULL, type = "random", dic = FALSE)
 }
 \arguments{
 \item{Outcomes}{Arm-level outcomes. If it is a multinomial response, the matrix would have dimensions treatment arms (row) by multinomial categories (column). If it is binomial or normal, it would be a vector.}
@@ -27,7 +27,7 @@ nodesplit.network.data(Outcomes = NULL, Study = NULL, Treat = NULL,
 
 \item{type}{Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".}
 
-\item{dic}{This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.}
+\item{dic}{This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE. Default is set to FALSE.}
 }
 \value{
 Creates list of variables that are used to run the model using \code{\link{nodesplit.network.run}}

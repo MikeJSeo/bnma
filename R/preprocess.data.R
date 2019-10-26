@@ -1,12 +1,5 @@
 
 
-
-
-
-
-
-
-
 preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random", rank.preference = "higher",
                             baseline = "none", baseline.risk = "independent", covariate = NULL, covariate.type = NULL, covariate.model = NULL,
                             hy.prior.Eta = NULL, hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL){

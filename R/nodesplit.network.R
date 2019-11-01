@@ -31,7 +31,7 @@
 #' @examples
 #' ###Thrombolytic data example
 #' network <- with(thrombolytic,{
-#'  nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9)))
+#'  nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9))
 #' })
 #' network
 #' @references S. Dias, N.J. Welton, D.M. Caldwellb, A.E. Ades (2010), \emph{Checking consistency in mixed treatment}, Statistics in Medicine 29(7-8, Sp. Iss. SI): 932-944. [\url{https://doi.org/10.1002/sim.3767}]
@@ -105,7 +105,7 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
 #' @examples
 #' ###Thrombolytic data example
 #' network <- with(thrombolytic,{
-#'  nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9)))
+#'  nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9))
 #' })
 #' result <- nodesplit.network.run(network)
 #' @export
@@ -441,7 +441,8 @@ pick.summary.variables.nodesplit <- function(result, extra.pars = NULL, only.par
 #' @examples
 #' ###Parkinsons data example
 #' network <- with(parkinsons, {
-#'  nodesplit.network.data(Outcomes, Study, Treat, SE = SE, response = "normal", Treat.order = Treat.order, pair = c("Placebo", "Ropinirole"))
+#'  nodesplit.network.data(Outcomes, Study, Treat, SE = SE, response = "normal", 
+#'  Treat.order = Treat.order, pair = c("Placebo", "Ropinirole"))
 #' })
 #' result <- nodesplit.network.run(network)
 #' summary(result)

@@ -82,7 +82,7 @@ NULL
 #' @importFrom graphics axis legend lines mtext plot points title
 NULL
 
-#' @importFrom stats coef end lm quantile rchisq rnorm sd start window
+#' @importFrom stats coef end lm quantile rchisq rnorm sd start window aggregate
 NULL
 
 #' @importFrom utils combn
@@ -96,3 +96,4 @@ NULL
 
 #' @import grid
 NULL
+

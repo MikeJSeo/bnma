@@ -494,9 +494,13 @@ network.rankogram <- function(result, title = "Rankogram", catnames = NULL){
   if(result$network$response != "multinomial"){
     
     Treat.order <- result$network$Treat.order
-    df <- data.frame(treatment=rep(Treat.order, each = length(Treat.order)),
-                     rank = rep(1:length(Treat.order), length(Treat.order)),
-                     probability = matrix(rank, ncol = 1))
+    treatment=rep(Treat.order, each = length(Treat.order))
+    rank = rep(1:length(Treat.order), length(Treat.order))
+    probability = matrix(rank, ncol = 1)
+               
+    df <- data.frame(treatment = treatment,
+                     rank = rank,
+                     probability = probability)
     
     ggplot(data=df, aes(x=rank, y=probability, fill=treatment)) +
       labs(title= title) +
@@ -508,7 +512,7 @@ network.rankogram <- function(result, title = "Rankogram", catnames = NULL){
   } else if(result$network$response == "multinomial"){
     
     ncat <- dim(rank)[3]
-    if (is.null(catnames)) catnames <- paste(": base category", colnames(network$Outcomes)[1], "and comparison", colnames(network$Outcomes)[1+seq(ncat)])
+    if (is.null(catnames)) catnames <- paste(": base category", colnames(result$network$Outcomes)[1], "and comparison", colnames(result$network$Outcomes)[1+seq(ncat)])
     for (j in seq(ncat)) {
       Treat.order <- result$network$Treat.order
       df <- data.frame(treatment=as.character(rep(Treat.order, each = length(Treat.order))),

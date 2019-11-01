@@ -17,7 +17,8 @@ This function uses summary function in coda package to summarize mcmc.list objec
 \examples{
 ###Parkinsons data example
 network <- with(parkinsons, {
- nodesplit.network.data(Outcomes, Study, Treat, SE = SE, response = "normal", Treat.order = Treat.order, pair = c("Placebo", "Ropinirole"))
+ nodesplit.network.data(Outcomes, Study, Treat, SE = SE, response = "normal", 
+ Treat.order = Treat.order, pair = c("Placebo", "Ropinirole"))
 })
 result <- nodesplit.network.run(network)
 summary(result)

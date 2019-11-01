@@ -52,7 +52,7 @@ The input data is preprocessed to fit the format necessary to run model in JAGS.
 \examples{
 ###Thrombolytic data example
 network <- with(thrombolytic,{
- nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9)))
+ nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9))
 })
 network
 }

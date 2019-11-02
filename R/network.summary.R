@@ -470,65 +470,6 @@ rank.tx <- function(result){
   return(prob.matrix)
 }
 
-#' Create a treatment rankogram
-#' 
-#' Another plot to display how each treatment is ranked. For each rank, we show how likely each treatment will be at that rank.
-#'
-#' @param result Object created by \code{\link{network.run}} function
-#' @param title Title of the rankogram
-#' @param catnames Label for category comparison in multinomial outcomes
-#' @examples
-#' network <-with(blocker, {
-#'  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
-#' })
-#' result <- network.run(network)
-#' network.rankogram(result)
-#' @seealso \code{\link{rank.tx}}
-#' @export
-
-
-network.rankogram <- function(result, title = "Rankogram", catnames = NULL){
-  
-  rank <- rank.tx(result)
-  
-  if(result$network$response != "multinomial"){
-    
-    Treat.order <- result$network$Treat.order
-    treatment=rep(Treat.order, each = length(Treat.order))
-    rank = rep(1:length(Treat.order), length(Treat.order))
-    probability = matrix(rank, ncol = 1)
-               
-    df <- data.frame(treatment = treatment,
-                     rank = rank,
-                     probability = probability)
-    
-    ggplot(data=df, aes(x=rank, y=probability, fill=treatment)) +
-      labs(title= title) +
-      geom_bar(stat="identity", position=position_dodge())+
-      geom_text(aes(label=round(probability, 2)), vjust=-0.5, color="black",
-                position = position_dodge(0.9), size=3.5)+
-      scale_fill_brewer(palette="Paired")+
-      theme_minimal()
-  } else if(result$network$response == "multinomial"){
-    
-    ncat <- dim(rank)[3]
-    if (is.null(catnames)) catnames <- paste(": base category", colnames(result$network$Outcomes)[1], "and comparison", colnames(result$network$Outcomes)[1+seq(ncat)])
-    for (j in seq(ncat)) {
-      Treat.order <- result$network$Treat.order
-      df <- data.frame(treatment=as.character(rep(Treat.order, each = length(Treat.order))),
-                       rank = rep(1:length(Treat.order), length(Treat.order)),
-                       probability = matrix(rank[,,j], ncol = 1))
-      
-      print(ggplot(data=df, aes(x=rank, y=probability, fill= treatment)) +
-        labs(title= paste0(title, catnames[j])) +
-        geom_bar(stat="identity", position=position_dodge())+
-        geom_text(aes(label=round(probability, 2)), vjust=-0.5, color="black",
-                  position = position_dodge(0.9), size=3.5)+
-        scale_fill_brewer(palette="Paired")+
-        theme_minimal())
-    }
-  }
-}
 
 
 #' Create a treatment rank plot

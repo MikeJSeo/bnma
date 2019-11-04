@@ -29,40 +29,11 @@ For a simple summary, use \code{\link{relative.effects.table}}.
 This function calculates relative effects for base treatment and comparison treatments.
 }
 \examples{
-#We can fit two different models with different base treatment and we can
-#obtain same relative effects estimate using this function
-#parkinsons
 network <- with(parkinsons, {
  network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
 })
 result <- network.run(network) 
-summary(result)
-
-network2 <- with(parkinsons, {
- network.data(Outcomes, Study, Treat, SE = SE, response = "normal",
- Treat.order = c(2,1,3,4,5))
-})
-result2 <- network.run(network2)
-
-summary(result)
-summary(relative.effects(result2, base.treatment = 1))
-
-#This also works for comparing different base.category for multinomial.
-#We fit two different models and compare the estimates again.
-#cardiovascular
-
-network3 <- with(cardiovascular, {
- network.data(Outcomes, Study, Treat, N, response = "multinomial")
-})
-result3 <- network.run(network3)
-
-network4 <- with(cardiovascular, {
- network.data(Outcomes[,c(2,1,3)], Study, Treat, N, response = "multinomial")
-})
-result4 <- network.run(network4)
-
-summary(result3)
-summary(relative.effects(result4, base.category = 2))
+summary(relative.effects(result, base.treatment = "Placebo"))
 }
 \seealso{
 \code{\link{relative.effects.table}}

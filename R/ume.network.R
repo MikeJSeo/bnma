@@ -717,11 +717,12 @@ summary.ume.network.result <- function(object, ...){
 #' This function uses plotting function in coda package to plot mcmc.list object
 #'
 #' @param x Result object created by \code{\link{ume.network.run}} function
+#' @param ... Additional arguments affecting the plot produced
 #' @examples
 #' network <- with(smoking, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 #' })
-#' result <- ume.network.run(network, only.pars = "sd")
+#' result <- ume.network.run(network)
 #' plot(result)
 #' @export
 

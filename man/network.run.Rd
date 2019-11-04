@@ -25,17 +25,6 @@ network.run(network, inits = NULL, n.chains = 3, max.run = 1e+05,
 
 \item{extra.pars.save}{Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.}
 }
-\value{
-\item{data_rjags}{Data that is put into rjags function \code{\link{jags.model}}}
-\item{inits}{Initial values that are either specified by the user or generated as a default}
-\item{pars.save}{Parameters that are saved. Add more parameters in extra.pars.save if other variables are desired}
-\item{burnin}{Half of the converged sequence is thrown out as a burnin}
-\item{n.thin}{If the number of iterations user wants (n.run) is less than the number of converged sequence after burnin, we thin the sequence and store the thinning interval}
-\item{samples}{MCMC samples stored using jags. The returned samples have the form of mcmc.list and can be directly applied to coda functions}
-\item{max.gelman}{Maximum Gelman and Rubin's convergence diagnostic calculated for the final sample}
-\item{deviance}{Contains deviance statistics such as pD (effective number of parameters) and DIC (Deviance Information Criterion)}
-\item{rank.tx}{Rank probability calculated for each treatments. \code{rank.preference} parameter in \code{\link{network.data}} is used to define whether higher or lower value is preferred. The numbers are probabilities that a given treatment has been in certain rank in the sequence.}
-}
 \description{
 This is the core function that runs the model in our program. Before running this function, we need to specify data, prior, JAGS code, etc. using \code{\link{network.data}}.
 }

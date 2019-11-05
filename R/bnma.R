@@ -61,11 +61,23 @@ NULL
 #'
 #' A dataset of 7 studies investigating the mean lost work-time reduction in patients given
 #' 4 dopamine agonists and placebo as adjunct therapy for Parkinson's disease.
-#' There is placebo, coded as 1, and four active drugs coded 2 to 5.
+#' There is placebo and four active drugs coded 2 to 5.
 #'
 #' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
 #' @format A list of Outcomes, Treat, Study, N, covariate, and Treat.order
 "parkinsons"
+
+
+#' Dopamine agonists as adjunct therapy in Parkinson's disease
+#'
+#' A contrast level (i.e. treatment difference) dataset of 7 studies investigating the mean lost work-time reduction in patients given
+#' 4 dopamine agonists and placebo as adjunct therapy for Parkinson's disease. Placebo is coded as 1, and four active drugs are coded 2 to 5.
+#' There is placebo, coded as 1, and four active drugs coded 2 to 5.
+#'
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+#' @format A list of Outcomes, Treat, SE, na, and V
+"parkinsons_contrast"
+
 
 #' Trials of low dose and high dose statins for cardiovascular disease vs. placebo
 #'
@@ -78,6 +90,30 @@ NULL
 #' @references C.H. Schmid, T.A. Trikalinos, I. Olkin (2014), \emph{Bayesian network meta-analysis for unordered categorical outcomes with incomplete data}, Research Synthesis Methods 5(2):162-185. [\url{https://doi.org/10.1002/jrsm.1103}]
 #' @format A list of Outcomes, Treat, Study, and N
 "cardiovascular"
+
+
+#' Smoking cessation counseling programs
+#'
+#' Twenty-four studies, including 2 three-arm trials, compared 4 smoking cessation counseling programs and recorded the number of
+#' individuals with successful smoking cessation at 6 to 12 month. Counseling programs include 1 = no intervention, 2 = self-help,
+#' 3 = individual counseling, and 4 - group counseling. 
+#'
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+#' @format A list of Outcomes, Treat, Study, and N
+"smoking"
+
+
+#' Thrombolytic drugs and percutaneous transluminal coronary angioplasty
+#'
+#' A dataset consisting of 50 trials comparing 8 thrombolytic drugs and percutaneous transluminal coronary angioplasty, following
+#' acute myocardial infarction. Data consist of the number of deaths in 30 or 35 days and the number of patients in each treatment arm.
+#' There are 9 treatments in total: streptokinase (1), alteplase (2), accelerated alteplase (3), streptokinase + alteplase (4),
+#' reteplase (5), tenecteplase (6), percutaneous transluminal coronary angioplasty (7), urokinase (8), anistreptilase (9)
+#' 
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+#' @format A list of Outcomes, Treat, Study, and N
+"thrombolytic"
+
 
 #' @importFrom graphics axis legend lines mtext plot points title
 NULL

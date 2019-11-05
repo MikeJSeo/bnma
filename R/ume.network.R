@@ -9,6 +9,8 @@
 #' @param SE A vector of standard error for each arm. Used only for normal response.
 #' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial".
 #' @param type Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".
+#' @param mean.mu Prior mean for the study effect (baseline risk)
+#' @param prec.mu Prior precision for the study effect (baseline risk)
 #' @param mean.d Prior mean for the relative effect
 #' @param prec.d Prior precision for the relative effect
 #' @param hy.prior Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter.
@@ -708,7 +710,6 @@ summary.ume.network.result <- function(object, ...){
   class(rval) <- 'summary.ume.network.result'
   rval
 }
-
 
 
 

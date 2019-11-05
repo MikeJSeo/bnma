@@ -24,6 +24,10 @@ ume.network.data(Outcomes, Study, Treat, N = NULL, SE = NULL,
 
 \item{type}{Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".}
 
+\item{mean.mu}{Prior mean for the study effect (baseline risk)}
+
+\item{prec.mu}{Prior precision for the study effect (baseline risk)}
+
 \item{mean.d}{Prior mean for the relative effect}
 
 \item{prec.d}{Prior precision for the relative effect}

@@ -283,6 +283,7 @@ summary.contrast.network.result <- function(object, ...){
 #' This function uses plotting function in coda package to plot mcmc.list object
 #'
 #' @param x Result object created by \code{\link{contrast.network.run}} function
+#' @param ... Additional arguments affecting the plot produced
 #' @examples
 #' network <- with(parkinsons_contrast, {
 #'  contrast.network.data(Outcomes, Treat, SE, na, V)

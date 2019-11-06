@@ -4,10 +4,12 @@
 \alias{plot.contrast.network.result}
 \title{Plot traceplot and posterior density of the result using contrast data}
 \usage{
-\method{plot}{contrast.network.result}(x)
+\method{plot}{contrast.network.result}(x, ...)
 }
 \arguments{
 \item{x}{Result object created by \code{\link{contrast.network.run}} function}
+
+\item{...}{Additional arguments affecting the plot produced}
 }
 \description{
 This function uses plotting function in coda package to plot mcmc.list object

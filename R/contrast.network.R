@@ -291,7 +291,7 @@ summary.contrast.network.result <- function(object, ...){
 #' plot(result)
 #' @export
 
-plot.contrast.network.result <- function(x) {
+plot.contrast.network.result <- function(x, ...) {
   
   if(!inherits(x, "contrast.network.result")) {
     stop('This is not the output from contrast.network.run. Need to run contrast.network.run function first')

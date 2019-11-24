@@ -828,8 +828,8 @@ network.leverage.plot <- function(result){
 #' })
 #' #run the following code:
 #' #result <- network.run(network)
-#' #network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "CZP",
-#' covariate.name = "Disease Duration")
+#' #network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "CZP", 
+#' #covariate.name = "Disease Duration")
 #' @export
 
 network.covariate.plot <- function(result, base.treatment = NULL, comparison.treatment= NULL, base.category = NULL, comparison.category = NULL, covariate.name = NULL){

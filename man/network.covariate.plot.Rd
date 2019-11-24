@@ -34,6 +34,6 @@ network <- with(certolizumab, {
 })
 #run the following code:
 #result <- network.run(network)
-#network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "CZP",
-covariate.name = "Disease Duration")
+#network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "CZP", 
+#covariate.name = "Disease Duration")
 }

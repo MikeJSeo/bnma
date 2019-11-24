@@ -43,5 +43,6 @@ This is similar to the function \code{\link{network.run}}, except it uses contra
 network <- with(parkinsons_contrast, {
  contrast.network.data(Outcomes, Treat, SE, na, V)
 })
-result <- contrast.network.run(network)
+#run the code below:
+#result <- contrast.network.run(network)
 }

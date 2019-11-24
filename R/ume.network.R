@@ -15,6 +15,11 @@
 #' @param prec.d Prior precision for the relative effect
 #' @param hy.prior Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter.
 #' @param dic This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.
+#' @examples
+#' network <- with(thrombolytic, {
+#'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial")
+#' })
+#' network
 #' @references S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \emph{Evidence synthesis for decision making 4: inconsistency in networks of evidence based on randomized controlled trials}, Medical Decision Making 33(5):641-656. [\url{https://doi.org/10.1177/0272989X12455847}]
 #' @export
 
@@ -359,7 +364,8 @@ ume.hy.prior.rjags <- function(hy.prior, ncat){
 #' network <- with(thrombolytic, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 #' })
-#' result <- ume.network.run(network)
+#' #run the following code:
+#' #result <- ume.network.run(network)
 #' @export
 
 ume.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,
@@ -691,8 +697,9 @@ pick.summary.variables.ume <- function(result, extra.pars = NULL, only.pars = NU
 #' network <- with(smoking, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 #' })
-#' result <- ume.network.run(network) 
-#' summary(result)
+#' #run the following code
+#' #result <- ume.network.run(network) 
+#' #summary(result)
 #' #summary(result, only.pars = "sd")
 #' #summary(result, extra.pars = c("delta"))
 #' @export
@@ -723,8 +730,9 @@ summary.ume.network.result <- function(object, ...){
 #' network <- with(smoking, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 #' })
-#' result <- ume.network.run(network)
-#' plot(result)
+#' #run the following code:
+#' #result <- ume.network.run(network)
+#' #plot(result)
 #' @export
 
 plot.ume.network.result <- function(x, ...) {

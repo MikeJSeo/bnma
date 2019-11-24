@@ -16,6 +16,7 @@ This makes a deviance plot which plots residual deviance (dev_arm) vs. all the a
 network <- with(blocker, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-result <- network.run(network)
-network.deviance.plot(result)
+#run the following code:
+#result <- network.run(network)
+#network.deviance.plot(result)
 }

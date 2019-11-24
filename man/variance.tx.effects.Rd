@@ -17,6 +17,7 @@ This function calculates correlation matrix from the variance matrix for heterog
 network <- with(cardiovascular, {
  network.data(Outcomes, Study, Treat, N, response = "multinomial")
 })
-result <- network.run(network)
-variance.tx.effects(result)
+#run the following code:
+#result <- network.run(network)
+#variance.tx.effects(result)
 }

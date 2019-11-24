@@ -39,6 +39,12 @@ ume.network.data(Outcomes, Study, Treat, N = NULL, SE = NULL,
 \description{
 This is similar to the function \code{\link{network.data}}, except this is used for the unrelated mean effects model.
 }
+\examples{
+network <- with(thrombolytic, {
+ ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial")
+})
+network
+}
 \references{
 S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \emph{Evidence synthesis for decision making 4: inconsistency in networks of evidence based on randomized controlled trials}, Medical Decision Making 33(5):641-656. [\url{https://doi.org/10.1177/0272989X12455847}]
 }

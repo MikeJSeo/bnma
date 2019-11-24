@@ -18,6 +18,7 @@ This function uses plotting function in coda package to plot mcmc.list object
 network <- with(parkinsons_contrast, {
  contrast.network.data(Outcomes, Treat, SE, na, V)
 })
-result <- contrast.network.run(network)
-plot(result)
+#run the code below:
+#result <- contrast.network.run(network)
+#plot(result)
 }

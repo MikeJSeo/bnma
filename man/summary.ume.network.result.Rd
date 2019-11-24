@@ -18,8 +18,9 @@ This function uses summary function in coda package to summarize mcmc.list objec
 network <- with(smoking, {
  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 })
-result <- ume.network.run(network) 
-summary(result)
+#run the following code
+#result <- ume.network.run(network) 
+#summary(result)
 #summary(result, only.pars = "sd")
 #summary(result, extra.pars = c("delta"))
 }

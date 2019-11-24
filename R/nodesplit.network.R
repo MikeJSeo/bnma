@@ -107,7 +107,8 @@ nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, 
 #' network <- with(thrombolytic,{
 #'  nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9))
 #' })
-#' result <- nodesplit.network.run(network)
+#' #run the following code:
+#' #result <- nodesplit.network.run(network)
 #' @export
 
 nodesplit.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,
@@ -444,8 +445,9 @@ pick.summary.variables.nodesplit <- function(result, extra.pars = NULL, only.par
 #'  nodesplit.network.data(Outcomes, Study, Treat, SE = SE, response = "normal", 
 #'  Treat.order = Treat.order, pair = c("Placebo", "Ropinirole"))
 #' })
-#' result <- nodesplit.network.run(network)
-#' summary(result)
+#' #run the following code:
+#' #result <- nodesplit.network.run(network)
+#' #summary(result)
 #' @export
 
 summary.nodesplit.network.result <- function(object, ...){

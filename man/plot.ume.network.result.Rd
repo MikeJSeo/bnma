@@ -18,6 +18,7 @@ This function uses plotting function in coda package to plot mcmc.list object
 network <- with(smoking, {
  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 })
-result <- ume.network.run(network)
-plot(result)
+#run the following code:
+#result <- ume.network.run(network)
+#plot(result)
 }

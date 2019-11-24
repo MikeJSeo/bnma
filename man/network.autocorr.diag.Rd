@@ -24,6 +24,7 @@ Note that to display extra parameters that are not saved, user needs to first sp
 network <- with(blocker, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-result <- network.run(network)
-network.autocorr.diag(result, only.pars = "d")
+#run the following code:
+#result <- network.run(network)
+#network.autocorr.diag(result, only.pars = "d")
 }

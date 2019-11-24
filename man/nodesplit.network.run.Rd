@@ -42,5 +42,6 @@ This is similar to the function \code{\link{network.run}}, except this is used f
 network <- with(thrombolytic,{
  nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9))
 })
-result <- nodesplit.network.run(network)
+#run the following code:
+#result <- nodesplit.network.run(network)
 }

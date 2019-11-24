@@ -22,11 +22,11 @@
 #' \item{rank.tx}{Rank probability calculated for each treatments. \code{rank.preference} parameter in \code{\link{network.data}} is used to define whether higher or lower value is preferred. The numbers are probabilities that a given treatment has been in certain rank in the sequence.}
 #' @examples
 #' #parkinson's example (normal)
-#' parkinsons
 #' network <- with(parkinsons,{
-#'  network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
+#'   network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
 #' })
-#' result <- network.run(network)
+#' #Run the following code:
+#' #result <- network.run(network)
 #' @export
 
 network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,

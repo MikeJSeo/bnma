@@ -32,8 +32,9 @@ This function calculates relative effects for base treatment and comparison trea
 network <- with(parkinsons, {
  network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
 })
-result <- network.run(network) 
-summary(relative.effects(result, base.treatment = "Placebo"))
+#run the following code:
+#result <- network.run(network) 
+#summary(relative.effects(result, base.treatment = "Placebo"))
 }
 \seealso{
 \code{\link{relative.effects.table}}

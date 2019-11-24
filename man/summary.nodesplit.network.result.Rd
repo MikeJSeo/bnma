@@ -20,6 +20,7 @@ network <- with(parkinsons, {
  nodesplit.network.data(Outcomes, Study, Treat, SE = SE, response = "normal", 
  Treat.order = Treat.order, pair = c("Placebo", "Ropinirole"))
 })
-result <- nodesplit.network.run(network)
-summary(result)
+#run the following code:
+#result <- nodesplit.network.run(network)
+#summary(result)
 }

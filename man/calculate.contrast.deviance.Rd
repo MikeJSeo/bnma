@@ -24,8 +24,9 @@ Calculates deviance statistics. This function automatically called in \code{\lin
 network <- with(parkinsons_contrast, {
  contrast.network.data(Outcomes, Treat, SE, na, V)
 })
-result <- contrast.network.run(network)
-calculate.contrast.deviance(result)
+#run the code below:
+#result <- contrast.network.run(network)
+#calculate.contrast.deviance(result)
 }
 \references{
 A.J. Franchini, S. Dias, A.E. Ades, J.P. Jansen, N.J. Welton (2012), \emph{Accounting for correlation in network meta-analysis with multi-arm trials}, Research Synthesis Methods 3(2):142-160. [\url{https://doi.org/10.1002/jrsm.1049}]

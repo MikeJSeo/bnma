@@ -43,5 +43,6 @@ This is similar to the function \code{\link{network.run}}, except this is used f
 network <- with(thrombolytic, {
  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-result <- ume.network.run(network)
+#run the following code:
+#result <- ume.network.run(network)
 }

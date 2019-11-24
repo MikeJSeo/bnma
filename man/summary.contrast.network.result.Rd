@@ -18,6 +18,7 @@ This function uses summary function in coda package to summarize mcmc.list objec
 network <- with(parkinsons_contrast, {
  contrast.network.data(Outcomes, Treat, SE, na, V)
 })
-result <- contrast.network.run(network) 
-summary(result)
+#run the code below:
+#result <- contrast.network.run(network) 
+#summary(result)
 }

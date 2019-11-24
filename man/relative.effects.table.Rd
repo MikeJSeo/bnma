@@ -26,8 +26,9 @@ This function creates a summary table of relative effects. Relative effects are 
 network <- with(cardiovascular,{
  network.data(Outcomes, Study, Treat, N, response = "multinomial")
 })
-result <- network.run(network)
-exp(relative.effects.table(result)) #look at odds ratio instead of log odds ratio
+#run the following code:
+#result <- network.run(network)
+#exp(relative.effects.table(result)) #look at odds ratio instead of log odds ratio
 }
 \seealso{
 \code{\link{relative.effects}}

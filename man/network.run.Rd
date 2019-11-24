@@ -41,9 +41,9 @@ This is the core function that runs the model in our program. Before running thi
 }
 \examples{
 #parkinson's example (normal)
-parkinsons
 network <- with(parkinsons,{
- network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
+  network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
 })
-result <- network.run(network)
+#Run the following code:
+#result <- network.run(network)
 }

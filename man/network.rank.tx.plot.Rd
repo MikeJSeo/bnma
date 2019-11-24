@@ -23,8 +23,9 @@ This plot displays how each treatment is ranked. For each rank, we show how like
 network <-with(blocker, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-result <- network.run(network)
-network.rank.tx.plot(result, txnames = c("a", "b"))
+#run the following code:
+#result <- network.run(network)
+#network.rank.tx.plot(result, txnames = c("a", "b"))
 }
 \seealso{
 \code{\link{rank.tx}}

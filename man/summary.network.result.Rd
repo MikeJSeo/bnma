@@ -19,6 +19,7 @@ network <- with(statins, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial",
  Treat.order = c("Placebo", "Statin"), covariate = covariate, covariate.type = "discrete")
 })
-result <- network.run(network)
-summary(result)
+#run the following code:
+#result <- network.run(network)
+#summary(result)
 }

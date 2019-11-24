@@ -23,6 +23,7 @@ Treat <- cardiovascular[["Treat"]]
 Outcomes <- cardiovascular[["Outcomes"]]
 N <- cardiovascular[["N"]]
 network <- network.data(Outcomes, Study, Treat, N, response = "multinomial")
-result <- network.run(network)
-network.autocorr.plot(result, only.pars = "d")
+#run the following code:
+#result <- network.run(network)
+#network.autocorr.plot(result, only.pars = "d")
 }

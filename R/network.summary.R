@@ -36,8 +36,9 @@ pick.summary.variables <- function(result, extra.pars = NULL, only.pars = NULL){
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial",
 #'  Treat.order = c("Placebo", "Statin"), covariate = covariate, covariate.type = "discrete")
 #' })
-#' result <- network.run(network)
-#' summary(result)
+#' #run the following code:
+#' #result <- network.run(network)
+#' #summary(result)
 #' @export
 
 summary.network.result <- function(object, ...){
@@ -66,8 +67,9 @@ summary.network.result <- function(object, ...){
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial",
 #'  Treat.order = c("Placebo", "Statin"), covariate = covariate, covariate.type = "discrete")
 #' })
-#' result <- network.run(network)
-#' plot(result, only.pars = "sd")
+#' #run the following code:
+#' #result <- network.run(network)
+#' #plot(result, only.pars = "sd")
 #' @export
 
 plot.network.result <- function(x, ...) {
@@ -87,8 +89,9 @@ plot.network.result <- function(x, ...) {
 #' network <- with(blocker,{
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 #' })
-#' result <- network.run(network)
-#' network.gelman.plot(result, only.pars = "d")
+#' #run the following code:
+#' #result <- network.run(network)
+#' #network.gelman.plot(result, only.pars = "d")
 #' @export
 
 network.gelman.plot <- function(result, extra.pars = NULL, only.pars = NULL){
@@ -112,8 +115,9 @@ network.gelman.plot <- function(result, extra.pars = NULL, only.pars = NULL){
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial",
 #'  Treat.order = c("Placebo", "Statin"), covariate = covariate, covariate.type = "discrete")
 #' })
-#' result <- network.run(network)
-#' network.gelman.diag(result, extra.pars = "Eta")
+#' #run the following code:
+#' #result <- network.run(network)
+#' #network.gelman.diag(result, extra.pars = "Eta")
 #' @export
 
 network.gelman.diag <- function(result, extra.pars = NULL, only.pars = NULL){
@@ -136,8 +140,9 @@ network.gelman.diag <- function(result, extra.pars = NULL, only.pars = NULL){
 #' network <- with(blocker, {
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 #' })
-#' result <- network.run(network)
-#' network.autocorr.diag(result, only.pars = "d")
+#' #run the following code:
+#' #result <- network.run(network)
+#' #network.autocorr.diag(result, only.pars = "d")
 #' @export
 
 network.autocorr.diag <- function(result, lags = c(0,1,5,10,50), extra.pars = NULL, only.pars = NULL){
@@ -161,8 +166,9 @@ network.autocorr.diag <- function(result, lags = c(0,1,5,10,50), extra.pars = NU
 #' Outcomes <- cardiovascular[["Outcomes"]]
 #' N <- cardiovascular[["N"]]
 #' network <- network.data(Outcomes, Study, Treat, N, response = "multinomial")
-#' result <- network.run(network)
-#' network.autocorr.plot(result, only.pars = "d")
+#' #run the following code:
+#' #result <- network.run(network)
+#' #network.autocorr.plot(result, only.pars = "d")
 #' @export
 
 network.autocorr.plot <- function(result, extra.pars = NULL, only.pars = NULL){
@@ -188,8 +194,9 @@ network.autocorr.plot <- function(result, extra.pars = NULL, only.pars = NULL){
 #' network <- with(parkinsons, {
 #'  network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
 #' })
-#' result <- network.run(network) 
-#' summary(relative.effects(result, base.treatment = "Placebo"))
+#' #run the following code:
+#' #result <- network.run(network) 
+#' #summary(relative.effects(result, base.treatment = "Placebo"))
 #' @seealso \code{\link{relative.effects.table}}
 #' @export
 
@@ -319,8 +326,9 @@ relative.effects <- function(result, base.treatment = NULL, comparison.treatment
 #' network <- with(cardiovascular,{
 #'  network.data(Outcomes, Study, Treat, N, response = "multinomial")
 #' })
-#' result <- network.run(network)
-#' exp(relative.effects.table(result)) #look at odds ratio instead of log odds ratio
+#' #run the following code:
+#' #result <- network.run(network)
+#' #exp(relative.effects.table(result)) #look at odds ratio instead of log odds ratio
 #' @seealso \code{\link{relative.effects}}
 #' @export
 
@@ -404,8 +412,9 @@ relative.effects.table <- function(result, summary_stat = "mean", probs = NULL, 
 #' network <- with(blocker, {
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 #' })
-#' result <- network.run(network)
-#' rank.tx(result)
+#' #run the following code:
+#' #result <- network.run(network)
+#' #rank.tx(result)
 #' @seealso \code{\link{network.rank.tx.plot}}
 #' @export
 
@@ -455,8 +464,9 @@ rank.tx <- function(result){
 #' network <-with(blocker, {
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 #' })
-#' result <- network.run(network)
-#' network.rank.tx.plot(result, txnames = c("a", "b"))
+#' #run the following code:
+#' #result <- network.run(network)
+#' #network.rank.tx.plot(result, txnames = c("a", "b"))
 #' @seealso \code{\link{rank.tx}}
 #' @export
 
@@ -504,8 +514,9 @@ network.rank.tx.plot <- function(result, txnames = NULL, catnames = NULL, legend
 #' network <- with(blocker, {
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 #' })
-#' result <- network.run(network)
-#' network.cumrank.tx.plot(result, txnames = c("control", "beta blocker"))
+#' #run the following code:
+#' #result <- network.run(network)
+#' #network.cumrank.tx.plot(result, txnames = c("control", "beta blocker"))
 #' @seealso \code{\link{rank.tx}}
 #' @export
 
@@ -552,8 +563,9 @@ network.cumrank.tx.plot <- function(result, txnames = NULL, catnames = NULL, leg
 #'  network.data(Outcomes, Study, Treat, N=N, response = "binomial", Treat.order,
 #'  baseline = "common", hy.prior = list("dhnorm", 0, 9.77))
 #' })
-#' result <- network.run(network)
-#' sucra(result)
+#' #run the following code:
+#' #result <- network.run(network)
+#' #sucra(result)
 #' @seealso \code{\link{rank.tx}}
 #' @references G. Salanti, A.E. Ades, J.P.A. Ioannidisa (2011), \emph{Graphical methods and numerical summaries for presenting results from multiple-treatment meta-analysis: an overview and tutorial}, Journal of Clinical Epidemiology 64(2):163-71. [\url{https://doi.org/10.1016/j.jclinepi.2010.03.016}]
 #' @export
@@ -609,8 +621,9 @@ sucra = function(result, txnames = NULL, catnames = NULL)
 #' network <- with(parkinsons, {
 #'  network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
 #' })
-#' result <- network.run(network)
-#' calculate.deviance(result)
+#' #run the following code:
+#' #result <- network.run(network)
+#' #calculate.deviance(result)
 #' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
 #' @export
 
@@ -767,8 +780,9 @@ calculate.deviance <- function(result){
 #' network <- with(blocker, {
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 #' })
-#' result <- network.run(network)
-#' network.deviance.plot(result)
+#' #run the following code:
+#' #result <- network.run(network)
+#' #network.deviance.plot(result)
 #' @export
 
 network.deviance.plot <- function(result){
@@ -812,8 +826,9 @@ network.leverage.plot <- function(result){
 #'  network.data(Outcomes, Study, Treat, N=N, response="binomial", Treat.order,
 #'  covariate = covariate, hy.prior = list("dhnorm", 0, 9.77))
 #' })
-#' result <- network.run(network)
-#' network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "CZP",
+#' #run the following code:
+#' #result <- network.run(network)
+#' #network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "CZP",
 #' covariate.name = "Disease Duration")
 #' @export
 
@@ -883,8 +898,9 @@ network.covariate.plot <- function(result, base.treatment = NULL, comparison.tre
 #' network <- with(cardiovascular, {
 #'  network.data(Outcomes, Study, Treat, N, response = "multinomial")
 #' })
-#' result <- network.run(network)
-#' variance.tx.effects(result)
+#' #run the following code:
+#' #result <- network.run(network)
+#' #variance.tx.effects(result)
 #' @export
 
 variance.tx.effects = function(result)

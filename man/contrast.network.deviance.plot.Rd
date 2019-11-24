@@ -16,6 +16,7 @@ This makes a contrasrt network deviance plot which plots residual deviance (resd
 network <- with(parkinsons_contrast, {
 contrast.network.data(Outcomes, Treat, SE, na, V)
 })
-result <- contrast.network.run(network)
-contrast.network.deviance.plot(result)
+#run the code below:
+#result <- contrast.network.run(network)
+#contrast.network.deviance.plot(result)
 }

@@ -17,8 +17,9 @@ This table is also stored as an output from \code{\link{network.run}}.
 network <- with(blocker, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-result <- network.run(network)
-rank.tx(result)
+#run the following code:
+#result <- network.run(network)
+#rank.tx(result)
 }
 \seealso{
 \code{\link{network.rank.tx.plot}}

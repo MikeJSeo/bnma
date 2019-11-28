@@ -4,8 +4,12 @@
 \alias{network.cumrank.tx.plot}
 \title{Create a treatment cumulative rank plot}
 \usage{
-network.cumrank.tx.plot(result, txnames = NULL, catnames = NULL,
-  legend.position = c(1, 1))
+network.cumrank.tx.plot(
+  result,
+  txnames = NULL,
+  catnames = NULL,
+  legend.position = c(1, 1)
+)
 }
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}

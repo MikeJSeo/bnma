@@ -4,9 +4,14 @@
 \alias{network.forest.plot}
 \title{Draws forest plot}
 \usage{
-network.forest.plot(result, level = 0.95, ticks.position = NULL,
-  label.multiplier = 0.2, label.margin = 10,
-  title = "Network Meta-analysis Forest plot")
+network.forest.plot(
+  result,
+  level = 0.95,
+  ticks.position = NULL,
+  label.multiplier = 0.2,
+  label.margin = 10,
+  title = "Network Meta-analysis Forest plot"
+)
 }
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}

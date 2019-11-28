@@ -4,9 +4,16 @@
 \alias{ume.network.run}
 \title{Run the model using the network object}
 \usage{
-ume.network.run(network, inits = NULL, n.chains = 3, max.run = 1e+05,
-  setsize = 10000, n.run = 50000, conv.limit = 1.05,
-  extra.pars.save = NULL)
+ume.network.run(
+  network,
+  inits = NULL,
+  n.chains = 3,
+  max.run = 1e+05,
+  setsize = 10000,
+  n.run = 50000,
+  conv.limit = 1.05,
+  extra.pars.save = NULL
+)
 }
 \arguments{
 \item{network}{network object created from \code{\link{ume.network.data}} function}

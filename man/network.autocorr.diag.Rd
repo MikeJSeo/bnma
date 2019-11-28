@@ -4,8 +4,12 @@
 \alias{network.autocorr.diag}
 \title{Generate autocorrelation diagnostics using coda package}
 \usage{
-network.autocorr.diag(result, lags = c(0, 1, 5, 10, 50),
-  extra.pars = NULL, only.pars = NULL)
+network.autocorr.diag(
+  result,
+  lags = c(0, 1, 5, 10, 50),
+  extra.pars = NULL,
+  only.pars = NULL
+)
 }
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}

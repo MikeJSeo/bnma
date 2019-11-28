@@ -4,8 +4,12 @@
 \alias{network.rank.tx.plot}
 \title{Create a treatment rank plot}
 \usage{
-network.rank.tx.plot(result, txnames = NULL, catnames = NULL,
-  legend.position = c(1, 1))
+network.rank.tx.plot(
+  result,
+  txnames = NULL,
+  catnames = NULL,
+  legend.position = c(1, 1)
+)
 }
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}

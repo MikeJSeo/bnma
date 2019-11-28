@@ -4,10 +4,21 @@
 \alias{ume.network.data}
 \title{Make a network object for the unrelated mean effects model (inconsistency model) containing data, priors, and a JAGS model file}
 \usage{
-ume.network.data(Outcomes, Study, Treat, N = NULL, SE = NULL,
-  response = NULL, type = "random", mean.mu = NULL, prec.mu = NULL,
-  mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5),
-  dic = TRUE)
+ume.network.data(
+  Outcomes,
+  Study,
+  Treat,
+  N = NULL,
+  SE = NULL,
+  response = NULL,
+  type = "random",
+  mean.mu = NULL,
+  prec.mu = NULL,
+  mean.d = NULL,
+  prec.d = NULL,
+  hy.prior = list("dunif", 0, 5),
+  dic = TRUE
+)
 }
 \arguments{
 \item{Outcomes}{Arm-level outcomes. If it is a multinomial response, the matrix would be arms (row) by multinomial categories (column). If it is binomial or normal, it would be a vector.}

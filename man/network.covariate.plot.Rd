@@ -4,9 +4,14 @@
 \alias{network.covariate.plot}
 \title{Make a covariate plot}
 \usage{
-network.covariate.plot(result, base.treatment = NULL,
-  comparison.treatment = NULL, base.category = NULL,
-  comparison.category = NULL, covariate.name = NULL)
+network.covariate.plot(
+  result,
+  base.treatment = NULL,
+  comparison.treatment = NULL,
+  base.category = NULL,
+  comparison.category = NULL,
+  covariate.name = NULL
+)
 }
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}

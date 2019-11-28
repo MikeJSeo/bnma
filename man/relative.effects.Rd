@@ -4,9 +4,14 @@
 \alias{relative.effects}
 \title{Find relative effects for base treatment and comparison treatments}
 \usage{
-relative.effects(result, base.treatment = NULL,
-  comparison.treatments = NULL, base.category = NULL,
-  comparison.categories = NULL, covariate = NULL)
+relative.effects(
+  result,
+  base.treatment = NULL,
+  comparison.treatments = NULL,
+  base.category = NULL,
+  comparison.categories = NULL,
+  covariate = NULL
+)
 }
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}

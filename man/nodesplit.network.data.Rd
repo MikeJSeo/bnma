@@ -4,9 +4,18 @@
 \alias{nodesplit.network.data}
 \title{Make a network object containing data, priors, and a JAGS model file}
 \usage{
-nodesplit.network.data(Outcomes = NULL, Study = NULL, Treat = NULL,
-  N = NULL, SE = NULL, response = NULL, Treat.order = NULL,
-  pair = NULL, type = "random", dic = FALSE)
+nodesplit.network.data(
+  Outcomes = NULL,
+  Study = NULL,
+  Treat = NULL,
+  N = NULL,
+  SE = NULL,
+  response = NULL,
+  Treat.order = NULL,
+  pair = NULL,
+  type = "random",
+  dic = FALSE
+)
 }
 \arguments{
 \item{Outcomes}{Arm-level outcomes. If it is a multinomial response, the matrix would have dimensions treatment arms (row) by multinomial categories (column). If it is binomial or normal, it would be a vector.}

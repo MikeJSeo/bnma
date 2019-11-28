@@ -4,9 +4,16 @@
 \alias{contrast.network.run}
 \title{Run the model using the network object}
 \usage{
-contrast.network.run(network, inits = NULL, n.chains = 3,
-  max.run = 1e+05, setsize = 10000, n.run = 50000,
-  conv.limit = 1.05, extra.pars.save = NULL)
+contrast.network.run(
+  network,
+  inits = NULL,
+  n.chains = 3,
+  max.run = 1e+05,
+  setsize = 10000,
+  n.run = 50000,
+  conv.limit = 1.05,
+  extra.pars.save = NULL
+)
 }
 \arguments{
 \item{network}{contrast level network object created from \code{\link{contrast.network.data}} function}

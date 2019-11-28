@@ -4,9 +4,16 @@
 \alias{network.run}
 \title{Run the model using the network object}
 \usage{
-network.run(network, inits = NULL, n.chains = 3, max.run = 1e+05,
-  setsize = 10000, n.run = 50000, conv.limit = 1.05,
-  extra.pars.save = NULL)
+network.run(
+  network,
+  inits = NULL,
+  n.chains = 3,
+  max.run = 1e+05,
+  setsize = 10000,
+  n.run = 50000,
+  conv.limit = 1.05,
+  extra.pars.save = NULL
+)
 }
 \arguments{
 \item{network}{Network object created from \code{\link{network.data}} function}

@@ -4,8 +4,12 @@
 \alias{relative.effects.table}
 \title{Make a summary table for relative effects}
 \usage{
-relative.effects.table(result, summary_stat = "mean", probs = NULL,
-  base.category = NULL)
+relative.effects.table(
+  result,
+  summary_stat = "mean",
+  probs = NULL,
+  base.category = NULL
+)
 }
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}

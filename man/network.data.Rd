@@ -4,15 +4,34 @@
 \alias{network.data}
 \title{Make a network object containing data, priors, and a JAGS model file}
 \usage{
-network.data(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL,
-  SE = NULL, response = NULL, Treat.order = NULL, type = "random",
-  rank.preference = "higher", baseline = "none",
-  baseline.risk = "independent", covariate = NULL,
-  covariate.type = NULL, covariate.model = NULL, mean.d = NULL,
-  prec.d = NULL, mean.Eta = NULL, prec.Eta = NULL,
-  hy.prior.Eta = NULL, mean.bl = NULL, prec.bl = NULL,
-  hy.prior.bl = NULL, mean.cov = NULL, prec.cov = NULL,
-  hy.prior.cov = NULL, hy.prior = NULL)
+network.data(
+  Outcomes = NULL,
+  Study = NULL,
+  Treat = NULL,
+  N = NULL,
+  SE = NULL,
+  response = NULL,
+  Treat.order = NULL,
+  type = "random",
+  rank.preference = "higher",
+  baseline = "none",
+  baseline.risk = "independent",
+  covariate = NULL,
+  covariate.type = NULL,
+  covariate.model = NULL,
+  mean.d = NULL,
+  prec.d = NULL,
+  mean.Eta = NULL,
+  prec.Eta = NULL,
+  hy.prior.Eta = NULL,
+  mean.bl = NULL,
+  prec.bl = NULL,
+  hy.prior.bl = NULL,
+  mean.cov = NULL,
+  prec.cov = NULL,
+  hy.prior.cov = NULL,
+  hy.prior = NULL
+)
 }
 \arguments{
 \item{Outcomes}{Arm-level outcomes. If it is a multinomial response, the matrix would have dimensions treatment arms (row) by multinomial categories (column). If it is binomial or normal, it would be a vector.}

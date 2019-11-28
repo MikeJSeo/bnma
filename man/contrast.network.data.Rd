@@ -4,9 +4,18 @@
 \alias{contrast.network.data}
 \title{Make a network object for contrast-level data containing data, priors, and a JAGS model file}
 \usage{
-contrast.network.data(Outcomes, Treat, SE, na, V = NULL,
-  type = "random", rank.preference = "higher", mean.d = 0,
-  prec.d = 1e-04, hy.prior = list("dunif", 0, 100))
+contrast.network.data(
+  Outcomes,
+  Treat,
+  SE,
+  na,
+  V = NULL,
+  type = "random",
+  rank.preference = "higher",
+  mean.d = 0,
+  prec.d = 1e-04,
+  hy.prior = list("dunif", 0, 100)
+)
 }
 \arguments{
 \item{Outcomes}{A vector of Contrast-level outcomes. Outcome is assumed to be normally distributed. If there are three arms in a trial, need to include two contrast values for that trial. See parkinsons_contrast data for an example.}

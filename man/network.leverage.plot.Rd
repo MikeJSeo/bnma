@@ -9,6 +9,18 @@ network.leverage.plot(result)
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}
 }
+\value{
+None
+}
 \description{
 This function makes a leverage vs. square root of residual deviance plot
+}
+\examples{
+network <- with(blocker, {
+ network.data(Outcomes, Study, Treat, N = N, response = "binomial")
+})
+\donttest{
+result <- network.run(network)
+network.leverage.plot(result)
+}
 }

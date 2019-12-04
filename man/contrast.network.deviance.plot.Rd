@@ -9,6 +9,9 @@ contrast.network.deviance.plot(result)
 \arguments{
 \item{result}{Object created by \code{\link{contrast.network.run}} function}
 }
+\value{
+None
+}
 \description{
 This makes a contrasrt network deviance plot which plots residual deviance (resdev_study) vs. all study.
 }
@@ -16,7 +19,8 @@ This makes a contrasrt network deviance plot which plots residual deviance (resd
 network <- with(parkinsons_contrast, {
 contrast.network.data(Outcomes, Treat, SE, na, V)
 })
-#run the code below:
-#result <- contrast.network.run(network)
-#contrast.network.deviance.plot(result)
+\donttest{
+result <- contrast.network.run(network)
+contrast.network.deviance.plot(result)
+}
 }

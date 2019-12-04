@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments affecting the summary produced}
 }
+\value{
+Returns summary of the nodesplit network model result
+}
 \description{
 This function uses summary function in coda package to summarize mcmc.list object. Monte carlo error (Time-series SE) is also obtained using the coda package and is printed in the summary as a default.
 }
@@ -20,7 +23,8 @@ network <- with(parkinsons, {
  nodesplit.network.data(Outcomes, Study, Treat, SE = SE, response = "normal", 
  Treat.order = Treat.order, pair = c("Placebo", "Ropinirole"))
 })
-#run the following code:
-#result <- nodesplit.network.run(network)
-#summary(result)
+\donttest{
+result <- nodesplit.network.run(network)
+summary(result)
+}
 }

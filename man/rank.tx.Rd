@@ -9,6 +9,9 @@ rank.tx(result)
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}
 }
+\value{
+Returns a table of ranking
+}
 \description{
 This function makes a table of ranking for each treament. Each number in the cell represents a probability certain treatment was in such rank.
 This table is also stored as an output from \code{\link{network.run}}.
@@ -17,9 +20,10 @@ This table is also stored as an output from \code{\link{network.run}}.
 network <- with(blocker, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-#run the following code:
-#result <- network.run(network)
-#rank.tx(result)
+\donttest{
+result <- network.run(network)
+rank.tx(result)
+}
 }
 \seealso{
 \code{\link{network.rank.tx.plot}}

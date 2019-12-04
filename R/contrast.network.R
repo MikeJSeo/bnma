@@ -15,6 +15,7 @@
 #' @param hy.prior Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter.
 #' @references A.J. Franchini, S. Dias, A.E. Ades, J.P. Jansen, N.J. Welton (2012), \emph{Accounting for correlation in network meta-analysis with multi-arm trials}, Research Synthesis Methods 3(2):142-160. [\url{https://doi.org/10.1002/jrsm.1049}] 
 #' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+#' @return Creates list of variables that are used to run the model using \code{\link{contrast.network.run}}
 #' @examples
 #' network <- with(parkinsons_contrast, {
 #'  contrast.network.data(Outcomes, Treat, SE, na, V)
@@ -162,13 +163,14 @@ contrast.network.rjags <- function(network){
 #' \item{samples}{MCMC samples stored using jags. The returned samples have the form of mcmc.list and can be directly applied to coda functions}
 #' \item{max.gelman}{Maximum Gelman and Rubin's convergence diagnostic calculated for the final sample}
 #' \item{deviance}{Contains deviance statistics such as pD (effective number of parameters) and DIC (Deviance Information Criterion)}
-#' \item{rank.tx}{Rank probability calculated for each treatments. \code{rank.preference} parameter in \code{\link{network.data}} is used to define whether higher or lower value is preferred. The numbers are probabilities that a given treatment has been in certain rank in the sequence.}
+#' \item{rank.tx}{Rank probability calculated for each treatments. \code{rank.preference} parameter in \code{\link{contrast.network.data}} is used to define whether higher or lower value is preferred. The numbers are probabilities that a given treatment has been in certain rank in the sequence.}
 #' @examples
 #' network <- with(parkinsons_contrast, {
 #'  contrast.network.data(Outcomes, Treat, SE, na, V)
 #' })
-#' #run the code below:
-#' #result <- contrast.network.run(network)
+#' \donttest{
+#' result <- contrast.network.run(network)
+#' }
 #' @export
 
 contrast.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,
@@ -256,13 +258,15 @@ pick.summary.variables.contrast <- function(result, extra.pars = NULL, only.pars
 #'
 #' @param object Result object created by \code{\link{contrast.network.run}} function
 #' @param ... Additional arguments affecting the summary produced
+#' @return Returns summary of the contrast network model result
 #' @examples
 #' network <- with(parkinsons_contrast, {
 #'  contrast.network.data(Outcomes, Treat, SE, na, V)
 #' })
-#' #run the code below:
-#' #result <- contrast.network.run(network) 
-#' #summary(result)
+#' \donttest{
+#' result <- contrast.network.run(network)
+#' summary(result)
+#' }
 #' @export
 
 summary.contrast.network.result <- function(object, ...){
@@ -286,13 +290,15 @@ summary.contrast.network.result <- function(object, ...){
 #'
 #' @param x Result object created by \code{\link{contrast.network.run}} function
 #' @param ... Additional arguments affecting the plot produced
+#' @return None
 #' @examples
 #' network <- with(parkinsons_contrast, {
 #'  contrast.network.data(Outcomes, Treat, SE, na, V)
 #' })
-#' #run the code below:
-#' #result <- contrast.network.run(network)
-#' #plot(result)
+#' \donttest{
+#' result <- contrast.network.run(network)
+#' plot(result)
+#' }
 #' @export
 
 plot.contrast.network.result <- function(x, ...) {
@@ -320,9 +326,10 @@ plot.contrast.network.result <- function(x, ...) {
 #' network <- with(parkinsons_contrast, {
 #'  contrast.network.data(Outcomes, Treat, SE, na, V)
 #' })
-#' #run the code below:
-#' #result <- contrast.network.run(network)
-#' #calculate.contrast.deviance(result)
+#' \donttest{
+#' result <- contrast.network.run(network)
+#' calculate.contrast.deviance(result)
+#' }
 #' @references A.J. Franchini, S. Dias, A.E. Ades, J.P. Jansen, N.J. Welton (2012), \emph{Accounting for correlation in network meta-analysis with multi-arm trials}, Research Synthesis Methods 3(2):142-160. [\url{https://doi.org/10.1002/jrsm.1049}] 
 #' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
 #' @export
@@ -383,13 +390,15 @@ calculate.contrast.deviance <- function(result){
 #'
 #' This makes a contrasrt network deviance plot which plots residual deviance (resdev_study) vs. all study.
 #' @param result Object created by \code{\link{contrast.network.run}} function
+#' @return None
 #' @examples
 #' network <- with(parkinsons_contrast, {
 #' contrast.network.data(Outcomes, Treat, SE, na, V)
 #' })
-#' #run the code below:
-#' #result <- contrast.network.run(network)
-#' #contrast.network.deviance.plot(result)
+#' \donttest{
+#' result <- contrast.network.run(network)
+#' contrast.network.deviance.plot(result)
+#' }
 #' @export
 
 contrast.network.deviance.plot <- function(result){
@@ -404,6 +413,15 @@ contrast.network.deviance.plot <- function(result){
 #' This function makes a leverage vs. square root of residual deviance plot
 #'
 #' @param result Object created by \code{\link{contrast.network.run}} function
+#' @return None
+#' @examples
+#' network <- with(parkinsons_contrast, {
+#' contrast.network.data(Outcomes, Treat, SE, na, V)
+#' })
+#' \donttest{
+#' result <- contrast.network.run(network)
+#' contrast.network.leverage.plot(result)
+#' }
 #' @export
 
 contrast.network.leverage.plot <- function(result){

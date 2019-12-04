@@ -28,9 +28,10 @@ Calculates deviance statistics. This function automatically called in \code{\lin
 network <- with(parkinsons, {
  network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
 })
-#run the following code:
-#result <- network.run(network)
-#calculate.deviance(result)
+\donttest{
+result <- network.run(network)
+calculate.deviance(result)
+}
 }
 \references{
 S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]

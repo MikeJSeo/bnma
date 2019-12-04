@@ -25,8 +25,9 @@
 #' network <- with(parkinsons,{
 #'   network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
 #' })
-#' #Run the following code:
-#' #result <- network.run(network)
+#' \donttest{
+#' result <- network.run(network)
+#' }
 #' @export
 
 network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,

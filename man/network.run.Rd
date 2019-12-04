@@ -51,6 +51,7 @@ This is the core function that runs the model in our program. Before running thi
 network <- with(parkinsons,{
   network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
 })
-#Run the following code:
-#result <- network.run(network)
+\donttest{
+result <- network.run(network)
+}
 }

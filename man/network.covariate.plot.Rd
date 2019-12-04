@@ -26,6 +26,9 @@ network.covariate.plot(
 
 \item{covariate.name}{A vector of covariate names of the covariate that goes into x-axis label}
 }
+\value{
+None
+}
 \description{
 This function makes a covariate plot of how the relative effect changes as the covariate value changes.
 User needs to specify one base treatment and one comparison treatment to make this plot (base category and comparison category is also needed for multinomial).
@@ -37,8 +40,9 @@ network <- with(certolizumab, {
  network.data(Outcomes, Study, Treat, N=N, response="binomial", Treat.order,
  covariate = covariate, hy.prior = list("dhnorm", 0, 9.77))
 })
-#run the following code:
-#result <- network.run(network)
-#network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "CZP", 
-#covariate.name = "Disease Duration")
+\donttest{
+result <- network.run(network)
+network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "CZP",
+covariate.name = "Disease Duration")
+}
 }

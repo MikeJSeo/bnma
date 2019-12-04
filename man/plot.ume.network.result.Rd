@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments affecting the plot produced}
 }
+\value{
+None
+}
 \description{
 This function uses plotting function in coda package to plot mcmc.list object
 }
@@ -18,7 +21,8 @@ This function uses plotting function in coda package to plot mcmc.list object
 network <- with(smoking, {
  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 })
-#run the following code:
-#result <- ume.network.run(network)
-#plot(result)
+\donttest{
+result <- ume.network.run(network)
+plot(result)
+}
 }

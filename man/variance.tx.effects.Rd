@@ -9,6 +9,9 @@ variance.tx.effects(result)
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}
 }
+\value{
+Returns correlation matrix
+}
 \description{
 This function calculates correlation matrix from the variance matrix for heterogeneity parameter. Only used for multinomial.
 }
@@ -17,7 +20,8 @@ This function calculates correlation matrix from the variance matrix for heterog
 network <- with(cardiovascular, {
  network.data(Outcomes, Study, Treat, N, response = "multinomial")
 })
-#run the following code:
-#result <- network.run(network)
-#variance.tx.effects(result)
+\donttest{
+result <- network.run(network)
+variance.tx.effects(result)
+}
 }

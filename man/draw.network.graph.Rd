@@ -11,6 +11,9 @@ draw.network.graph(network, label.dist = 2)
 
 \item{label.dist}{distance of the label from the node. Default is 2.}
 }
+\value{
+None
+}
 \description{
 This function draws network graph using igraph package
 }

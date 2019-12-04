@@ -20,6 +20,9 @@ network.autocorr.diag(
 
 \item{only.pars}{Parameters that user wants to display. This gets rids of other default parameters user doesn't want to show.}
 }
+\value{
+Returns autocorrelation diagnostics
+}
 \description{
 This function generates autocorrelation diagnostics using coda package. User can specify lags and parameters to display. 
 Note that to display extra parameters that are not saved, user needs to first specify parameters in \code{extra.pars.save} parameter in \code{\link{network.run}} function.
@@ -28,7 +31,8 @@ Note that to display extra parameters that are not saved, user needs to first sp
 network <- with(blocker, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-#run the following code:
-#result <- network.run(network)
-#network.autocorr.diag(result, only.pars = "d")
+\donttest{
+result <- network.run(network)
+network.autocorr.diag(result, only.pars = "d")
+}
 }

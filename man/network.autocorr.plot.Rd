@@ -13,17 +13,18 @@ network.autocorr.plot(result, extra.pars = NULL, only.pars = NULL)
 
 \item{only.pars}{Parameters that user wants to display. This gets rids of other default parameters user doesn't want to show}
 }
+\value{
+None
+}
 \description{
 This function plots autocorrelation using coda package.
 }
 \examples{
-#cardiovascular
-Study <- cardiovascular[["Study"]]
-Treat <- cardiovascular[["Treat"]]
-Outcomes <- cardiovascular[["Outcomes"]]
-N <- cardiovascular[["N"]]
-network <- network.data(Outcomes, Study, Treat, N, response = "multinomial")
-#run the following code:
-#result <- network.run(network)
-#network.autocorr.plot(result, only.pars = "d")
+network <- with(blocker, {
+ network.data(Outcomes, Study, Treat, N = N, response = "binomial")
+})
+\donttest{
+result <- network.run(network)
+network.autocorr.plot(result)
+}
 }

@@ -13,6 +13,9 @@ sucra(result, txnames = NULL, catnames = NULL)
 
 \item{catnames}{Category names. Only used in multinomial.}
 }
+\value{
+Returns SUCRA for each treatment
+}
 \description{
 SUCRA is the surface under the cumulative ranking distribution defined in Salanti et al. (2011)
 }
@@ -22,9 +25,10 @@ network <- with(certolizumab, {
  network.data(Outcomes, Study, Treat, N=N, response = "binomial", Treat.order,
  baseline = "common", hy.prior = list("dhnorm", 0, 9.77))
 })
-#run the following code:
-#result <- network.run(network)
-#sucra(result)
+\donttest{
+result <- network.run(network)
+sucra(result)
+}
 }
 \references{
 G. Salanti, A.E. Ades, J.P.A. Ioannidisa (2011), \emph{Graphical methods and numerical summaries for presenting results from multiple-treatment meta-analysis: an overview and tutorial}, Journal of Clinical Epidemiology 64(2):163-71. [\url{https://doi.org/10.1016/j.jclinepi.2010.03.016}]

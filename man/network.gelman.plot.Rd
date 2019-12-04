@@ -13,15 +13,19 @@ network.gelman.plot(result, extra.pars = NULL, only.pars = NULL)
 
 \item{only.pars}{Parameters that user wants to display. This gets rids of other default parameters user doesn't want to show.}
 }
+\value{
+None
+}
 \description{
 This function plots Gelman-Rubin diagnostic using coda package.
 }
 \examples{
-#blocker
-network <- with(blocker,{
- network.data(Outcomes, Study, Treat, N = N, response = "binomial")
+network <- with(statins, {
+ network.data(Outcomes, Study, Treat, N = N, response = "binomial",
+ Treat.order = c("Placebo", "Statin"), covariate = covariate, covariate.type = "discrete")
 })
-#run the following code:
-#result <- network.run(network)
-#network.gelman.plot(result, only.pars = "d")
+\donttest{
+result <- network.run(network)
+network.gelman.plot(result)
+}
 }

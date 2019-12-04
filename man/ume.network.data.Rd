@@ -47,6 +47,9 @@ ume.network.data(
 
 \item{dic}{This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.}
 }
+\value{
+Creates list of variables that are used to run the model using \code{\link{ume.network.run}}
+}
 \description{
 This is similar to the function \code{\link{network.data}}, except this is used for the unrelated mean effects model.
 }

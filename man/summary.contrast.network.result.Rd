@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments affecting the summary produced}
 }
+\value{
+Returns summary of the contrast network model result
+}
 \description{
 This function uses summary function in coda package to summarize mcmc.list object. Monte carlo error (Time-series SE) is also obtained using the coda package and is printed in the summary as a default.
 }
@@ -18,7 +21,8 @@ This function uses summary function in coda package to summarize mcmc.list objec
 network <- with(parkinsons_contrast, {
  contrast.network.data(Outcomes, Treat, SE, na, V)
 })
-#run the code below:
-#result <- contrast.network.run(network) 
-#summary(result)
+\donttest{
+result <- contrast.network.run(network)
+summary(result)
+}
 }

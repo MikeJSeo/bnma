@@ -15,6 +15,7 @@
 #' @param prec.d Prior precision for the relative effect
 #' @param hy.prior Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter.
 #' @param dic This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.
+#' @return Creates list of variables that are used to run the model using \code{\link{ume.network.run}}
 #' @examples
 #' network <- with(thrombolytic, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial")
@@ -364,8 +365,9 @@ ume.hy.prior.rjags <- function(hy.prior, ncat){
 #' network <- with(thrombolytic, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 #' })
-#' #run the following code:
-#' #result <- ume.network.run(network)
+#' \donttest{
+#' result <- ume.network.run(network)
+#' }
 #' @export
 
 ume.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,
@@ -693,15 +695,15 @@ pick.summary.variables.ume <- function(result, extra.pars = NULL, only.pars = NU
 #'
 #' @param object Result object created by \code{\link{ume.network.run}} function
 #' @param ... Additional arguments affecting the summary produced
+#' @return Returns summary of the ume network model result
 #' @examples
 #' network <- with(smoking, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 #' })
-#' #run the following code
-#' #result <- ume.network.run(network) 
-#' #summary(result)
-#' #summary(result, only.pars = "sd")
-#' #summary(result, extra.pars = c("delta"))
+#' \donttest{
+#' result <- ume.network.run(network) 
+#' summary(result)
+#' }
 #' @export
 
 summary.ume.network.result <- function(object, ...){
@@ -726,13 +728,15 @@ summary.ume.network.result <- function(object, ...){
 #'
 #' @param x Result object created by \code{\link{ume.network.run}} function
 #' @param ... Additional arguments affecting the plot produced
+#' @return None
 #' @examples
 #' network <- with(smoking, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 #' })
-#' #run the following code:
-#' #result <- ume.network.run(network)
-#' #plot(result)
+#' \donttest{
+#' result <- ume.network.run(network)
+#' plot(result)
+#' }
 #' @export
 
 plot.ume.network.result <- function(x, ...) {

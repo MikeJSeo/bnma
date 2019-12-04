@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments affecting the plot produced}
 }
+\value{
+None
+}
 \description{
 This function uses plotting function in coda package to plot mcmc.list object
 }
@@ -18,7 +21,8 @@ This function uses plotting function in coda package to plot mcmc.list object
 network <- with(parkinsons_contrast, {
  contrast.network.data(Outcomes, Treat, SE, na, V)
 })
-#run the code below:
-#result <- contrast.network.run(network)
-#plot(result)
+\donttest{
+result <- contrast.network.run(network)
+plot(result)
+}
 }

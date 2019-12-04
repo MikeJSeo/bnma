@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments affecting the summary produced}
 }
+\value{
+Returns summary of the network model result
+}
 \description{
 This function uses summary function in coda package to summarize mcmc.list object. Monte carlo error (Time-series SE) is also obtained using the coda package and is printed in the summary as a default.
 }
@@ -19,7 +22,8 @@ network <- with(statins, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial",
  Treat.order = c("Placebo", "Statin"), covariate = covariate, covariate.type = "discrete")
 })
-#run the following code:
-#result <- network.run(network)
-#summary(result)
+\donttest{
+result <- network.run(network)
+summary(result)
+}
 }

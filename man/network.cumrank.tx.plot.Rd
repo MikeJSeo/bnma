@@ -20,6 +20,9 @@ network.cumrank.tx.plot(
 
 \item{legend.position}{x, y position of the legend}
 }
+\value{
+None
+}
 \description{
 This function creates a treatment cumulative rank plot. Rank preference can be specified by the \code{rank.preference} parameter in \code{\link{network.data}}
 }
@@ -27,9 +30,10 @@ This function creates a treatment cumulative rank plot. Rank preference can be s
 network <- with(blocker, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-#run the following code:
-#result <- network.run(network)
-#network.cumrank.tx.plot(result, txnames = c("control", "beta blocker"))
+\donttest{
+result <- network.run(network)
+network.cumrank.tx.plot(result, txnames = c("control", "beta blocker"))
+}
 }
 \seealso{
 \code{\link{rank.tx}}

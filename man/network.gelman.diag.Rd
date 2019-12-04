@@ -13,6 +13,9 @@ network.gelman.diag(result, extra.pars = NULL, only.pars = NULL)
 
 \item{only.pars}{Parameters that user wants to display. This gets rids of other default parameters user doesn't want to show.}
 }
+\value{
+Returns gelman-rubin diagnostics
+}
 \description{
 This function uses coda package to find Gelman-Rubin diagnostics.
 }
@@ -21,7 +24,8 @@ network <- with(statins, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial",
  Treat.order = c("Placebo", "Statin"), covariate = covariate, covariate.type = "discrete")
 })
-#run the following code:
-#result <- network.run(network)
-#network.gelman.diag(result, extra.pars = "Eta")
+\donttest{
+result <- network.run(network)
+network.gelman.diag(result, extra.pars = "Eta")$psrf
+}
 }

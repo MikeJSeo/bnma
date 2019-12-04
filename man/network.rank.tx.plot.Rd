@@ -20,6 +20,9 @@ network.rank.tx.plot(
 
 \item{legend.position}{x,y position of the legend}
 }
+\value{
+None
+}
 \description{
 This plot displays how each treatment is ranked. For each rank, we show how likely each treatment will be at that rank.
 }
@@ -27,9 +30,10 @@ This plot displays how each treatment is ranked. For each rank, we show how like
 network <-with(blocker, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-#run the following code:
-#result <- network.run(network)
-#network.rank.tx.plot(result, txnames = c("a", "b"))
+\donttest{
+result <- network.run(network)
+network.rank.tx.plot(result, txnames = c("a", "b"))
+}
 }
 \seealso{
 \code{\link{rank.tx}}

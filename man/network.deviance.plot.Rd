@@ -9,6 +9,9 @@ network.deviance.plot(result)
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}
 }
+\value{
+None
+}
 \description{
 This makes a deviance plot which plots residual deviance (dev_arm) vs. all the arms for each study.
 }
@@ -16,7 +19,8 @@ This makes a deviance plot which plots residual deviance (dev_arm) vs. all the a
 network <- with(blocker, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 })
-#run the following code:
-#result <- network.run(network)
-#network.deviance.plot(result)
+\donttest{
+result <- network.run(network)
+network.deviance.plot(result)
+}
 }

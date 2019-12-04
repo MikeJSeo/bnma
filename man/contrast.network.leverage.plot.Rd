@@ -9,6 +9,18 @@ contrast.network.leverage.plot(result)
 \arguments{
 \item{result}{Object created by \code{\link{contrast.network.run}} function}
 }
+\value{
+None
+}
 \description{
 This function makes a leverage vs. square root of residual deviance plot
+}
+\examples{
+network <- with(parkinsons_contrast, {
+contrast.network.data(Outcomes, Treat, SE, na, V)
+})
+\donttest{
+result <- contrast.network.run(network)
+contrast.network.leverage.plot(result)
+}
 }

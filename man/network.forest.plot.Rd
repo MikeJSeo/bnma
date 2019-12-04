@@ -26,8 +26,21 @@ network.forest.plot(
 
 \item{title}{Header name which you can modify}
 }
+\value{
+None
+}
 \description{
 Draws forest plot of pooled treatment effect. Reports odds ratio for binomial and multinomial outcomes and continuous scale for normal outcomes.
+}
+\examples{
+network <- with(certolizumab, {
+ network.data(Outcomes, Study, Treat, N=N, response="binomial", Treat.order,
+ covariate = covariate, hy.prior = list("dhnorm", 0, 9.77))
+})
+\donttest{
+result <- network.run(network)
+network.forest.plot(result)
+}
 }
 \references{
 W. Viechtbauer (2010), \emph{Conducting meta-analyses in R with the metafor package}, Journal of Statistical Software, 36(3):1-48. [\url{https://doi.org/10.18637/jss.v036.i03}]

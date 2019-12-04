@@ -22,6 +22,9 @@ relative.effects.table(
 
 \item{base.category}{Specifies for which base category user wants for the summary. Used only for multinoimal.}
 }
+\value{
+Returns relative effects table
+}
 \description{
 This function creates a summary table of relative effects. Relative effects are in units of log odds ratio for binomial and multinomial data and real number scale for normal data.
 }
@@ -30,9 +33,10 @@ This function creates a summary table of relative effects. Relative effects are 
 network <- with(cardiovascular,{
  network.data(Outcomes, Study, Treat, N, response = "multinomial")
 })
-#run the following code:
-#result <- network.run(network)
-#exp(relative.effects.table(result)) #look at odds ratio instead of log odds ratio
+\donttest{
+result <- network.run(network)
+exp(relative.effects.table(result)) #look at odds ratio instead of log odds ratio
+}
 }
 \seealso{
 \code{\link{relative.effects}}

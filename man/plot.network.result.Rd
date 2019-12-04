@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments affecting the plot produced}
 }
+\value{
+None
+}
 \description{
 This function uses plotting function in coda package to plot mcmc.list object
 }
@@ -19,7 +22,8 @@ network <- with(statins, {
  network.data(Outcomes, Study, Treat, N = N, response = "binomial",
  Treat.order = c("Placebo", "Statin"), covariate = covariate, covariate.type = "discrete")
 })
-#run the following code:
-#result <- network.run(network)
-#plot(result, only.pars = "sd")
+\donttest{
+result <- network.run(network)
+plot(result, only.pars = "sd")
+}
 }

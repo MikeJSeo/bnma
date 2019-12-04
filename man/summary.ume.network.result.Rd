@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments affecting the summary produced}
 }
+\value{
+Returns summary of the ume network model result
+}
 \description{
 This function uses summary function in coda package to summarize mcmc.list object. Monte carlo error (Time-series SE) is also obtained using the coda package and is printed in the summary as a default.
 }
@@ -18,9 +21,8 @@ This function uses summary function in coda package to summarize mcmc.list objec
 network <- with(smoking, {
  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 })
-#run the following code
-#result <- ume.network.run(network) 
-#summary(result)
-#summary(result, only.pars = "sd")
-#summary(result, extra.pars = c("delta"))
+\donttest{
+result <- ume.network.run(network) 
+summary(result)
+}
 }

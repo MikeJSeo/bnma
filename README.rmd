@@ -1,0 +1,32 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# bnma
+
+The goal of bnma is to provide users a tool to perform network meta-analyses under Bayesian framework. The package is publicly available in CRAN. https://CRAN.R-project.org/package=bnma
+
+## Installation
+
+You can install bnma from github with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+# devtools::install_github("MikeJSeo/bnma")
+install.packages("bnma")
+```
+
+## Description
+
+Read reference manual (https://cran.r-project.org/web/packages/bnma/bnma.pdf) and vignette (https://cran.r-project.org/web/packages/bnma/vignettes/my-vignette.html) for more details
+

@@ -12,19 +12,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-# bnma
+# bnma (Bayesian network meta analysis)
 
-The goal of bnma is to provide users a tool to perform network meta-analyses under Bayesian framework. The package is publicly available in CRAN. https://CRAN.R-project.org/package=bnma
-
-## Installation
-
-You can install bnma from github with:
-
-```{r gh-installation, eval = FALSE}
-# install.packages("devtools")
-# devtools::install_github("MikeJSeo/bnma")
-install.packages("bnma")
-```
+The package is publicly available in CRAN. https://CRAN.R-project.org/package=bnma
 
 ## Description
 

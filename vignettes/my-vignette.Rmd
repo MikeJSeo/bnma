@@ -160,9 +160,8 @@ We estimate odds ratios using our NMA model, and then we apply these odds ratios
 library(meta)
 placebo_index <- which(certolizumab$Treat == "Placebo")
 meta.pla <- metaprop(event = certolizumab$Outcomes[placebo_index], n = certolizumab$N[placebo_index], method = "GLMM", sm = "PLOGIT")
-prob.pla <- exp(meta.pla$TE.fixed)/(1+exp(meta.pla$TE.fixed))
 
-network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", A.probability = prob.pla))
+network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", mean.A = meta.pla$TE.random, prec.A = 1/meta.pla$tau^2))
 result <- network.run(network)
 summary(result, extra.pars = c("RD", "RR"))
 ```

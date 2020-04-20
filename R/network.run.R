@@ -79,10 +79,6 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
         c("Eta", "d", "sigma", "sigma_transformed","prob","delta")
       }
     
-    if(!is.null(A.probability)){
-      pars.save <- c(pars.save, "NNT", "RD", "RR")
-    }
-    
     if(type == "fixed"){
       pars.save <- pars.save[!pars.save %in% c("sd", "sigma", "logvar", "sigma_transformed", "delta")]
     }

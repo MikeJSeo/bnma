@@ -20,6 +20,7 @@ The package is now publicly available in CRAN. https://CRAN.R-project.org/packag
 - bnma adds modelling baseline risk (https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.5539)
 - bnma automatically checks for convergence using gelman-rubin diagnostics before sampling full iteration amount
 - bnma generates reasonable initial values if left unspecified (dispersed initial values)
+- bnma has added new summary plots: rank plots, forest plot, etc
 
 
 Thank you,

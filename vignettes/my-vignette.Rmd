@@ -158,4 +158,5 @@ We estimate odds ratios using our NMA model, and then we apply these odds ratios
 ```{r}
 network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", A.probability = 0.05))
 result <- network.run(network)
+summary(result, extra.pars = c("RD", "RR"))
 ```

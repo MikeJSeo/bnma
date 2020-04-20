@@ -10,6 +10,3 @@ The package is now publicly available in CRAN. <https://CRAN.R-project.org/packa
 -   bnma automatically checks for convergence using gelman-rubin diagnostics before sampling full iteration amount
 -   bnma generates reasonable initial values if left unspecified (dispersed initial values)
 -   bnma has added new summary plots: rank plots, forest plot, etc
-
-Thank you,
-Michael Seo

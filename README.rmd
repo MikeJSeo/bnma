@@ -24,4 +24,5 @@ The package is now publicly available in CRAN. https://CRAN.R-project.org/packag
 
 
 Thank you,    
+
 Michael Seo

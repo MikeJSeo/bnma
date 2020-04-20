@@ -12,4 +12,5 @@ The package is now publicly available in CRAN. <https://CRAN.R-project.org/packa
 -   bnma has added new summary plots: rank plots, forest plot, etc
 
 Thank you,
+
 Michael Seo

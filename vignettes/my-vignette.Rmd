@@ -151,7 +151,7 @@ summary(result)
 ```
 
 
-## Finding risk difference, and relative risk with Binomial outcomes
+## Finding risk difference and relative risk instead of odds ratio with Binomial outcomes
 
 We estimate odds ratios using our NMA model, and then we apply these odds ratios to a baseline risk (i.e. risk in placebo), to estimate absolute event rates for all treatments. Using these absolute event rates, we are then able to find number needed to treat, risk difference, and relative risk. In this example, we use metaprop function from meta package to meta-analyze placebo event proportion.
 

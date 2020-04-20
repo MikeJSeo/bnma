@@ -86,6 +86,7 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   network$prior.data <- prior.data
 
   # add in estimated event rate for placebo if specified: used for calculating NNT, RR, and RD
+  print(A.probability)
 #  network <- append(network, A.probability)
 #  print(A.probability)
 #  network$A.probability <- A.probability

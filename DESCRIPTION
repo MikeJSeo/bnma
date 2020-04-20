@@ -1,7 +1,7 @@
 Package: bnma
 Type: Package
 Title: Bayesian Network Meta-Analysis using 'JAGS'
-Version: 1.0.0
+Version: 1.1.0
 Depends: R (>= 2.10)
 Imports: rjags (>= 4-6), graphics, stats, utils, coda (>= 0.13), ggplot2, grid, igraph
 Authors@R: c( 

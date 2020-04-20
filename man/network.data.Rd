@@ -90,7 +90,7 @@ network.data(
 
 \item{mean.A}{Mean effect of 'standard' treatment (i.e. placebo) in a logit scale; this is used for binomial outcome when the risk difference or relative risk is needed; this should be informed from external evidence or can be found by meta-analyzing single proportions}
 
-\item{prec.A}{Precision of 'standard' treatment}
+\item{prec.A}{Precision of 'standard' treatment in a logit scale}
 }
 \value{
 Creates list of variables that are used to run the model using \code{\link{network.run}}

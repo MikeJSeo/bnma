@@ -32,7 +32,7 @@
 #' @param prec.cov Prior precision for the covariate effect
 #' @param hy.prior.cov Between treatment heterogeneity in covariate effect (for exchangeable regression coefficient only). Format of the parameter is same as hy.prior. Default is set to be dunif(0, 5) for binary, dunif(0, 100) for normal, and wishart with identity scale matrix and (# of categories - 1) degrees of freedom for multinomial.
 #' @param hy.prior Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal and binomial response and wishart for multinomial response. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter. For wishart distribution, the last two parameter would be the scale matrix and the degrees of freedom.
-#' @param A.probability estimate of 'standard' treatment (i.e. placebo) in natural (probability) scale; this is used for binomial outcome when number needed to treat, risk difference, or relative risk is needed; this should be informed from external evidence or can be found by meta-analyzing single proportions
+#' @param A.probability Estimate of 'standard' treatment (i.e. placebo) in natural (probability) scale; this is used for binomial outcome when the number needed to treat, risk difference, or relative risk is needed; this should be informed from external evidence or can be found by meta-analyzing single proportions
 #' @return Creates list of variables that are used to run the model using \code{\link{network.run}}
 #' \item{data}{Data combining all the input data. User can check this to insure the data is correctly specified. For modelling purposes, character valued studies or treatment variables are changed to numeric values based on alphabetical order.}
 #' \item{nrow}{Total number of arms in the meta-analysis}
@@ -67,7 +67,7 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   # rename the variables and order them based on specified treatment order
   network <- preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type, rank.preference = rank.preference,
                   baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model,
-                  hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior, A.probability = A.probability)
+                  hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior)
   
   # find characteristic values associated with the network, i.e. number of studies, number of treatments, etc
   characteristics <- find.characteristics(network)
@@ -86,6 +86,9 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   #network <- append(network, prior.data)
   network$prior.data <- prior.data
 
+  # add in estimated event rate for placebo if specified: used for calculating NNT, RR, and RD
+  network$A.probability <- A.probability
+  
   # generate JAGS code
   code <- network.rjags(network)
   network$code <- code

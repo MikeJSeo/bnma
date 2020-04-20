@@ -240,9 +240,6 @@ pick.summary.variables.contrast <- function(result, extra.pars = NULL, only.pars
     pars <- only.pars
   }
   if(!is.null(extra.pars)){
-    if(!extra.pars %in% varnames.split){
-      stop(paste0(extra.pars, " is not saved in result"))
-    }
     pars <- c(pars, extra.pars)
   }
   summary.samples <- lapply(samples, function(x){x[,varnames.split %in% pars, drop = F]})

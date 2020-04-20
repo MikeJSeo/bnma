@@ -84,16 +84,10 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   # generate prior data that will be used for running JAGS model
   prior.data <- network.prior.default(network, mean.d, prec.d, mean.Eta, prec.Eta, hy.prior.Eta, mean.bl, prec.bl, hy.prior.bl, mean.cov, prec.cov, hy.prior.cov, hy.prior)
   network$prior.data <- prior.data
-
-  # add in estimated event rate for placebo if specified: used for calculating NNT, RR, and RD
-  print(A.probability)
-#  network <- append(network, A.probability)
-#  print(A.probability)
-#  network$A.probability <- A.probability
   
   # generate JAGS code
-  #code <- network.rjags(network)
-  #network$code <- code
+  code <- network.rjags(network)
+  network$code <- code
   
   # calculate baseline log odds if baseline effect is specified
   mx_bl <- calculate.baseline.log.odds(network)

@@ -30,7 +30,8 @@ network.data(
   mean.cov = NULL,
   prec.cov = NULL,
   hy.prior.cov = NULL,
-  hy.prior = NULL
+  hy.prior = NULL,
+  A.probability = NULL
 )
 }
 \arguments{
@@ -85,6 +86,8 @@ network.data(
 \item{hy.prior.cov}{Between treatment heterogeneity in covariate effect (for exchangeable regression coefficient only). Format of the parameter is same as hy.prior. Default is set to be dunif(0, 5) for binary, dunif(0, 100) for normal, and wishart with identity scale matrix and (# of categories - 1) degrees of freedom for multinomial.}
 
 \item{hy.prior}{Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal and binomial response and wishart for multinomial response. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter. For wishart distribution, the last two parameter would be the scale matrix and the degrees of freedom.}
+
+\item{A.probability}{estimate of 'standard' treatment (i.e. placebo) in natural (probability) scale; this is used for binomial outcome when number needed to treat, risk difference, or relative risk is needed; this should be informed from external evidence or can be found by meta-analyzing single proportions}
 }
 \value{
 Creates list of variables that are used to run the model using \code{\link{network.run}}

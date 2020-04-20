@@ -2,7 +2,7 @@
 
 preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random", rank.preference = "higher",
                             baseline = "none", baseline.risk = "independent", covariate = NULL, covariate.type = NULL, covariate.model = NULL,
-                            hy.prior.Eta = NULL, hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL, A.probability = NULL){
+                            hy.prior.Eta = NULL, hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL, mean.A = NULL, prec.A = NULL){
 
   # This is first bit of our code that runs when the user enters the data using \code{\link{network.data}}.
   # The function preprocesses the given data to fit the data format necessary to run our NMA model in JAGS.
@@ -12,7 +12,7 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
   
   network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type, rank.preference = rank.preference,
                   baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model,
-                  hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior, A.probability = A.probability)
+                  hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior, mean.A = mean.A, prec.A = prec.A)
           
   check.for.errors(network) # check for errors in the data specified
 
@@ -50,7 +50,7 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
   list(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, SE = SE,
        data = data, Treat.order = transform$Treat.order, Study.order = transform$Study.order,
        response = response, type = type, rank.preference = rank.preference, baseline = baseline, baseline.risk = baseline.risk,
-       covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model, A.probability = A.probability)
+       covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model, mean.A = mean.A, prec.A = prec.A)
 
 }
 

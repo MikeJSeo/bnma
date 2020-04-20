@@ -71,6 +71,12 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
       data$mx_bl = mx_bl
     }
     
+    # add placebo event rate when calculating RR or RD
+    if(!is.null(mean.A) & !is.null(prec.A)){
+      data$mean.A <- mean.A
+      data$prec.A <- prec.A
+    }
+    
     ########## parameters to save in the model
     pars.save <-
       if(response == "binomial" || response == "normal"){
@@ -79,7 +85,7 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
         c("Eta", "d", "sigma", "sigma_transformed","prob","delta")
       }
     
-    if(response == "binomial" & !is.null(A.probability)){
+    if(response == "binomial" & !is.null(mean.A) & !is.null(prec.A)){
       pars.save <- c(pars.save, "RD", "RR")
     }
     

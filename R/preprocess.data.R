@@ -2,7 +2,7 @@
 
 preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random", rank.preference = "higher",
                             baseline = "none", baseline.risk = "independent", covariate = NULL, covariate.type = NULL, covariate.model = NULL,
-                            hy.prior.Eta = NULL, hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL){
+                            hy.prior.Eta = NULL, hy.prior.bl = NULL, hy.prior.cov = NULL, hy.prior = NULL, A.probability = NULL){
 
   # This is first bit of our code that runs when the user enters the data using \code{\link{network.data}}.
   # The function preprocesses the given data to fit the data format necessary to run our NMA model in JAGS.

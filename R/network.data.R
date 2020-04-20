@@ -90,8 +90,8 @@ network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, 
   network$A.probability <- A.probability
   
   # generate JAGS code
-  code <- network.rjags(network)
-  network$code <- code
+  #code <- network.rjags(network)
+  #network$code <- code
   
   # calculate baseline log odds if baseline effect is specified
   mx_bl <- calculate.baseline.log.odds(network)

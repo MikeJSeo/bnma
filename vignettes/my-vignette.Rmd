@@ -30,7 +30,6 @@ library(bnma)
 
 It is essential to specify the input data in a correct format. We have chosen to use arm-level data with following input variable names: Outcomes, N or SE, Study, and Treat. Outcomes is the trial results. N is the number of respondents used for binary or multinomial model. SE is the standard error used for normal model. Study is the study indicator for the meta analysis. Lastly, Treat is the treatment indicator for each arm. We will use a dataset `parkinsons` for illustration.
 
-
 ```{r}
 parkinsons
 ```

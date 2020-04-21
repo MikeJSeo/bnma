@@ -10,6 +10,6 @@ Package is quite similar and has been inspired greatly by a popular Bayesian NMA
 -   bnma automatically checks for convergence using gelman-rubin diagnostics before sampling full iteration amount
 -   bnma generates reasonable initial values if left unspecified (dispersed initial values)
 -   bnma defaults to reporting odds ratio as the summary measure for binomial outcome; bnma adds an option to report instead relative risk and risk difference using external placebo event rate
--   bnma has added new summary plots: rank plots, forest plot, etc
+-   bnma adds new summary plots: rank plots, forest plot, etc
 
 Please see the vignette for detailed examples of using this package.

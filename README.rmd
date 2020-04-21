@@ -14,10 +14,10 @@ knitr::opts_chunk$set(
 
 # bnma (Bayesian network meta analysis)
 
-Package is quite similar and has been inspired greatly by a popular Bayesian NMA package gemtc (https://cran.r-project.org/web/packages/gemtc/index.html). Some additional features of bnma include:
+Package is quite similar and has been inspired greatly by a popular Bayesian NMA package gemtc. Some additional features of bnma include:
 
 - bnma has binomial, normal, and multinomial outcomes.
-- bnma adds modelling baseline risk (https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.5539)
+- bnma adds modelling baseline risk
 - bnma automatically checks for convergence using gelman-rubin diagnostics before sampling full iteration amount
 - bnma generates reasonable initial values if left unspecified (dispersed initial values)
 - bnma defaults to reporting odds ratio as the summary measure for binomial outcome; bnma adds an option to report instead relative risk and risk difference using external placebo event rate 

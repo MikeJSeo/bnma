@@ -11,4 +11,4 @@ Package is quite similar and has been inspired greatly by another popular Bayesi
 -   bnma generates reasonable initial values if left unspecified (dispersed initial values)
 -   bnma has added new summary plots: rank plots, forest plot, etc
 
-Please see the vignette for how detailed example of using this package.
+Please see the vignette for detailed examples of using this package.

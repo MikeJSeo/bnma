@@ -1,6 +1,6 @@
 # bnma 1.1.1
 
-* Updated vignette
+* Updated vignette and added description section
 
 # bnma 1.1.0
 

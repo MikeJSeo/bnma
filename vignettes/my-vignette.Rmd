@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-We describe how to run Bayesian network meta analysis using this package. First we'll need to load the package.
+In this vignette, we describe how to run Bayesian network meta-analysis using this package. First we'll need to load the package.
 
 ```{r}
 #install.packages("bnma")
@@ -28,7 +28,7 @@ library(bnma)
 
 ## Preprocessing
 
-It is essential to specify the input data in a correct format. We have chosen to use arm-level data with following input variable names: Outcomes, N or SE, Study, and Treat. Outcomes is the trial results. N is the number of respondents used for binary or multinomial model. SE is the standard error used for normal model. Study is the study indicator for the meta analysis. Lastly, Treat is the treatment indicator for each arm. We use a dataset `parkinsons` for illustration.
+It is essential to specify the input data in a correct format. We have chosen to use arm-level data with following input variable names: Outcomes, N or SE, Study, and Treat. Outcomes is the trial results. N is the number of respondents used for binary or multinomial model. SE is the standard error used for normal model. Study is the study indicator for the meta analysis. Lastly, Treat is the treatment indicator for each arm. We will use a dataset `parkinsons` for illustration.
 
 
 ```{r}
@@ -81,7 +81,7 @@ network.forest.plot(result)
 
 ## Multinomial model
 
-Another nice feature of this network meta analysis package is that multinomial outcome dataset can be analyzed. Here is an example.
+Another nice feature of this package is that multinomial outcome dataset can be analyzed. Here is an example.
 
 ```{r}
 network <- with(cardiovascular, network.data(Outcomes, Study, Treat, N, response = "multinomial"))

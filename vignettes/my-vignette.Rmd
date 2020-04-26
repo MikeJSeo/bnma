@@ -90,7 +90,7 @@ summary(result)
 
 ## Adding covariates
 
-We can add continuous or discrete covariates to fit a network meta regression. If the covariate is continuous, it is centered. Discrete variables need to be 0-1 dummy format. There are three different assumptions for covariate effect: "common", "independent", and "exchangeable". 
+We can add continuous or discrete covariates to fit a network meta-regression. If the covariate is continuous, it is centered. Discrete variables need to be 0-1 dummy format. There are three different assumptions for covariate effect: "common", "independent", and "exchangeable". 
 
 
 ```{r}
@@ -107,7 +107,7 @@ network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment 
 
 ## Baseline risk
 
-Another useful addition to this network package is the ability to model baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independenet" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common slope and exchangeable baseline risk model.
+Another useful addition of this network package is the ability to model baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independenet" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common baseline slope and exchangeable baseline risk model.
 
 ```{r}
 network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "common", baseline.risk = "exchangeable"))

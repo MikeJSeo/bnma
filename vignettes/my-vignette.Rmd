@@ -22,6 +22,7 @@ In this vignette, we describe how to run a Bayesian network meta-analysis model 
 
 ```{r}
 #install.packages("bnma")
+#or devtools::install_github("MikeJSeo/bnma")
 library(bnma)
 ```
 

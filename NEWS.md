@@ -1,3 +1,7 @@
+# bnma 1.1.2
+
+* Added number needed to treat
+
 # bnma 1.1.1
 
 * Updated vignette and added description section

@@ -88,7 +88,7 @@ network.data(
 
 \item{hy.prior}{Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal and binomial response and wishart for multinomial response. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter. For wishart distribution, the last two parameter would be the scale matrix and the degrees of freedom.}
 
-\item{mean.A}{Mean effect of 'standard' treatment (i.e. placebo) in a logit scale; this is used for binomial outcome when the risk difference or relative risk is needed; this should be informed from external evidence or can be found by meta-analyzing single proportions; For number needed to treat, we assume that events are "bad". Reversal of sign is needed if the events are "good".}
+\item{mean.A}{Mean effect of 'standard' treatment (i.e. placebo) in a logit scale; this is used for binomial outcome when the risk difference, relative risk, or number needed to treat is needed; this should be informed from external evidence or can be found by meta-analyzing single proportions; For number needed to treat, we assume that events are "bad". Reversal of sign is needed if the events are "good".}
 
 \item{prec.A}{Precision of 'standard' treatment in a logit scale}
 }

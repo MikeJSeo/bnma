@@ -4,7 +4,7 @@ author: "Michael Seo and Christopher Schmid"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Bayesian network meta analysis}
+  %\VignetteIndexEntry{Bayesian network meta-analysis}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -34,7 +34,7 @@ It is essential to specify the input data in a correct format. We have chosen to
 parkinsons
 ```
 
-In order to run network meta analysis in JAGS, we need to relabel study names into to a numeric sequence, i.e. 1 to total number of studies, and relabel the treatment into a numeric sequence according to treatment order specified. If treatment order is not specified, default is to use alphabetical order. In the example below, we set placebo as the baseline treatment followed by Pramipexole, Ropinirole, Bromocriptine, and Cabergoline as the treatment order.
+In order to run network meta-analysis in JAGS, we need to relabel study names into to a numeric sequence, i.e. 1 to total number of studies, and relabel the treatment into a numeric sequence according to treatment order specified. If the treatment order is not specified, default is to use the alphabetical order. In the example below, we set placebo as the baseline treatment followed by Pramipexole, Ropinirole, Bromocriptine, and Cabergoline as the treatment order.
 
 ```{r}
 network <- with(parkinsons, network.data(Outcomes = Outcomes, Study = Study, Treat = Treat, SE = SE, response = "normal", Treat.order = Treat.order))
@@ -42,7 +42,7 @@ network$Treat.order
 network$Study.order
 ```
 
-Another important preprocessing step that is done through `network.data` function is to change the arm-level data into study-level data. We store the study-level data of Outcomes as r, Treat as t, N or SE as n or se. We can see how Outcomes changed into a matrix given below. Similarly, if the Outcomes are multinomial, it will change to a 3 dimensional array.
+Another important preprocessing step that is done in `network.data` function is changing the arm-level data into study-level data. We store the study-level data of Outcomes as r, Treat as t, N or SE as n or se. We can see how Outcomes changed into a study-level matrix given below (i.e. row = study). If the Outcomes are multinomial, it will change to a 3 dimensional array.
 
 ```{r}
 network$r
@@ -50,7 +50,7 @@ network$r
 
 ## Priors
 
-Priors can be set in the `network.data` function. Please take a look at the function description for the prior specifications. For heterogeneity parameters of the random effects model, we follow the data format from a similar Bayesian network meta-analysis R package `gemtc`. It should be a list of length 3 where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. Here is an example.
+Priors can be set in the `network.data` function. If left unspecified, default values are used. For heterogeneity parameters of the random effects model, we follow the data format from a similar Bayesian network meta-analysis R package `gemtc`. It should be a list of length 3 where the first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. Here is an example of assigning a half-normal distribution with mean 0 and standard deviation 5. 
 
 ```{r}
 network <- with(smoking, network.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, response = "binomial", mean.d = 0.1, hy.prior = list("dhnorm", 0, 5)))
@@ -58,7 +58,7 @@ network <- with(smoking, network.data(Outcomes = Outcomes, Study = Study, Treat 
 
 ## Running the model
 
-Now to run the network, we use the function `network.run`. There are many parameters that can be modified, but the most important is the parameter `n.run` which determines how many final observations the user wants. Gelman-Rubin statitics is checked automatically every `setsize` number of iterations and once the series have converged we store the last half of the sequence. If the number of iteration is less than the number of observations user wanted (`n.runs`), it will sample more to fill the requirement. One of the nice feature of this package is that it checks for convergence automatically and will give an error if the sequence has not converged. The parameters tested for convergence are the relative treatment effects, baseline effect, and heterogeneity parameter. The number that is printed during the running of the model is the point estimate of the Gelman-Rubin statistics.
+Now to run the model, we use the function `network.run`. The most important parameter is `n.run` which determines the number of final samples the user wants. Gelman-Rubin statitics is checked automatically every `setsize` number of iterations and once the series have converged we store the last half of the sequence. If the number of iteration is less than the number of final samples (`n.runs`), it will sample more to fill the requirement. One of the nice features of this package is that it checks for convergence automatically and will give an error if the sequence has not converged. The parameters tested for convergence are the relative treatment effects, baseline effect, and heterogeneity parameter. The number that is printed during the running of the model is the point estimate of the Gelman-Rubin statistics used to test convergence.
 
 ```{r}
 result <- network.run(network, n.run = 30000)
@@ -66,7 +66,7 @@ result <- network.run(network, n.run = 30000)
 
 ## Model Summary
 
-Package includes many summary tools that can be used. One of the more useful summary might be the forest plot. Please look over the R package guide for more possible options.
+Package includes many summary tools that can be used. One of the useful summary might be the forest plot.
 
 ```{r, fig.width = 6, fig.height = 6}
 network.forest.plot(result)
@@ -80,7 +80,7 @@ network.forest.plot(result)
 
 ## Multinomial model
 
-Another nice feature of this package is that multinomial outcome dataset can be analyzed. Here is an example.
+Another nice addition of this package is that multinomial outcome dataset can be analyzed. Here is an example.
 
 ```{r}
 network <- with(cardiovascular, network.data(Outcomes, Study, Treat, N, response = "multinomial"))
@@ -99,7 +99,7 @@ result <- network.run(network)
 summary(result)
 ```
 
-Covariate plot shows you how the relative effect changes as the covariate varies.
+Covariate plot shows you how the relative treatment effect changes as the covariate varies.
 
 ```{r, fig.width = 6, fig.height = 6}
 network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "Statin")
@@ -107,7 +107,7 @@ network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment 
 
 ## Baseline risk
 
-Another useful addition to this network package is the ability to add baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independenet" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common slope and exchangeable baseline risk model.
+Another useful addition to this network package is the ability to model baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independenet" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common slope and exchangeable baseline risk model.
 
 ```{r}
 network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "common", baseline.risk = "exchangeable"))
@@ -140,7 +140,7 @@ summary(result)
 
 ## Finding risk difference, relative risk, and number needed to treat with Binomial outcomes
 
-We estimate odds ratios using our NMA model, and then we apply these odds ratios to a baseline risk (i.e. risk in placebo) to estimate absolute event rates for all treatments. Using these absolute event rates, we are then able to find risk difference, relative risk, and number needed to treat.
+Default summary measure when analyzing binary outcomes is the odds ratio. We have added an option to calculate risk difference, relative risk, and number needed to treat by incorporating external baseline risk in treatment A (i.e. placebo)
 
 ```{r}
 #Using metaprop function from meta package, we meta-analyze placebo event proportion.

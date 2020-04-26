@@ -71,7 +71,7 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
       data$mx_bl = mx_bl
     }
     
-    # add placebo event rate when calculating RR or RD
+    # add placebo event rate when calculating RR, RD, NNT
     if(!is.null(mean.A) & !is.null(prec.A)){
       data$mean.A <- mean.A
       data$prec.A <- prec.A
@@ -86,7 +86,7 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
       }
     
     if(response == "binomial" & !is.null(mean.A) & !is.null(prec.A)){
-      pars.save <- c(pars.save, "RD", "RR")
+      pars.save <- c(pars.save, "RD", "RR", "NNT")
     }
     
     if(type == "fixed"){

@@ -188,6 +188,7 @@ model.binomial <- function(network)
                      "\n\tA ~ dnorm(mean.A, prec.A)",
                      "\n\tfor(k in 1:", ntreat, ") { logit(T[k]) <- A + d[k] }",
                      "\n\tfor(k in 1:", ntreat, ") {",
+                     "\n\t\tNNT[k] <- 1/(T[1] - T[k])",
                      "\n\t\tRD[k] <- T[k] - T[1]",
                      "\n\t\tRR[k] <- T[k]/T[1]",
                      "\n\t}")

@@ -137,9 +137,9 @@ summary(result)
 ```
 
 
-## Finding risk difference and relative risk with Binomial outcomes
+## Finding risk difference, relative risk, and number needed to treat with Binomial outcomes
 
-We estimate odds ratios using our NMA model, and then we apply these odds ratios to a baseline risk (i.e. risk in placebo) to estimate absolute event rates for all treatments. Using these absolute event rates, we are then able to find risk difference and relative risk.
+We estimate odds ratios using our NMA model, and then we apply these odds ratios to a baseline risk (i.e. risk in placebo) to estimate absolute event rates for all treatments. Using these absolute event rates, we are then able to find risk difference, relative risk, and number needed to treat.
 
 ```{r}
 #Using metaprop function from meta package, we meta-analyze placebo event proportion.
@@ -150,5 +150,5 @@ We estimate odds ratios using our NMA model, and then we apply these odds ratios
 
 network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", mean.A = -2.27, prec.A = 2.53))
 result <- network.run(network)
-summary(result, extra.pars = c("RD", "RR"))
+summary(result, extra.pars = c("RD", "RR", "NNT"))
 ```

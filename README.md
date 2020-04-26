@@ -3,7 +3,7 @@
 bnma (Bayesian network meta analysis)
 =====================================
 
-This Package is quite similar and has been inspired by a popular Bayesian NMA package gemtc. Some additional features of bnma include:
+This Package is quite similar and has been inspired by the popular Bayesian NMA package gemtc. Some additional features of bnma include:
 
 -   bnma allows binomial, normal, and multinomial outcomes.
 -   bnma adds modelling baseline risk

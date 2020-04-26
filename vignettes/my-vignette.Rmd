@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-In this vignette, we describe how to run a Bayesian network meta-analysis model using this package. First we'll need to load the package.
+In this vignette, we describe how to run a Bayesian network meta-analysis model using this package. First, we'll need to load the package.
 
 ```{r}
 #install.packages("bnma")
@@ -138,9 +138,9 @@ summary(result)
 ```
 
 
-## Finding risk difference and relative risk instead of odds ratio with Binomial outcomes
+## Finding risk difference and relative risk with Binomial outcomes
 
-We estimate odds ratios using our NMA model, and then we apply these odds ratios to a baseline risk (i.e. risk in placebo) to estimate absolute event rates for all treatments. Using these absolute event rates, we are then able to find number needed to treat, risk difference, and relative risk.
+We estimate odds ratios using our NMA model, and then we apply these odds ratios to a baseline risk (i.e. risk in placebo) to estimate absolute event rates for all treatments. Using these absolute event rates, we are then able to find risk difference and relative risk.
 
 ```{r}
 #Using metaprop function from meta package, we meta-analyze placebo event proportion.

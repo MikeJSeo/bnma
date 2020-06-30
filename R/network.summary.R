@@ -111,7 +111,7 @@ network.gelman.plot <- function(result, extra.pars = NULL, only.pars = NULL){
 #' This function uses coda package to find Gelman-Rubin diagnostics.
 #' 
 #' @param result Object created by \code{\link{network.run}} function
-#' @param extra.pars Extra parameters that the user wants to plot other than the default parameters.
+#' @param extra.pars Extra parameters that the user wants to display other than the default parameters.
 #' @param only.pars Parameters that user wants to display. This gets rids of other default parameters user doesn't want to show.
 #' @return Returns gelman-rubin diagnostics
 #' @examples

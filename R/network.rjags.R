@@ -32,6 +32,16 @@ model.normal <- function(network){
     
     if(type == "fixed"){
       code <- paste0(code, "\n\t\t\ttheta[i,k] <- Eta[i] + d[t[i,k]] - d[t[i,1]]")
+      
+      if(baseline != "none"){
+        code <- paste0(code, " + (b_bl[t[i,k]] - b_bl[t[i,1]]) * (Eta[i] - mx_bl)")
+      }
+      
+      if(!is.null(covariate)){
+        for(i in 1:dim(covariate)[2]){
+          code <- paste0(code, " + (beta", i, "[t[i,k]]- beta", i, "[t[i,1]]) * (x", i, "[i]-mx", i, ")")
+        }
+      }
     } else{
       code <- paste0(code, "\n\t\t\ttheta[i,k] <- Eta[i] + delta[i,k]")
     }
@@ -114,6 +124,16 @@ model.binomial <- function(network)
     
     if(type == "fixed"){
       code <- paste0(code, "\n\t\t\tlogit(p[i,k]) <- Eta[i] + d[t[i,k]] - d[t[i,1]]")
+      
+      if(baseline != "none"){
+        code <- paste0(code, " + (b_bl[t[i,k]] - b_bl[t[i,1]]) * (Eta[i] - mx_bl)")
+      }
+      
+      if(!is.null(covariate)){
+        for(i in 1:dim(covariate)[2]){
+          code <- paste0(code, " + (beta", i, "[t[i,k]]- beta", i, "[t[i,1]]) * (x", i, "[i]-mx", i, ")")
+        }
+      }
     } else if(type == "random"){
       code <- paste0(code, "\n\t\t\tlogit(p[i,k]) <- Eta[i] + delta[i,k]")
     }

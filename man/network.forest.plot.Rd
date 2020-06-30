@@ -10,7 +10,8 @@ network.forest.plot(
   ticks.position = NULL,
   label.multiplier = 0.2,
   label.margin = 10,
-  title = "Network Meta-analysis Forest plot"
+  title = "Network Meta-analysis Forest plot",
+  only.reference.treatment = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ network.forest.plot(
 \item{label.margin}{This is how much margin space you specify to assign space for the median[lower, upper] values. Default margin is set to 10.}
 
 \item{title}{Header name which you can modify}
+
+\item{only.reference.treatment}{Indicator for plotting only the comparison to the reference treatment}
 }
 \value{
 None

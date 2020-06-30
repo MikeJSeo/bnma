@@ -961,6 +961,7 @@ variance.tx.effects = function(result)
 #' @param label.multiplier This is a multiplying factor to move the position of the text associated with median[lower, upper] values. This number is multiplied by the range of x-axis and added to the x-axis limit. Default multiplier is set to 0.2.
 #' @param label.margin This is how much margin space you specify to assign space for the median[lower, upper] values. Default margin is set to 10. 
 #' @param title Header name which you can modify
+#' @param only.reference.treatment Indicator for plotting only the comparison to the reference treatment
 #' @return None
 #' @examples
 #' network <- with(certolizumab, {
@@ -974,7 +975,7 @@ variance.tx.effects = function(result)
 #' @references W. Viechtbauer (2010), \emph{Conducting meta-analyses in R with the metafor package}, Journal of Statistical Software, 36(3):1-48. [\url{https://doi.org/10.18637/jss.v036.i03}]
 #' @export
 
-network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, label.multiplier = 0.2, label.margin = 10, title = "Network Meta-analysis Forest plot"){
+network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, label.multiplier = 0.2, label.margin = 10, title = "Network Meta-analysis Forest plot", only.reference.treatment = FALSE){
   
   ncat <- ifelse(result$network$response == "multinomial", result$network$ncat, 2)
   
@@ -992,10 +993,16 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
       upper <- relative.effects.table(result, summary_stat = "quantile", probs = level + (1- level)/2)
     }
     
-    lower <- lower[upper.tri(lower)]
-    OR <- OR[upper.tri(OR)]
-    upper <- upper[upper.tri(upper)]
-    
+    if(only.reference.treatment == TRUE){
+      lower <- lower[1,-1]
+      OR <- OR[1,-1]
+      upper <- upper[1,-1]
+    } else{
+      lower <- lower[upper.tri(lower)]
+      OR <- OR[upper.tri(OR)]
+      upper <- upper[upper.tri(upper)]    
+    }
+  
     odds <- data.frame(lower = lower, OR = OR, upper = upper)  
     
     if(result$network$response %in% c("binomial", "multinomial")){

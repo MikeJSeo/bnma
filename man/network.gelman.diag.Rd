@@ -9,7 +9,7 @@ network.gelman.diag(result, extra.pars = NULL, only.pars = NULL)
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}
 
-\item{extra.pars}{Extra parameters that the user wants to plot other than the default parameters.}
+\item{extra.pars}{Extra parameters that the user wants to display other than the default parameters.}
 
 \item{only.pars}{Parameters that user wants to display. This gets rids of other default parameters user doesn't want to show.}
 }

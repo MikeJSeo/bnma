@@ -998,9 +998,9 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
       OR <- OR[1,-1]
       upper <- upper[1,-1]
     } else{
-      lower <- lower[upper.tri(lower)]
-      OR <- OR[upper.tri(OR)]
-      upper <- upper[upper.tri(upper)]    
+      lower <- -lower[lower.tri(lower)]
+      OR <- -OR[lower.tri(OR)]
+      upper <- -upper[lower.tri(upper)]    
     }
   
     odds <- data.frame(lower = lower, OR = OR, upper = upper)  
@@ -1017,7 +1017,11 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
     for(j in 1:ncol(comps)){
       name[j] <- paste0(Treat.order[comps[2,j]]," vs ", Treat.order[comps[1,j]])
     }
-    odds$name <- name
+    
+    if(only.reference.treatment == TRUE){
+      name <- name[1:(length(Treat.order)-1)]
+    } 
+    odds$name <- name  
     
     if(is.null(ticks.position)){
       if(result$network$response %in% c("binomial", "multinomial")){
@@ -1052,9 +1056,9 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
     #find actual xlim range; this part of code keeps changing with ggplot update..
     xlim.range <- ggplot_build(p)$layout$panel_params[[1]]$x.range
     
-    p <- p + geom_text(aes(label = paste0(sprintf("%0.2f", round(OR, digits = 2)), " [", sprintf("%0.2f", round(lower, digits = 2)) , ", ", sprintf("%0.2f", round(upper, digits = 2)), "]")), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = 1:length(comps[1,]))   # hjust = -1, vjust = 2)
+    p <- p + geom_text(aes(label = paste0(sprintf("%0.2f", round(OR, digits = 2)), " [", sprintf("%0.2f", round(lower, digits = 2)) , ", ", sprintf("%0.2f", round(upper, digits = 2)), "]")), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = 1:length(name))   # hjust = -1, vjust = 2)
     
-    median_name_location <- ifelse(length(odds[,1]) <= 3, length(comps[1,]) + 0.5, length(comps[1,]) + 1)
+    median_name_location <- ifelse(length(odds[,1]) <= 3, length(name) + 0.5, length(name) + 1)
     p <- p + geom_text(aes(label = "Median [95% Crl]"), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = median_name_location)
     
     gt <- ggplot_gtable(ggplot_build(p))

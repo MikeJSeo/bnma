@@ -15,5 +15,5 @@ citEntry(entry="Manual",
          paste("Michael Seo and Christopher Schmid (",
                year,
                "). bnma: Bayesian Network Meta-Analysis using 'JAGS'. ",
-               vers, ".", 
+               vers, ". ", 
 			   "URL https://CRAN.R-project.org/package=bnma.", sep=""))

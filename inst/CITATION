@@ -9,9 +9,11 @@ citEntry(entry="Manual",
                     person("Christopher", "Schmid")),
          year = year,
          note = vers,
+		 url = "https://CRAN.R-project.org/package=bnma",
 
          textVersion =
          paste("Michael Seo and Christopher Schmid (",
                year,
                "). bnma: Bayesian Network Meta-Analysis using 'JAGS'. ",
-               vers, ".", sep=""))
+               vers, ".", 
+			   "URL https://CRAN.R-project.org/package=bnma.", sep=""))

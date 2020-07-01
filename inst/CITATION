@@ -9,7 +9,6 @@ citEntry(entry="Manual",
                     person("Christopher", "Schmid")),
          year = year,
          note = vers,
-		 url = "https://CRAN.R-project.org/package=bnma")
 
          textVersion =
          paste("Michael Seo and Christopher Schmid (",

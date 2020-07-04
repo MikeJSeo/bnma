@@ -3,7 +3,7 @@ pick.summary.variables <- function(result, extra.pars = NULL, only.pars = NULL){
   varnames <- dimnames(samples[[1]])[[2]]
   varnames.split <- sapply(strsplit(varnames, "\\["), '[[', 1)
   varnames.split <- gsub("[[:digit:]]","",varnames.split)
-  
+
   if(!is.null(only.pars)){
     if(!all(only.pars %in% varnames.split)){
       stop(paste0(only.pars, "was not sampled"))
@@ -41,12 +41,12 @@ pick.summary.variables <- function(result, extra.pars = NULL, only.pars = NULL){
 #' @export
 
 summary.network.result <- function(object, ...){
-  
+
   if(!inherits(object, "network.result")) {
     stop('This is not the output from network.run. Need to run network.run function first')
   }
   summary.samples <- pick.summary.variables(object, ...)
-  
+
   rval <- list("summary.samples"= summary(summary.samples),
                "Treat.order" =  object$network$Treat.order,
                "deviance" = unlist(object$deviance[1:3]),
@@ -79,7 +79,7 @@ plot.network.result <- function(x, ...) {
 }
 
 #' Use coda package to plot Gelman-Rubin diagnostic plot
-#' 
+#'
 #' This function plots Gelman-Rubin diagnostic using coda package.
 #'
 #' @param result Object created by \code{\link{network.run}} function
@@ -100,16 +100,16 @@ plot.network.result <- function(x, ...) {
 network.gelman.plot <- function(result, extra.pars = NULL, only.pars = NULL){
   summary.samples <- pick.summary.variables(result, extra.pars, only.pars)
   summary.samples <- mcmc.list(lapply(summary.samples, function(x) { x[,colSums(abs(x)) != 0] }))
-  
+
   for(v in 1:nvar(summary.samples)){
     gelman.plot(summary.samples[,v,drop=FALSE])
   }
 }
 
 #' Use coda package to find Gelman-Rubin diagnostics
-#' 
+#'
 #' This function uses coda package to find Gelman-Rubin diagnostics.
-#' 
+#'
 #' @param result Object created by \code{\link{network.run}} function
 #' @param extra.pars Extra parameters that the user wants to display other than the default parameters.
 #' @param only.pars Parameters that user wants to display. This gets rids of other default parameters user doesn't want to show.
@@ -121,20 +121,20 @@ network.gelman.plot <- function(result, extra.pars = NULL, only.pars = NULL){
 #' })
 #' \donttest{
 #' result <- network.run(network)
-#' network.gelman.diag(result, extra.pars = "Eta")$psrf
+#' network.gelman.diag(result, extra.pars = "Eta")
 #' }
 #' @export
 
 network.gelman.diag <- function(result, extra.pars = NULL, only.pars = NULL){
   summary.samples <- pick.summary.variables(result, extra.pars, only.pars)
   summary.samples <- mcmc.list(lapply(summary.samples, function(x) { x[,colSums(abs(x)) != 0] }))
-  
+
   gelman.diag(summary.samples, multivariate = FALSE)$psrf
 }
 
 #' Generate autocorrelation diagnostics using coda package
-#' 
-#' This function generates autocorrelation diagnostics using coda package. User can specify lags and parameters to display. 
+#'
+#' This function generates autocorrelation diagnostics using coda package. User can specify lags and parameters to display.
 #' Note that to display extra parameters that are not saved, user needs to first specify parameters in \code{extra.pars.save} parameter in \code{\link{network.run}} function.
 #'
 #' @param result Object created by \code{\link{network.run}} function
@@ -155,18 +155,18 @@ network.gelman.diag <- function(result, extra.pars = NULL, only.pars = NULL){
 network.autocorr.diag <- function(result, lags = c(0,1,5,10,50), extra.pars = NULL, only.pars = NULL){
   summary.samples <- pick.summary.variables(result, extra.pars, only.pars)
   summary.samples <- mcmc.list(lapply(summary.samples, function(x) { x[,colSums(abs(x)) != 0] }))
-  
+
   autocorr.diag(summary.samples, lags = lags)
 }
 
-#' Generate autocorrelation plot using coda package 
-#' 
+#' Generate autocorrelation plot using coda package
+#'
 #' This function plots autocorrelation using coda package.
 #'
 #' @param result Object created by \code{\link{network.run}} function
 #' @param extra.pars Extra parameters that the user wants to plot other than the default parameters.
 #' @param only.pars Parameters that user wants to display. This gets rids of other default parameters user doesn't want to show
-#' @return None 
+#' @return None
 #' @examples
 #' network <- with(blocker, {
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial")
@@ -184,7 +184,7 @@ network.autocorr.plot <- function(result, extra.pars = NULL, only.pars = NULL){
 }
 
 #' Find relative effects for base treatment and comparison treatments
-#' 
+#'
 #' This function calculates relative effects for base treatment and comparison treatments.
 #'
 #' @param result Object created by \code{\link{network.run}} function
@@ -195,7 +195,7 @@ network.autocorr.plot <- function(result, extra.pars = NULL, only.pars = NULL){
 #' @param covariate Covariate value at which to compute relative effects. Only used if covariate value is specified in the model.
 #' @return
 #' This returns a mcmc.list sample of relative effects for the base treatment specified. This allows user to obtain relative effects of different base.treatment after the sampling has been done.
-#' For a simple summary, use \code{\link{relative.effects.table}}. 
+#' For a simple summary, use \code{\link{relative.effects.table}}.
 #' @examples
 #' network <- with(parkinsons, {
 #'  network.data(Outcomes, Study, Treat, SE = SE, response = "normal")
@@ -208,13 +208,13 @@ network.autocorr.plot <- function(result, extra.pars = NULL, only.pars = NULL){
 #' @export
 
 relative.effects <- function(result, base.treatment = NULL, comparison.treatments = NULL, base.category = NULL, comparison.categories = NULL, covariate = NULL){
-  
+
   network <- result$network
-  
+
   if(!is.null(covariate)){
     stopifnot(length(covariate) == dim(network$covariate)[2])
   }
-  
+
   Treat.order <- network$Treat.order
   if(!is.null(base.treatment)){
     stopifnot(base.treatment %in% Treat.order)
@@ -233,17 +233,17 @@ relative.effects <- function(result, base.treatment = NULL, comparison.treatment
     summary.samples <- pick.summary.variables(result, only.pars = c("d"))
   }
   vars <- dimnames(summary.samples[[1]])[[2]]
-  
+
   if(network$response != "multinomial"){
     effects <- matrix(0, nrow = network$ntreat, ncol = length(comparison.treatments))
     effects[which(Treat.order == base.treatment),] = -1
-    
+
     col_name = NULL
     for(i in 1:ncol(effects)){
       effects[which(comparison.treatments[i] == Treat.order),i] = 1
       col_name <- c(col_name, paste0("d_treatment", base.treatment, comparison.treatments[i]))
     }
-    
+
     if(!is.null(covariate)){
       cov_matrix <-  covariate_centerered  <- NULL
       for(i in 1:length(covariate)){
@@ -256,7 +256,7 @@ relative.effects <- function(result, base.treatment = NULL, comparison.treatment
     }
     colnames(effects) <- col_name
     rownames(effects) <- vars
-    
+
     samples <- as.mcmc.list(lapply(summary.samples, function(chain){
       samples <- chain %*% effects
       colnames(samples) <- colnames(effects)
@@ -267,7 +267,7 @@ relative.effects <- function(result, base.treatment = NULL, comparison.treatment
     categories_row <- as.numeric(substr(vars_d, nchar(vars_d[1])-1, nchar(vars_d[1])-1))
     categories_row <- categories_row+1
     ncat <- network$ncat
-    
+
     if(!is.null(base.category)){
       stopifnot(base.category %in% 1:ncat)
     } else{
@@ -279,10 +279,10 @@ relative.effects <- function(result, base.treatment = NULL, comparison.treatment
     } else{
       comparison.categories <- (1:ncat)[-base.category]
     }
-    
+
     effects <- matrix(0, nrow = network$ntreat*(network$ncat-1), length(vars), ncol = length(comparison.treatments) * length(comparison.categories))
     categories_column <- rep(comparison.categories, each = length(comparison.treatments))
-    
+
     effects[which(rep(Treat.order, ncat-1) == base.treatment),] <- -1
     col_name <- NULL
     for(i in 1:ncol(effects)){
@@ -290,13 +290,13 @@ relative.effects <- function(result, base.treatment = NULL, comparison.treatment
       col_name <- c(col_name, paste0("d_treatment", base.treatment, rep(comparison.treatments, length(comparison.categories))[i]))
     }
     colnames(effects) <- col_name
-    
+
     for(i in 1:ncol(effects)){
       effects[which(categories_row == base.category),i] <- -effects[which(categories_row == base.category),i]
       effects[which(categories_row != base.category & categories_row != rep(comparison.categories, each = length(comparison.treatments))[i]),i] <- 0
       colnames(effects)[i] <- paste0(colnames(effects)[i], "_category", base.category, rep(comparison.categories, each = length(comparison.treatments))[i])
     }
-    
+
     if(!is.null(covariate)){
       cov_matrix <-  covariate_centerered  <- NULL
       for(i in 1:length(covariate)){
@@ -308,7 +308,7 @@ relative.effects <- function(result, base.treatment = NULL, comparison.treatment
       effects <- rbind(cov_matrix, effects)
     }
     rownames(effects) <- vars
-    
+
     samples <- as.mcmc.list(lapply(summary.samples, function(chain){
       samples <- chain %*% effects
       colnames(samples) <- colnames(effects)
@@ -319,12 +319,12 @@ relative.effects <- function(result, base.treatment = NULL, comparison.treatment
 }
 
 #' Make a summary table for relative effects
-#' 
+#'
 #' This function creates a summary table of relative effects. Relative effects are in units of log odds ratio for binomial and multinomial data and real number scale for normal data.
 #'
 #' @param result Object created by \code{\link{network.run}} function
 #' @param summary_stat Specifies what type of statistics user wants. Options are: "mean", "ci", "quantile", "sd", "p-value".
-#' "ci" gives 95% confidence interval (0.025, 0.5, 0.975) and "quantile" gives specific quantile specified in probs parameter. 
+#' "ci" gives 95% confidence interval (0.025, 0.5, 0.975) and "quantile" gives specific quantile specified in probs parameter.
 #' "p-value" is the probability relative effect (in binomial, log odds ratio) is less than 0.
 #' @param probs Used only for the quantile summary. Specifies which quantile user wants the summary of (should be one numeric value between 0 to 1)
 #' @param base.category Specifies for which base category user wants for the summary. Used only for multinoimal.
@@ -342,27 +342,27 @@ relative.effects <- function(result, base.treatment = NULL, comparison.treatment
 #' @export
 
 relative.effects.table <- function(result, summary_stat = "mean", probs = NULL, base.category = NULL){
-  
+
   stopifnot(summary_stat %in% c("mean", "quantile", "sd", "p-value", "ci"))
-  
+
   if(!is.null(probs)){
     if(length(probs) != 1){
       stop("length of probs should be 1")
     }
   }
-  
+
   Treat.order <- result$network$Treat.order
-  
+
   ts <- 1:length(Treat.order)
   comps <- combn(ts, 2)
-  
+
   if(result$network$response != "multinomial"){
     tbl <- matrix(NA, nrow = length(ts), ncol = length(ts), dimnames = list(Treat.order, Treat.order))
-    
+
     for (i in 1:ncol(comps)) {
       comp <- comps[, i]
       samples <- as.matrix(relative.effects(result, base.treatment = Treat.order[comp[1]], comparison.treatments = Treat.order[comp[2]]))
-      
+
       if(summary_stat == "mean"){
         tbl[comp[1], comp[2]] <- mean(samples)
         tbl[comp[2], comp[1]] <- -tbl[comp[1], comp[2]]
@@ -383,11 +383,11 @@ relative.effects.table <- function(result, summary_stat = "mean", probs = NULL, 
   } else if(result$network$response == "multinomial"){
     ncat <- result$network$ncat
     tbl <- array(NA, dim = c(length(ts), length(ts), ncat -1), dimnames = list(Treat.order, Treat.order, NULL))
-    
+
     for (i in 1:ncol(comps)) {
       comp <- comps[, i]
       samples <- as.matrix(relative.effects(result, base.treatment = Treat.order[comp[1]], comparison.treatments = Treat.order[comp[2]], base.category = base.category))
-      
+
       if(summary_stat == "mean"){
         tbl[comp[1], comp[2],] <- apply(samples, 2, mean)
         tbl[comp[2], comp[1],]  <- -tbl[comp[1], comp[2],]
@@ -415,7 +415,7 @@ relative.effects.table <- function(result, summary_stat = "mean", probs = NULL, 
 #'
 #' This function makes a table of ranking for each treament. Each number in the cell represents a probability certain treatment was in such rank.
 #' This table is also stored as an output from \code{\link{network.run}}.
-#' 
+#'
 #' @param result Object created by \code{\link{network.run}} function
 #' @return Returns a table of ranking
 #' @examples
@@ -434,12 +434,12 @@ rank.tx <- function(result){
   varnames <- dimnames(samples[[1]])[[2]]
   varnames.split <- sapply(strsplit(varnames, "\\["), '[[', 1)
   varnames.split <- gsub("[[:digit:]]","",varnames.split)
-  
+
   rank.samples <- lapply(samples, function(x){x[,varnames.split %in% "prob"]})
-  
+
   Treat.order <- result$network$Treat.order
   response <- result$network$response
-  
+
   if(response != "multinomial"){
     prob.matrix <- matrix(NA, nrow = length(Treat.order), ncol = length(Treat.order), dimnames = list(paste0("rank ", 1:length(Treat.order)), paste0("treatment ", Treat.order)))
     for(i in 1:nrow(prob.matrix)){
@@ -464,7 +464,7 @@ rank.tx <- function(result){
 
 
 #' Create a treatment rank plot
-#' 
+#'
 #' This plot displays how each treatment is ranked. For each rank, we show how likely each treatment will be at that rank.
 #'
 #' @param result Object created by \code{\link{network.run}} function
@@ -484,11 +484,11 @@ rank.tx <- function(result){
 #' @export
 
 network.rank.tx.plot <- function(result, txnames = NULL, catnames = NULL, legend.position = c(1,1)){
-  
+
   rank.table <- rank.tx(result)
   ntreat = dim(rank.table)[1]
   if (is.null(txnames)) txnames <- paste("Treatment", result$network$Treat.order)
-  
+
   if(result$network$response != "multinomial"){
     plot(seq(ntreat),seq(ntreat),type="n",xaxt="n",ylim=c(0,1),pty="s",yaxt="n",ylab="Probability",xlab="Rank")
     axis(side=1,at=seq(ntreat))
@@ -539,7 +539,7 @@ network.cumrank.tx.plot <- function(result, txnames = NULL, catnames = NULL, leg
   rank.table <- rank.tx(result)
   ntreat = dim(rank.table)[1]
   if (is.null(txnames)) txnames <- paste("Treatment", result$network$Treat.order)
-  
+
   if(result$network$response != "multinomial"){
     x <- apply(rank.table,2,cumsum)
     plot(seq(ntreat),seq(ntreat),type="n",xaxt="n",ylim=c(0,1),yaxt="n",ylab="Cumulative Probability",xlab="Rank")
@@ -551,7 +551,7 @@ network.cumrank.tx.plot <- function(result, txnames = NULL, catnames = NULL, leg
   } else if(result$network$response == "multinomial"){
     ncat <- dim(rank.table)[3]
     if (is.null(catnames)) catnames <- paste("Outcome Category with base 1 and comparison", 1+seq(ncat))
-    
+
     for (i in seq(ncat))  {
       x = apply(rank.table[,,i],2,cumsum)
       plot(seq(ntreat),seq(ntreat),type="n",xaxt="n",ylim=c(0,1),yaxt="n",ylab="Cumulative Probability",xlab="Rank")
@@ -592,7 +592,7 @@ sucra = function(result, txnames = NULL, catnames = NULL)
   rank.table <- rank.tx(result)
   ntreat = dim(rank.table)[1]
   if (is.null(txnames)) txnames <- paste("Treatment", result$network$Treat.order)
-  
+
   if(result$network$response != "multinomial"){
     if(ntreat ==2){
       x <- rank.table[-ntreat,]
@@ -646,13 +646,13 @@ sucra = function(result, txnames = NULL, catnames = NULL)
 #' @export
 
 calculate.deviance <- function(result){
-  
+
   network <- result$network
   samples <- result$samples
-  
+
   totresdev <- lapply(samples, function(x){ x[,"totresdev"]})
   Dbar <- mean(unlist(totresdev))
-  
+
   ###### find residual deviance by arm
   if(network$response == "multinomial" & !is.null(network$miss.matrix)){
     dev <- list()
@@ -660,10 +660,10 @@ calculate.deviance <- function(result){
       dev_each <- lapply(samples, function(x) { x[,grep(paste0("dev", ii, "\\["), dimnames(samples[[1]])[[2]])]})
       dev_each <- do.call(rbind, dev_each)
       dev_each <- apply(dev_each, 2, mean)
-      
+
       n_value <- network[[paste0("n", ii)]]
       dev_matrix <- matrix(NA, nrow = dim(n_value)[1], ncol = dim(n_value)[2])
-      
+
       for(i in 1:dim(dev_matrix)[1]){
         for(j in 1:dim(dev_matrix)[2]){
           ind <- which(paste0("dev", ii, "[", i, ",", j, "]") == names(dev_each))
@@ -679,7 +679,7 @@ calculate.deviance <- function(result){
     dev <- lapply(samples, function(x) { x[,grep("dev\\[", dimnames(samples[[1]])[[2]])]})
     dev <- do.call(rbind, dev)
     dev <- apply(dev, 2, mean)
-    
+
     dev_matrix <- matrix(NA, nrow =  network$nstudy, ncol = max(network$na))
     for(i in 1:dim(dev_matrix)[1]){
       for(j in 1:dim(dev_matrix)[2]){
@@ -691,21 +691,21 @@ calculate.deviance <- function(result){
     }
     dev_arm <- dev_matrix
   }
-  
+
   ############find leverage
   if(network$response == "binomial"){
-    
+
     rtilda <- lapply(samples, function(x){ x[,grep("rhat\\[", dimnames(samples[[1]])[[2]])] })
     rtilda <- do.call(rbind, rtilda)
     rtilda <- apply(rtilda, 2, mean)
-    
+
     rtilda_arm <- devtilda_arm <- matrix(NA, nrow = network$nstudy, ncol = max(network$na))
     for(i in 1:network$nstudy){
       for(j in 1:network$na[i]){
         r_value <- network$r[i,j]
         n_value <- network$n[i,j]
         rtilda_arm[i,j] <- rtilda[which(paste("rhat[", i, ",", j, "]", sep = "") == names(rtilda))]
-        
+
         devtilda_arm[i,j] <- ifelse(r_value != 0, 2 * r_value * (log(r_value)-log(rtilda_arm[i,j])), 0)
         devtilda_arm[i,j] <- devtilda_arm[i,j] + ifelse((n_value - r_value) != 0, 2 * (n_value-r_value) *(log(n_value-r_value) - log(n_value- rtilda_arm[i,j])), 0)
       }
@@ -714,18 +714,18 @@ calculate.deviance <- function(result){
     ybar <- lapply(samples, function(x){ x[,grep("theta\\[", dimnames(samples[[1]])[[2]])] })
     ybar <- do.call(rbind, ybar)
     ybar <- apply(ybar, 2, mean)
-    
+
     ybar_arm <- devtilda_arm <- matrix(NA, nrow = network$nstudy, ncol = max(network$na))
-    
+
     for(i in 1:network$nstudy){
       for(j in 1:network$na[i]){
         r_value <- network$r[i,j]
         se_value <- network$se[i,j]
-        
+
         if(class(network) == "nodesplit.network.data"){
-          ybar_arm[i,j] <- ybar[which(paste("theta[", i, ",", network$t[i,j], "]", sep = "") == names(ybar))] 
+          ybar_arm[i,j] <- ybar[which(paste("theta[", i, ",", network$t[i,j], "]", sep = "") == names(ybar))]
         } else{
-          ybar_arm[i,j] <- ybar[which(paste("theta[", i, ",", j, "]", sep = "") == names(ybar))] 
+          ybar_arm[i,j] <- ybar[which(paste("theta[", i, ",", j, "]", sep = "") == names(ybar))]
         }
         devtilda_arm[i,j] <- ifelse(se_value != 0, (r_value - ybar_arm[i,j])^2 / se_value^2, 0)
       }
@@ -735,7 +735,7 @@ calculate.deviance <- function(result){
       rtilda <- lapply(samples, function(x){ x[,grep("rhat\\[", dimnames(samples[[1]])[[2]])]})
       rtilda <- do.call(rbind, rtilda)
       rtilda <- apply(rtilda, 2, mean)
-      
+
       rtilda_arm <- devtilda_category <- array(NA, dim = c(network$nstudy, max(network$na), network$ncat))
       for(i in 1:network$nstudy){
         for(j in 1:network$na[i]){
@@ -752,11 +752,11 @@ calculate.deviance <- function(result){
       for(ii in seq(network$npattern)){
         r_values <- network[[paste0("r",ii)]]
         devtilda_category <- rtilda_matrix <- array(NA, dim = dim(r_values))
-        
+
         rtilda <- lapply(samples, function(x){ x[,grep(paste0("rhat", ii, "\\["), dimnames(samples[[1]])[[2]])] })
         rtilda <- do.call(rbind, rtilda)
         rtilda <- apply(rtilda, 2, mean)
-        
+
         for(i in 1:dim(r_values)[1]){
           for(j in 1:dim(r_values)[2]){
             for(k in 1:dim(r_values)[3]){
@@ -779,7 +779,7 @@ calculate.deviance <- function(result){
   leverage_arm <- dev_arm - devtilda_arm
   pD <- sum(leverage_arm, na.rm = TRUE)
   DIC <- Dbar + pD
-  
+
   out <- list(Dbar = Dbar, pD = pD, DIC = DIC, data.points = sum(network$na), dev_arm = dev_arm, devtilda_arm = devtilda_arm, leverage_arm = leverage_arm)
   if(network$response == "binomial" || network$response == "multinomial"){
     out$rtilda_arm = rtilda_arm
@@ -815,7 +815,7 @@ network.deviance.plot <- function(result){
 #' Make a leverage plot
 #'
 #' This function makes a leverage vs. square root of residual deviance plot
-#' 
+#'
 #' @param result Object created by \code{\link{network.run}} function
 #' @return None
 #' @examples
@@ -864,7 +864,7 @@ network.leverage.plot <- function(result){
 #' @export
 
 network.covariate.plot <- function(result, base.treatment = NULL, comparison.treatment= NULL, base.category = NULL, comparison.category = NULL, covariate.name = NULL){
-  
+
   if(is.null(network$covariate)){
     stop("need to provide covariate information to make this plot")
   }
@@ -877,7 +877,7 @@ network.covariate.plot <- function(result, base.treatment = NULL, comparison.tre
       stop("need to specify all base.treatment, comparison.treatment, base.category, and comparison.category")
     }
   }
-  
+
   network <- result$network
   observed <- network$covariate
   xvals <- matrix(NA, nrow = dim(network$covariate)[2], ncol = 7)
@@ -888,7 +888,7 @@ network.covariate.plot <- function(result, base.treatment = NULL, comparison.tre
     xvals[i,] <- seq(xlim[i,1], xlim[i,2], length.out = 7)
     covariate_mx <- c(covariate_mx, network[[paste0("mx",i)]])
   }
-  
+
   for(i in 1:dim(network$covariate)[2]){
     res <- lapply(xvals[i,], function(xval) {
       covariate <- covariate_mx
@@ -898,22 +898,22 @@ network.covariate.plot <- function(result, base.treatment = NULL, comparison.tre
       } else{
         samples <- relative.effects(result, base.treatment, comparison.treatment, base.category, comparison.category, covariate = covariate)
       }
-      
+
       samples <- as.matrix(samples)
       stats <- t(apply(samples, 2, quantile, probs = c(0.025, 0.5, 0.975)))
       data.frame(median = stats[,"50%"], lower = stats[,"2.5%"], upper = stats[,"97.5%"])
     })
     res <- do.call(rbind,res)
-    
+
     dim_names <- if(network$response != "multinomial"){
       dimnames(as.matrix(relative.effects(result, base.treatment, comparison.treatment)))[[2]]
     } else{
       dimnames(as.matrix(relative.effects(result, base.treatment, comparison.treatment, base.category, comparison.category)))[[2]]
     }
-    
+
     ylim <- c(min(res), max(res))
     xlab_name <- ifelse(is.null(covariate.name), paste0("covariate ", i), covariate.name[i])
-    
+
     plot(xvals[i,], res$median, type = "l", xlim = xlim[i,], ylim = ylim, main = "Treatment effect vs. covariate", xlab = xlab_name, ylab = dim_names)
     lines(xvals[i,], res$lower, lty = 2)
     lines(xvals[i,], res$upper, lty = 2)
@@ -944,10 +944,10 @@ variance.tx.effects = function(result)
   samples_sigma <- pick.summary.variables(result, only.pars = c("sigma"))
   samples_sigma <- do.call(rbind, samples_sigma)
   samples_sigma <- apply(samples_sigma, 2, mean)
-  
+
   sigma_matrix <- matrix(samples_sigma, nrow = result$network$ncat-1)
   cor_matrix <- sigma_matrix/outer(sqrt(diag(sigma_matrix)),sqrt(diag(sigma_matrix)))
-  
+
   return(list(sigma_matrix = sigma_matrix, cor_matrix = cor_matrix))
 }
 
@@ -959,7 +959,7 @@ variance.tx.effects = function(result)
 #' @param level Confidence level. Default is 0.95 denoting 95 percent C.I.
 #' @param ticks.position Position of the x-axis tick marks. If left unspecified, the function tries to set it at sensible values
 #' @param label.multiplier This is a multiplying factor to move the position of the text associated with median[lower, upper] values. This number is multiplied by the range of x-axis and added to the x-axis limit. Default multiplier is set to 0.2.
-#' @param label.margin This is how much margin space you specify to assign space for the median[lower, upper] values. Default margin is set to 10. 
+#' @param label.margin This is how much margin space you specify to assign space for the median[lower, upper] values. Default margin is set to 10.
 #' @param title Header name which you can modify
 #' @param only.reference.treatment Indicator for plotting only the comparison to the reference treatment
 #' @return None
@@ -976,13 +976,13 @@ variance.tx.effects = function(result)
 #' @export
 
 network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, label.multiplier = 0.2, label.margin = 10, title = "Network Meta-analysis Forest plot", only.reference.treatment = FALSE){
-  
+
   ncat <- ifelse(result$network$response == "multinomial", result$network$ncat, 2)
-  
+
   for(i in 1:(ncat-1)){
-    
-    if(i != 1) grid::grid.newpage()  
-    
+
+    if(i != 1) grid::grid.newpage()
+
     if(result$network$response == "multinomial"){
       lower <- relative.effects.table(result, summary_stat = "quantile", probs = (1- level)/2)[,,i]
       OR <- relative.effects.table(result, summary_stat = "quantile", probs = 0.5)[,,i]
@@ -992,7 +992,7 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
       OR <- relative.effects.table(result, summary_stat = "quantile", probs = 0.5)
       upper <- relative.effects.table(result, summary_stat = "quantile", probs = level + (1- level)/2)
     }
-    
+
     if(only.reference.treatment == TRUE){
       lower <- lower[1,-1]
       OR <- OR[1,-1]
@@ -1000,67 +1000,67 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
     } else{
       lower <- -lower[lower.tri(lower)]
       OR <- -OR[lower.tri(OR)]
-      upper <- -upper[lower.tri(upper)]    
+      upper <- -upper[lower.tri(upper)]
     }
-  
-    odds <- data.frame(lower = lower, OR = OR, upper = upper)  
-    
+
+    odds <- data.frame(lower = lower, OR = OR, upper = upper)
+
     if(result$network$response %in% c("binomial", "multinomial")){
       odds <- exp(odds) #report odds ratio instead of log odds ratio
-    } 
-    
+    }
+
     Treat.order <- result$network$Treat.order
     ts <- 1:length(Treat.order)
     comps <- combn(ts, 2)
-    
+
     name <- rep(NA, ncol(comps))
     for(j in 1:ncol(comps)){
       name[j] <- paste0(Treat.order[comps[2,j]]," vs ", Treat.order[comps[1,j]])
     }
-    
+
     if(only.reference.treatment == TRUE){
       name <- name[1:(length(Treat.order)-1)]
-    } 
-    odds$name <- name  
-    
+    }
+    odds$name <- name
+
     if(is.null(ticks.position)){
       if(result$network$response %in% c("binomial", "multinomial")){
-        ticks <- c(0.1, 0.2, 0.5, 1, 2, 5, 10)  
+        ticks <- c(0.1, 0.2, 0.5, 1, 2, 5, 10)
       } else if(result$network$response == "normal"){
         ticks <- pretty(c(min(odds$lower, na.rm =TRUE), max(odds$upper, na.rm = TRUE)))
       }
     } else{
       ticks <- ticks.position
     }
-    
-    p <- ggplot(odds, aes(y = OR, x = name)) + 
+
+    p <- ggplot(odds, aes(y = OR, x = name)) +
       geom_point() +
       geom_errorbar(aes(ymin = lower, ymax = upper), width = .2) +
       scale_x_discrete(limits = name) +
       geom_hline(yintercept = 1, linetype = 2) +
       coord_flip() +
       theme_bw() +
-      theme(plot.margin = unit(c(1,label.margin,1,1), "lines")) 
-    
+      theme(plot.margin = unit(c(1,label.margin,1,1), "lines"))
+
     if(result$network$response %in% c("binomial")){
       p <- p + labs(x = "Treatment comparison", y = "Odds Ratio", title = title) +
-        scale_y_log10(breaks = ticks, labels = ticks) 
+        scale_y_log10(breaks = ticks, labels = ticks)
     } else if(result$network$response %in% c("multinomial")){
       p <- p + labs(x = "Treatment comparison", y = "Odds Ratio", title = paste0(title, ": Multinomial Category ", (i+1), " vs 1")) +
-        scale_y_log10(breaks = ticks, labels = ticks) 
+        scale_y_log10(breaks = ticks, labels = ticks)
     } else if(result$network$response %in% c("normal")){
       p <- p + labs(x = "Treatment comparison", y = "Continuous Scale", title = title) +
-        scale_y_continuous(breaks = ticks, labels = ticks) 
+        scale_y_continuous(breaks = ticks, labels = ticks)
     }
-    
+
     #find actual xlim range; this part of code keeps changing with ggplot update..
     xlim.range <- ggplot_build(p)$layout$panel_params[[1]]$x.range
-    
+
     p <- p + geom_text(aes(label = paste0(sprintf("%0.2f", round(OR, digits = 2)), " [", sprintf("%0.2f", round(lower, digits = 2)) , ", ", sprintf("%0.2f", round(upper, digits = 2)), "]")), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = 1:length(name))   # hjust = -1, vjust = 2)
-    
+
     median_name_location <- ifelse(length(odds[,1]) <= 3, length(name) + 0.5, length(name) + 1)
     p <- p + geom_text(aes(label = "Median [95% Crl]"), y = xlim.range[2] + diff(xlim.range)*label.multiplier, x = median_name_location)
-    
+
     gt <- ggplot_gtable(ggplot_build(p))
     gt$layout$clip[gt$layout$name == "panel"] <- "off"
     grid::grid.draw(gt)
@@ -1083,7 +1083,7 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
 #' @export
 
 draw.network.graph = function(network, label.dist = 2){
-  
+
   if(class(network) == "contrast.network.data"){
     Treat <- c(t(network$Treat))[!is.na(c(t(network$Treat)))]
     Study <- rep(1:length(network$na), times = network$na)

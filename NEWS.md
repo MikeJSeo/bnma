@@ -1,7 +1,7 @@
 # bnma 1.2.0
 
-* Added modelling baseline risk and covariate effects when running fixed effects model
-* Modified code for network.forest.plot that allows plotting only the comparison with the reference treatment and fixed labelling issue
+* Added modeling baseline risk and covariate effects when fitting a fixed effects model
+* Modified code for network.forest.plot that allows plotting only the comparison with the reference treatment and fixed labeling issue
 
 # bnma 1.1.2
 

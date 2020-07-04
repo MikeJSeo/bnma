@@ -26,6 +26,6 @@ network <- with(statins, {
 })
 \donttest{
 result <- network.run(network)
-network.gelman.diag(result, extra.pars = "Eta")$psrf
+network.gelman.diag(result, extra.pars = "Eta")
 }
 }

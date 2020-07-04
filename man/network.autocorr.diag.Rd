@@ -24,7 +24,7 @@ network.autocorr.diag(
 Returns autocorrelation diagnostics
 }
 \description{
-This function generates autocorrelation diagnostics using coda package. User can specify lags and parameters to display. 
+This function generates autocorrelation diagnostics using coda package. User can specify lags and parameters to display.
 Note that to display extra parameters that are not saved, user needs to first specify parameters in \code{extra.pars.save} parameter in \code{\link{network.run}} function.
 }
 \examples{

@@ -15,7 +15,7 @@ relative.effects.table(
 \item{result}{Object created by \code{\link{network.run}} function}
 
 \item{summary_stat}{Specifies what type of statistics user wants. Options are: "mean", "ci", "quantile", "sd", "p-value".
-"ci" gives 95% confidence interval (0.025, 0.5, 0.975) and "quantile" gives specific quantile specified in probs parameter. 
+"ci" gives 95% confidence interval (0.025, 0.5, 0.975) and "quantile" gives specific quantile specified in probs parameter.
 "p-value" is the probability relative effect (in binomial, log odds ratio) is less than 0.}
 
 \item{probs}{Used only for the quantile summary. Specifies which quantile user wants the summary of (should be one numeric value between 0 to 1)}

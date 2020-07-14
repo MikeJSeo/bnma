@@ -366,7 +366,7 @@ ume.hy.prior.rjags <- function(hy.prior, ncat){
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial")
 #' })
 #' \donttest{
-#' result <- ume.network.run(network)
+#' result <- ume.network.run(network, n.run = 10000)
 #' }
 #' @export
 

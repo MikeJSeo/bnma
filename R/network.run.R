@@ -85,8 +85,12 @@ network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, s
         c("Eta", "d", "sigma", "sigma_transformed","prob","delta")
       }
     
+    if(response == "normal" & !is.null(mean.A) & !is.null(prec.A)){
+      pars.save <- c(pars.save, "T")
+    }
+    
     if(response == "binomial" & !is.null(mean.A) & !is.null(prec.A)){
-      pars.save <- c(pars.save, "RD", "RR", "NNT")
+      pars.save <- c(pars.save, "T", "RD", "RR", "NNT")
     }
     
     if(type == "fixed"){

@@ -109,7 +109,7 @@ model.normal <- function(network){
     if(!is.null(mean.A) & !is.null(prec.A)){
       code <- paste0(code,
                      "\n\tA ~ dnorm(mean.A, prec.A)",
-                     "\n\tfor(k in 1:", ntreat, ") { logit(T[k]) <- A + d[k] }")
+                     "\n\tfor(k in 1:", ntreat, ") { T[k] <- A + d[k] }")
     }
     
     return(code)

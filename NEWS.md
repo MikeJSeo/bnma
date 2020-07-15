@@ -1,3 +1,7 @@
+# bnma 1.3.0
+
+* Added finding absolute treatment effect in binomial and normal outcomes
+
 # bnma 1.2.0
 
 * Added modeling baseline risk and covariate effects when fitting a fixed effects model

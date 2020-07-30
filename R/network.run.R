@@ -32,7 +32,7 @@
 #' }
 #' @export
 
-network.run <- function(network, inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,
+network.run <- function(network, inits = NULL, RNG.inits = NULL, n.chains = 3, max.run = 100000, setsize = 10000, n.run = 50000,
                         conv.limit = 1.05, extra.pars.save = NULL){
   
   if (!inherits(network, "network.data")) {

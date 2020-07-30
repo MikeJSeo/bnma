@@ -7,6 +7,7 @@
 network.run(
   network,
   inits = NULL,
+  RNG.inits = NULL,
   n.chains = 3,
   max.run = 1e+05,
   setsize = 10000,
@@ -20,6 +21,8 @@ network.run(
 
 \item{inits}{Initial values for the parameters being sampled. If left unspecified, program will generate reasonable initial values.}
 
+\item{RNG.inits}{List of .RNG.name and .RNG.seed that control the JAGS RNGs. Please refer to jags.model function in rjags for more information.}
+
 \item{n.chains}{Number of chains to run}
 
 \item{max.run}{Maximum number of iterations that user is willing to run. If the algorithm is not converging, it will run up to \code{max.run} iterations before printing a message that it did not converge}
@@ -31,8 +34,6 @@ network.run(
 \item{conv.limit}{Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used (instead of 95 percent C.I.) to test convergence of parameters for study effect (eta), relative effect (d), and heterogeneity (log variance (logvar)).}
 
 \item{extra.pars.save}{Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.}
-
-\item{RNG.inits}{List of .RNG.name and .RNG.seed that control the JAGS RNGs. Please refer to jags.model function in rjags for more information.}
 }
 \value{
 \item{data_rjags}{Data that is put into rjags function \code{\link{jags.model}}}

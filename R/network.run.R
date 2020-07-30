@@ -140,11 +140,10 @@ network.run <- function(network, inits = NULL, RNG.inits = NULL, n.chains = 3, m
     }
     
     if(is.null(RNG.inits)){
-      RNG.inits <- list(
-        list(".RNG.name" = "base::Wichmann-Hill", ".RNG.seed" = 1),
-        list(".RNG.name" = "base::Wichmann-Hill", ".RNG.seed" = 2),
-        list(".RNG.name" = "base::Wichmann-Hill", ".RNG.seed" = 3)
-      )
+      RNG.inits <- list()
+      for(i in 1:n.chains){
+        RNG.inits[[i]] <- list(".RNG.name" = "base::Wichmann-Hill", ".RNG.seed" = i)
+      }
     }
     
     inits <- mapply(c, inits, RNG.inits, SIMPLIFY = FALSE)

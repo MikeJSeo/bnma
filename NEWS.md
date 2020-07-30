@@ -1,6 +1,7 @@
 # bnma 1.3.0
 
 * Added finding absolute treatment effect in binomial and normal outcomes
+* Added RNG.inits in the network.run function for reproducibility
 
 # bnma 1.2.0
 

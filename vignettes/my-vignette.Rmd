@@ -153,3 +153,27 @@ network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, S
 result <- network.run(network)
 summary(result, extra.pars = c("RD", "RR", "NNT"))
 ```
+
+## Generating reproducible results: initializing the random number generators
+
+Generating reproducible results requires to set two set of seed values. First, the set.seed() function is used to allow bnma to generate reproducible initial values. Second, there is the JAGS RNG seed that need to be set. Setting the JAGS RNG seed is not necessary in bnma as the program assigns default JAGS RNG seeds. However, users can specify their own seed if needed.
+
+```{r}
+set.seed(1234) # seed for generating reproducible initial values
+network <- with(blocker, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial"))
+
+# JAGS RNG list of initial values
+jags_inits <- list(
+  list(".RNG.name"="base::Wichmann-Hill", ".RNG.seed" = 94387),
+  list(".RNG.name"="base::Wichmann-Hill", ".RNG.seed" = 24507),
+  list(".RNG.name"="base::Wichmann-Hill", ".RNG.seed" = 39483)
+)
+result <- network.run(network, n.chains=3, RNG.inits=jags_inits)
+
+# bnma initial values now contain initial values for the parameters and the JAGS RNG initial values
+str(result$inits)
+
+# reproducible results
+summary(result)
+```
+

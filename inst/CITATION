@@ -16,4 +16,4 @@ citEntry(entry="Manual",
                year,
                "). bnma: Bayesian Network Meta-Analysis using 'JAGS'. ",
                vers, ". ", 
-			   "URL https://CRAN.R-project.org/package=bnma.", sep=""))
+			   "https://CRAN.R-project.org/package=bnma.", sep=""))

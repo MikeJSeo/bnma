@@ -216,9 +216,9 @@ model.binomial <- function(network)
                      "\n\tfor(k in 1:", ntreat, ") { logit(T[k]) <- A + d[k] }",
                      "\n\tfor(k in 1:", ntreat, ") {",
                      "\n\t\tfor(kk in (k+1):", ntreat, ") {",
-                     "\n\t\tNNT[k,kk] <- 1/(T[kk] - T[k])",
-                     "\n\t\tRD[k,kk] <- T[kk] - T[k]",
-                     "\n\t\tRR[k,kk] <- T[kk]/T[k]",
+                     "\n\t\tNNT[kk,k] <- 1/(T[kk] - T[k])",
+                     "\n\t\tRD[kk,k] <- T[kk] - T[k]",
+                     "\n\t\tRR[kk,k] <- T[kk]/T[k]",
                      "\n\t\t}",
                      "\n\t}")
                      

@@ -219,14 +219,9 @@ model.binomial <- function(network)
                      "\n\t\tNNT[k,kk] <- 1/(T[kk] - T[k])",
                      "\n\t\tRD[k,kk] <- T[kk] - T[k]",
                      "\n\t\tRR[k,kk] <- T[kk]/T[k]",
-                     "\n\t\t}"),
+                     "\n\t\t}",
                      "\n\t}")
                      
-                     # "\n\tfor(k in 2:", ntreat, ") {",
-                     # "\n\t\tNNT[k] <- 1/(T[k] - T[1])",
-                     # "\n\t\tRD[k] <- T[k] - T[1]",
-                     # "\n\t\tRR[k] <- T[k]/T[1]",
-                     # "\n\t}")
                      
                      # "\n\tfor(k in 2:", ntreat, ") {",
                      # "\n\t\tNNT[k] <- 1/(T[k] - T[1])",

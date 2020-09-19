@@ -1,3 +1,7 @@
+# bnma 1.4.0
+
+* Added different treatment comparisons for RR, RD, and NNT
+
 # bnma 1.3.0
 
 * Added finding absolute treatment effect in binomial and normal outcomes

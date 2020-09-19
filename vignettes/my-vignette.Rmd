@@ -140,7 +140,7 @@ summary(result)
 
 ## Finding risk difference, relative risk, and number needed to treat with Binomial outcomes
 
-Default summary measure when analyzing binary outcomes is the odds ratio. We have added an option to calculate risk difference, relative risk, and number needed to treat by incorporating external baseline risk in treatment A (i.e. placebo)
+Default summary measure when analyzing binary outcomes is the odds ratio. We have added an option to calculate risk difference, relative risk, and number needed to treat by incorporating external baseline risk in treatment A (i.e. placebo).
 
 ```{r}
 #Using metaprop function from meta package, we meta-analyze placebo event proportion.

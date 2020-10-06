@@ -8,7 +8,6 @@
 #' @param N A vector of total number of observations in each arm. Used for binomial and multinomial responses.
 #' @param SE A vector of standard error for each arm. Used only for normal response.
 #' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial".
-#' @param Treat.order Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.
 #' @param type Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".
 #' @param mean.mu Prior mean for the study effect (baseline risk)
 #' @param prec.mu Prior precision for the study effect (baseline risk)
@@ -28,12 +27,9 @@
 ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random",
                              mean.mu = NULL, prec.mu = NULL, mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5), dic = TRUE){
   
-  if(is.null(Treat.order)){
-    Treat.order <- sort(unique(Treat))
+  if(!is.numeric(network$Treat)){
+    stop("Treatment has to be a numeric sequence; also, for each study, base treatment has be treatment with the lowest value")
   }
-  Treat <- relabel.vec(Treat, Treat.order)
-  names(Treat.order) <- 1:length(Treat.order)
-  
   
   if(missing(Study) || missing(Treat) || missing(Outcomes)){
     stop("Study, Treat, and Outcomes have to be all specified")
@@ -114,7 +110,7 @@ ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, respon
     }
   }
   
-  network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, r = r, t = t, type = type, rank.preference = NULL, nstudy = nstudy, na = na, ntreat = ntreat, b.id = b.id, response = response, hy.prior = hy.prior, mean.d = mean.d, prec.d = prec.d, mean.mu = mean.mu, prec.mu = prec.mu, dic = dic)
+  network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, Treat.order = Treat.order, r = r, t = t, type = type, rank.preference = NULL, nstudy = nstudy, na = na, ntreat = ntreat, b.id = b.id, response = response, hy.prior = hy.prior, mean.d = mean.d, prec.d = prec.d, mean.mu = mean.mu, prec.mu = prec.mu, dic = dic)
   
   if(response == "binomial" || response == "multinomial"){
     network$N = N

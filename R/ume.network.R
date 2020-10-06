@@ -24,7 +24,7 @@
 #' @references S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \emph{Evidence synthesis for decision making 4: inconsistency in networks of evidence based on randomized controlled trials}, Medical Decision Making 33(5):641-656. [\url{https://doi.org/10.1177/0272989X12455847}]
 #' @export
 
-ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random",
+ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, response = NULL, type = "random",
                              mean.mu = NULL, prec.mu = NULL, mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5), dic = TRUE){
   
   if(!is.numeric(Treat)){
@@ -110,7 +110,7 @@ ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, respon
     }
   }
   
-  network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, Treat.order = Treat.order, r = r, t = t, type = type, rank.preference = NULL, nstudy = nstudy, na = na, ntreat = ntreat, b.id = b.id, response = response, hy.prior = hy.prior, mean.d = mean.d, prec.d = prec.d, mean.mu = mean.mu, prec.mu = prec.mu, dic = dic)
+  network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, r = r, t = t, type = type, rank.preference = NULL, nstudy = nstudy, na = na, ntreat = ntreat, b.id = b.id, response = response, hy.prior = hy.prior, mean.d = mean.d, prec.d = prec.d, mean.mu = mean.mu, prec.mu = prec.mu, dic = dic)
   
   if(response == "binomial" || response == "multinomial"){
     network$N = N
@@ -585,9 +585,7 @@ ume.make.inits <- function(network, n.chains, delta, mu, se.mu){
     # design matrix
     base.tx <- Treat[b.id]    # base treatment for N studies
     end.Study <- c(0, cumsum(na))  # end row number of each trial
-    print(end.Study)
     rows <- end.Study - seq(0, nstudy)   # end number of each trial not including base treatment arms
-    print(rows)
     design.mat <- matrix(0, sum(na) - nstudy, ntreat*(ntreat-1)/2 ) # no. non-base arms x #txs
     col_names <- NULL
     
@@ -597,21 +595,15 @@ ume.make.inits <- function(network, n.chains, delta, mu, se.mu){
       }
     }
     colnames(design.mat) <- col_names
-    print(design.mat)
     
     for(i in seq(nstudy)){
       studytx <- Treat[(end.Study[i]+1):end.Study[i+1]]  #treatments in ith Study
       nonbase.tx <- studytx[studytx!=base.tx[i]]    #non-baseline treatments for ith Study
       for (j in seq(length(nonbase.tx))){
-        print(j+rows[i])
-        print(paste0("Treat", base.tx[i], nonbase.tx[j]))
         design.mat[j+rows[i],paste0("Treat", base.tx[i], nonbase.tx[j])] <- 1
       }
     }
   
-  
-  #####
-    
     fit <- summary(lm(y ~ design.mat - 1))
     d <- se.d <- rep(NA, ntreat*(ntreat-1)/2)
     if(length(coef(fit)[,1]) == length(d)){ #check if there is any NA in the estimated fit

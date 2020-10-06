@@ -219,13 +219,9 @@ ume.normal.rjags <- function(network){
                    "\n\t\tmu[i] ~ dnorm(mean.mu, prec.mu)",
                    "\n\t\tfor(k in 1:na[i]) {",
                    "\n\t\t\ttau[i,k] <- 1/pow(se[i,k],2)",
-                   "\n\t\t\tr[i,k] ~ dnorm(theta[i,k], tau[i,k])")
-    
-    if(type == "fixed"){
-      code <- paste0(code, "\n\t\t\ttheta[i,k] <- mu[i] + d[t[i,1], t[i,k]]")
-    } else if(type == "random"){
-      code <- paste0(code, "\n\t\t\ttheta[i,k] <- mu[i] + delta[i,k]")
-    }  
+                   "\n\t\t\tr[i,k] ~ dnorm(theta[i,k], tau[i,k])",
+                   "\n\t\t\ttheta[i,k] <- mu[i] + delta[i,k]"
+                   )
     
     code <- paste0(code,   
                    "\n\t\t\tdev[i,k] <- (r[i,k]-theta[i,k])*(r[i,k]-theta[i,k])*tau[i,k]",
@@ -235,6 +231,10 @@ ume.normal.rjags <- function(network){
     if(type == "random"){
       code <- paste0(code, "\n\t\tfor (k in 2:na[i]) {",
                      "\n\t\t\tdelta[i,k] ~ dnorm(d[t[i,1],t[i,k]], prec)",
+                     "\n\t\t}")
+    } else if(type == "fixed"){
+      code <- paste0(code, "\n\t\tfor (k in 2:na[i]) {",
+                     "\n\t\t\tdelta[i,k] <- d[t[i,1],t[i,k]]",
                      "\n\t\t}")
     }
     
@@ -274,12 +274,6 @@ ume.binomial.rjags <- function(network){
                    "\n\t\t\tr[i,k] ~ dbin(p[i,k], n[i,k])",
                    "\n\t\t\tlogit(p[i,k]) <- mu[i] + delta[i,k]"
                    )
-    
-    if(type == "fixed"){
-      code <- paste0(code, "\n\t\t\tlogit(p[i,k]) <- mu[i] + d[t[i,1], t[i,k]]")
-    } else if(type == "random"){
-      code <- paste0(code, "\n\t\t\tlogit(p[i,k]) <- mu[i] + delta[i,k]")
-    }
     
     code <- paste0(code,          
                    "\n\t\t\trhat[i,k] <- p[i,k] * n[i,k]",

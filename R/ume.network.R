@@ -612,7 +612,6 @@ ume.make.inits <- function(network, n.chains, delta, mu, se.mu){
         design.mat[j+rows[i],paste0("Treat", base.tx[i], nonbase.tx[j])] <- 1
       }
     }
-    print(design.mat)})
   
   
   #####

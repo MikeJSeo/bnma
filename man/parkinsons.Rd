@@ -4,7 +4,9 @@
 \name{parkinsons}
 \alias{parkinsons}
 \title{Dopamine agonists as adjunct therapy in Parkinson's disease}
-\format{A list of Outcomes, Treat, Study, N, covariate, and Treat.order}
+\format{
+A list of Outcomes, Treat, Study, N, covariate, and Treat.order
+}
 \usage{
 parkinsons
 }

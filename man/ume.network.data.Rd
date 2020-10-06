@@ -11,6 +11,7 @@ ume.network.data(
   N = NULL,
   SE = NULL,
   response = NULL,
+  Treat.order = NULL,
   type = "random",
   mean.mu = NULL,
   prec.mu = NULL,
@@ -32,6 +33,8 @@ ume.network.data(
 \item{SE}{A vector of standard error for each arm. Used only for normal response.}
 
 \item{response}{Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial".}
+
+\item{Treat.order}{Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.}
 
 \item{type}{Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".}
 

@@ -4,7 +4,9 @@
 \name{cardiovascular}
 \alias{cardiovascular}
 \title{Trials of low dose and high dose statins for cardiovascular disease vs. placebo}
-\format{A list of Outcomes, Treat, Study, and N}
+\format{
+A list of Outcomes, Treat, Study, and N
+}
 \usage{
 cardiovascular
 }

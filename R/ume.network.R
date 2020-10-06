@@ -8,6 +8,7 @@
 #' @param N A vector of total number of observations in each arm. Used for binomial and multinomial responses.
 #' @param SE A vector of standard error for each arm. Used only for normal response.
 #' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial".
+#' @param Treat.order Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.
 #' @param type Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".
 #' @param mean.mu Prior mean for the study effect (baseline risk)
 #' @param prec.mu Prior precision for the study effect (baseline risk)
@@ -24,8 +25,15 @@
 #' @references S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \emph{Evidence synthesis for decision making 4: inconsistency in networks of evidence based on randomized controlled trials}, Medical Decision Making 33(5):641-656. [\url{https://doi.org/10.1177/0272989X12455847}]
 #' @export
 
-ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, response = NULL, type = "random",
+ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random",
                              mean.mu = NULL, prec.mu = NULL, mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5), dic = TRUE){
+  
+  if(is.null(Treat.order)){
+    Treat.order <- sort(unique(Treat))
+  }
+  Treat <- relabel.vec(Treat, Treat.order)
+  names(Treat.order) <- 1:length(Treat.order)
+  
   
   if(missing(Study) || missing(Treat) || missing(Outcomes)){
     stop("Study, Treat, and Outcomes have to be all specified")
@@ -581,7 +589,9 @@ ume.make.inits <- function(network, n.chains, delta, mu, se.mu){
     # design matrix
     base.tx <- Treat[b.id]    # base treatment for N studies
     end.Study <- c(0, cumsum(na))  # end row number of each trial
+    print(end.Study)
     rows <- end.Study - seq(0, nstudy)   # end number of each trial not including base treatment arms
+    print(rows)
     design.mat <- matrix(0, sum(na) - nstudy, ntreat*(ntreat-1)/2 ) # no. non-base arms x #txs
     col_names <- NULL
     
@@ -591,14 +601,21 @@ ume.make.inits <- function(network, n.chains, delta, mu, se.mu){
       }
     }
     colnames(design.mat) <- col_names
+    print(design.mat)
     
     for(i in seq(nstudy)){
       studytx <- Treat[(end.Study[i]+1):end.Study[i+1]]  #treatments in ith Study
       nonbase.tx <- studytx[studytx!=base.tx[i]]    #non-baseline treatments for ith Study
       for (j in seq(length(nonbase.tx))){
+        print(j+rows[i])
+        print(paste0("Treat", base.tx[i], nonbase.tx[j]))
         design.mat[j+rows[i],paste0("Treat", base.tx[i], nonbase.tx[j])] <- 1
       }
     }
+    print(design.mat)})
+  
+  
+  #####
     
     fit <- summary(lm(y ~ design.mat - 1))
     d <- se.d <- rep(NA, ntreat*(ntreat-1)/2)

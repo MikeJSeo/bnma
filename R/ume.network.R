@@ -27,7 +27,7 @@
 ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random",
                              mean.mu = NULL, prec.mu = NULL, mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5), dic = TRUE){
   
-  if(!is.numeric(network$Treat)){
+  if(!is.numeric(Treat)){
     stop("Treatment has to be a numeric sequence; also, for each study, base treatment has be treatment with the lowest value")
   }
   

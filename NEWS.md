@@ -1,6 +1,7 @@
 # bnma 1.4.0
 
 * Added different treatment comparisons for RR, RD, and NNT
+* Fixed error in running fixed effects ume model
 
 # bnma 1.3.0
 

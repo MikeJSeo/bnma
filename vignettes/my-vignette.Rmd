@@ -151,7 +151,8 @@ Default summary measure when analyzing binary outcomes is the odds ratio. We hav
 
 network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", mean.A = -2.27, prec.A = 2.53))
 result <- network.run(network)
-summary(result, extra.pars = c("RD", "RR", "NNT"))
+#summary(result, extra.pars = c("RD", "RR", "NNT"))
+summary(result, extra.pars = c("RR"))
 ```
 
 ## Generating reproducible results: initializing the random number generators

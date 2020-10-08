@@ -831,7 +831,7 @@ network.deviance.plot <- function(result){
 network.leverage.plot <- function(result){
   deviance <- result$deviance
   dev <- sqrt(apply(deviance$dev_arm, 1, mean, na.rm = TRUE))
-  leverage <- apply(deviance$leverage, 1, mean, na.rm = TRUE)
+  leverage <- apply(deviance$leverage_arm, 1, mean, na.rm = TRUE)
   plot(dev, leverage, xlim = c(0, max(c(dev, 2.5))), ylim = c(0, max(c(leverage,4))),
        xlab = "Square root of residual deviance", ylab = "Leverage", main = "Leverage versus residual deviance")
   mtext("Per-study mean contribution")

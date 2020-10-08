@@ -814,7 +814,7 @@ network.deviance.plot <- function(result){
 
 #' Make a leverage plot
 #'
-#' This function makes a leverage vs. square root of residual deviance plot
+#' This function makes a leverage vs. square root of residual deviance plot (mean for each study)
 #'
 #' @param result Object created by \code{\link{network.run}} function
 #' @return None
@@ -834,7 +834,10 @@ network.leverage.plot <- function(result){
   leverage <- apply(deviance$leverage, 1, mean, na.rm = TRUE)
   plot(dev, leverage, xlim = c(0, max(c(dev, 2.5))), ylim = c(0, max(c(leverage,4))),
        xlab = "Square root of residual deviance", ylab = "Leverage", main = "Leverage versus residual deviance")
-  mtext("Per-study mean per-datapoint contribution")
+  mtext("Per-study mean contribution")
+  for(i in 1: floor(max(c(leverage,4)))){
+    curve(i-x^2, from=0, to = max(c(dev, 2.5)), add = TRUE)
+  }
 }
 
 #' Make a covariate plot

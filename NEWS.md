@@ -2,6 +2,7 @@
 
 * Added different treatment comparisons for RR, RD, and NNT
 * Fixed error in running fixed effects ume model
+* Revised the function network.leverage.plot to include per arm contributions
 
 # bnma 1.3.0
 

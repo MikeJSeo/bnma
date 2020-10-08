@@ -11,7 +11,6 @@ ume.network.data(
   N = NULL,
   SE = NULL,
   response = NULL,
-  Treat.order = NULL,
   type = "random",
   mean.mu = NULL,
   prec.mu = NULL,

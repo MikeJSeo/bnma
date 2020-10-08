@@ -4,16 +4,18 @@
 \alias{network.leverage.plot}
 \title{Make a leverage plot}
 \usage{
-network.leverage.plot(result)
+network.leverage.plot(result, per.study = FALSE)
 }
 \arguments{
 \item{result}{Object created by \code{\link{network.run}} function}
+
+\item{per.study}{Indicator for using an average square root of residual deviance for each study instead of for each arm. Default is FALSE.}
 }
 \value{
 None
 }
 \description{
-This function makes a leverage vs. square root of residual deviance plot
+This function makes a leverage vs. square root of residual deviance plot (mean for each study)
 }
 \examples{
 network <- with(blocker, {

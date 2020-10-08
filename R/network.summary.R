@@ -817,6 +817,7 @@ network.deviance.plot <- function(result){
 #' This function makes a leverage vs. square root of residual deviance plot (mean for each study)
 #'
 #' @param result Object created by \code{\link{network.run}} function
+#' @param per.study Indicator for using an average square root of residual deviance for each study instead of for each arm. Default is FALSE.
 #' @return None
 #' @examples
 #' network <- with(blocker, {
@@ -828,13 +829,23 @@ network.deviance.plot <- function(result){
 #' }
 #' @export
 
-network.leverage.plot <- function(result){
+network.leverage.plot <- function(result, per.study = FALSE){
+  
   deviance <- result$deviance
-  dev <- apply(sqrt(deviance$dev_arm), 1, mean, na.rm = TRUE)
-  leverage <- apply(deviance$leverage_arm, 1, mean, na.rm = TRUE)
-  plot(dev, leverage, xlim = c(0, max(c(dev, 2.5))), ylim = c(0, max(c(leverage,4))),
-       xlab = "Square root of residual deviance", ylab = "Leverage", main = "Leverage versus residual deviance")
-  mtext("Per-study mean contribution")
+  if(per.study == TRUE){
+    dev <- apply(sqrt(deviance$dev_arm), 1, mean, na.rm = TRUE)
+    leverage <- apply(deviance$leverage_arm, 1, mean, na.rm = TRUE)
+    plot(dev, leverage, xlim = c(0, max(c(dev, 2.5))), ylim = c(0, max(c(leverage,4))),
+         xlab = "Square root of residual deviance", ylab = "Leverage", main = "Leverage versus residual deviance")
+    mtext("Per-study mean contribution")  
+  } else{
+    dev <- c(t(sqrt(deviance$dev_arm)))
+    leverage <- c(t(deviance$leverage_arm))
+    plot(dev, leverage, xlim = c(0, max(c(dev, 2.5))), ylim = c(0, max(c(leverage,4))),
+         xlab = "Square root of residual deviance", ylab = "Leverage", main = "Leverage versus residual deviance")
+    mtext("Per-arm contribution")  
+  }
+  
   for(i in 1: floor(max(c(leverage,4)))){
     curve(i-x^2, from=0, to = max(c(dev, 2.5)), add = TRUE)
   }

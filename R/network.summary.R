@@ -840,7 +840,9 @@ network.leverage.plot <- function(result, per.study = FALSE){
     mtext("Per-study mean contribution")  
   } else{
     dev <- c(t(sqrt(deviance$dev_arm)))
+    dev <- dev[!is.na(dev)]
     leverage <- c(t(deviance$leverage_arm))
+    leverage <- leverage[!is.na(leverage)]
     plot(dev, leverage, xlim = c(0, max(c(dev, 2.5))), ylim = c(0, max(c(leverage,4))),
          xlab = "Square root of residual deviance", ylab = "Leverage", main = "Leverage versus residual deviance")
     mtext("Per-arm contribution")  

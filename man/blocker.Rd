@@ -4,9 +4,7 @@
 \name{blocker}
 \alias{blocker}
 \title{Beta blockers to prevent mortality after myocardial infarction}
-\format{
-A list of Outcomes, Treat, Study, and N.
-}
+\format{A list of Outcomes, Treat, Study, and N.}
 \usage{
 blocker
 }

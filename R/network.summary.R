@@ -1098,7 +1098,7 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
 #' draw.network.graph(network)
 #' @export
 
-draw.network.graph = function(network, label.dist = 2){
+draw.network.graph <- function(network, label.dist = 2){
 
   if(class(network) == "contrast.network.data"){
     Treat <- c(t(network$Treat))[!is.na(c(t(network$Treat)))]
@@ -1114,3 +1114,62 @@ draw.network.graph = function(network, label.dist = 2){
   g <- igraph::graph.edgelist(as.matrix(pairs[,1:2]), directed=FALSE)
   plot(g, edge.curved=FALSE, edge.width=pairs$freq, vertex.label.dist= label.dist)
 }
+
+
+#' Plotting comparison of posterior mean deviance in the consistency model and inconsistency model
+#'
+#' This function compares posterior mean deviance of inconsistency model and consistency model.
+#' Such comparison provides information that can help identify the loops in which inconsistency is present.
+#'
+#' This function draws network graph using igraph package
+#' @param result1 consistency model result from running \code{\link{network.run}} function
+#' @param result2 inconsistency model result from running \code{\link{ume.network.data}} function
+#' @param with.label indicator to show the study number; default is true.
+#' @return None
+#' @references S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \emph{Evidence synthesis for decision making 4: inconsistency in networks of evidence based on randomized controlled trials}, Medical Decision Making 33(5):641-656. [\url{https://doi.org/10.1177/0272989X12455847}]
+#' @examples
+#' network1 <- with(smoking, {
+#'  network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
+#' })
+#' 
+#' network2 <- with(smoking, {
+#'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
+#' })
+#' \donttest{
+#' result1 <- network.run(network1)
+#' result2 <- ume.network.run(network2)
+#' network.inconsistency.plot(result1, result2)
+#' }
+#' @export
+
+network.inconsistency.plot <- function(result1, result2, with.label = T){
+  
+  if(class(result1) != "network.result"){
+    stop("result1 has to be a consistency model result")
+  }
+  
+  if(class(result2) != "ume.network.result"){
+    stop("result2 has to be an inconsistency model result")
+  }
+ 
+  rownumber <- rep(1:nrow(result1$deviance$dev_arm), each = ncol(result1$deviance$dev_arm))
+  dev <- c(t(result1$deviance$dev_arm))
+  dev2 <- c(t(result2$deviance$dev_arm))
+  names(dev) <- names(dev2) <- rownumber
+  
+  dev <- dev[!is.na(dev)]
+  dev2 <- dev2[!is.na(dev2)]
+  max_point <- ceiling(max(c(dev, dev2))) #for same scale
+  
+  if(with.label == T){
+    plot(dev2 ~ dev, col="lightblue", pch=19, cex=2, xlim = c(0, max_point), ylim = c(0, max_point), xlab = "consistency model", ylab = "inconsistency model")
+    abline(0, 1, lty = "dotted")  
+    text(dev2 ~ dev, labels = names(dev), cex = 0.8)  
+  } else{
+    plot(dev2 ~ dev, xlim = c(0, max_point), ylim = c(0, max_point), xlab = "consistency model", ylab = "inconsistency model")
+    abline(0, 1, lty = "dotted")  
+  }
+}
+
+
+  

@@ -4,9 +4,7 @@
 \name{parkinsons_contrast}
 \alias{parkinsons_contrast}
 \title{Dopamine agonists as adjunct therapy in Parkinson's disease}
-\format{
-A list of Outcomes, Treat, SE, na, and V
-}
+\format{A list of Outcomes, Treat, SE, na, and V}
 \usage{
 parkinsons_contrast
 }

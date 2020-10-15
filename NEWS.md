@@ -3,6 +3,7 @@
 * Added different treatment comparisons for RR, RD, and NNT
 * Fixed error in running fixed effects ume model
 * Revised the function network.leverage.plot to include per arm contributions
+* Added a plot that compares posterior mean deviance of inconsistency model and consistency model
 
 # bnma 1.3.0
 

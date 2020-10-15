@@ -120,11 +120,19 @@ summary(result)
 Unrelated mean effects (UME) model estimates separate, unrelated basic parameters. We do not assume consistency in this model. We can compare this model with the standard consistency model. If the parameter estimates are similar for both models, and there is considerable overlap in the 95% credible interval, we can conclude that there is no evidence of inconsistency in the network.
 
 ```{r}
-network <- with(smoking, {
+# fit an inconsistency model (UME)
+network2 <- with(smoking, {
   ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 })
-result <- ume.network.run(network)
-summary(result)
+result2 <- ume.network.run(network2)
+summary(result2)
+
+# fit a consistency model and compare posterior mean deviance in the consistency model and inconsistency model
+network1 <- with(smoking, {
+  network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
+})
+result1 <- network.run(network1)
+network.inconsistency.plot(result1, result2)
 ```
 
 ## Inconsistency model

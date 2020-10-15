@@ -4,9 +4,7 @@
 \name{thrombolytic}
 \alias{thrombolytic}
 \title{Thrombolytic drugs and percutaneous transluminal coronary angioplasty}
-\format{
-A list of Outcomes, Treat, Study, and N
-}
+\format{A list of Outcomes, Treat, Study, and N}
 \usage{
 thrombolytic
 }

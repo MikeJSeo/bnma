@@ -4,9 +4,7 @@
 \name{smoking}
 \alias{smoking}
 \title{Smoking cessation counseling programs}
-\format{
-A list of Outcomes, Treat, Study, and N
-}
+\format{A list of Outcomes, Treat, Study, and N}
 \usage{
 smoking
 }

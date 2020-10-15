@@ -8,7 +8,7 @@ Imports: rjags (>= 4-6), graphics, stats, utils, coda (>= 0.13), ggplot2, grid, 
 Authors@R: c( 
 	person("Michael", "Seo", email = "swj8874@gmail.com", role = c("aut", "cre")),
 	person("Christopher", "Schmid", email = "christopher_schmid@brown.edu", role = "aut")) 
-Description: Network meta-analyses using Bayesian framework following Dias et al. (2013) <DOI:10.1177/0272989X12458724>. Based on the data input, creates prior, model file, and initial values needed to run models in 'rjags'. Able to handle binomial, normal and multinomial arm-based data. Can handle multi-arm trials and includes methods to incorporate covariate and baseline risk effects. Includes standard diagnostics and visualization tools to evaluate the results.
+Description: Network meta-analyses using Bayesian framework following Dias et al. (2013) <DOI:10.1177/0272989X12458724>. Based on the data input, creates prior, model file, and initial values needed to run models in 'rjags'. Able to handle binomial, normal and multinomial arm-level data. Can handle multi-arm trials and includes methods to incorporate covariate and baseline risk effects. Includes standard diagnostics and visualization tools to evaluate the results.
 License: GPL-3
 LazyData: true
 RoxygenNote: 7.1.1

@@ -107,7 +107,7 @@ network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment 
 
 ## Baseline risk
 
-Another useful addition of this network package is the ability to model baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independenet" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common baseline slope and exchangeable baseline risk model.
+Another useful addition of this network package is the ability to model baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independent" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common baseline slope and exchangeable baseline risk model.
 
 ```{r}
 network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "common", baseline.risk = "exchangeable"))

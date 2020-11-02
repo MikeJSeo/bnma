@@ -17,6 +17,13 @@
 #' @param hy.prior Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter.
 #' @param dic This is an indicator for whether user wants to calculate DIC. Model stores less information if you set it to FALSE.
 #' @return Creates list of variables that are used to run the model using \code{\link{ume.network.run}}
+#' \item{r}{\code{Outcomes} made into an array that is suitable for use in rjags code. For multinomial, it has 3 dimensions: number of study by max number of arms in studies by number of categories.}
+#' \item{t}{\code{Treat} transformed into a matrix which has dimensions number of study by max number of arms in studies}
+#' \item{nstudy}{Number of study}
+#' \item{na}{Number of arms for each study}
+#' \item{ntreat}{Number of treatment}
+#' \item{b.id}{Indicator in sequence of all treatments for which treatment is base treatment in Study}
+#' \item{code}{Rjags model file code that is generated using information provided by the user. To view model file inside R in a nice format, use \code{cat(network$code).}}
 #' @examples
 #' network <- with(thrombolytic, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial")
@@ -116,7 +123,7 @@ ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, respon
     }
   }
   
-  network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, r = r, t = t, type = type, rank.preference = NULL, nstudy = nstudy, na = na, ntreat = ntreat, b.id = b.id, response = response, hy.prior = hy.prior, mean.d = mean.d, prec.d = prec.d, mean.mu = mean.mu, prec.mu = prec.mu, dic = dic)
+  network <- list(Outcomes = Outcomes, Study = Study, Treat = Treat, Treat.order = Treat.order, r = r, t = t, type = type, nstudy = nstudy, na = na, ntreat = ntreat, b.id = b.id, response = response, hy.prior = hy.prior, mean.d = mean.d, prec.d = prec.d, mean.mu = mean.mu, prec.mu = prec.mu, dic = dic)
   
   if(response == "binomial" || response == "multinomial"){
     network$N = N
@@ -370,7 +377,6 @@ ume.hy.prior.rjags <- function(hy.prior, ncat){
 #' \item{samples}{MCMC samples stored using jags. The returned samples have the form of mcmc.list and can be directly applied to coda functions}
 #' \item{max.gelman}{Maximum Gelman and Rubin's convergence diagnostic calculated for the final sample}
 #' \item{deviance}{Contains deviance statistics such as pD (effective number of parameters) and DIC (Deviance Information Criterion)}
-#' \item{rank.tx}{Rank probability calculated for each treatments. \code{rank.preference} parameter in \code{\link{ume.network.data}} is used to define whether higher or lower value is preferred. The numbers are probabilities that a given treatment has been in certain rank in the sequence.}
 #' @examples
 #' network <- with(thrombolytic, {
 #'  ume.network.data(Outcomes, Study, Treat, N = N, response = "binomial")

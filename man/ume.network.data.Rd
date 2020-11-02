@@ -52,6 +52,13 @@ ume.network.data(
 }
 \value{
 Creates list of variables that are used to run the model using \code{\link{ume.network.run}}
+\item{r}{\code{Outcomes} made into an array that is suitable for use in rjags code. For multinomial, it has 3 dimensions: number of study by max number of arms in studies by number of categories.}
+\item{t}{\code{Treat} transformed into a matrix which has dimensions number of study by max number of arms in studies}
+\item{nstudy}{Number of study}
+\item{na}{Number of arms for each study}
+\item{ntreat}{Number of treatment}
+\item{b.id}{Indicator in sequence of all treatments for which treatment is base treatment in Study}
+\item{code}{Rjags model file code that is generated using information provided by the user. To view model file inside R in a nice format, use \code{cat(network$code).}}
 }
 \description{
 This is similar to the function \code{\link{network.data}}, except this is used for the unrelated mean effects model.

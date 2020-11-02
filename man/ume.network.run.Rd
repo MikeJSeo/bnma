@@ -41,7 +41,6 @@ ume.network.run(
 \item{samples}{MCMC samples stored using jags. The returned samples have the form of mcmc.list and can be directly applied to coda functions}
 \item{max.gelman}{Maximum Gelman and Rubin's convergence diagnostic calculated for the final sample}
 \item{deviance}{Contains deviance statistics such as pD (effective number of parameters) and DIC (Deviance Information Criterion)}
-\item{rank.tx}{Rank probability calculated for each treatments. \code{rank.preference} parameter in \code{\link{ume.network.data}} is used to define whether higher or lower value is preferred. The numbers are probabilities that a given treatment has been in certain rank in the sequence.}
 }
 \description{
 This is similar to the function \code{\link{network.run}}, except this is used for the unrelated mean effects model.

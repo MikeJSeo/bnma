@@ -654,43 +654,20 @@ calculate.deviance <- function(result){
   Dbar <- mean(unlist(totresdev))
 
   ###### find residual deviance by arm
-  if(network$response == "multinomial" & !is.null(network$miss.matrix)){
-    dev <- list()
-    for(ii in seq(network$npattern)){
-      dev_each <- lapply(samples, function(x) { x[,grep(paste0("dev", ii, "\\["), dimnames(samples[[1]])[[2]])]})
-      dev_each <- do.call(rbind, dev_each)
-      dev_each <- apply(dev_each, 2, mean)
-
-      n_value <- network[[paste0("n", ii)]]
-      dev_matrix <- matrix(NA, nrow = dim(n_value)[1], ncol = dim(n_value)[2])
-
-      for(i in 1:dim(dev_matrix)[1]){
-        for(j in 1:dim(dev_matrix)[2]){
-          ind <- which(paste0("dev", ii, "[", i, ",", j, "]") == names(dev_each))
-          if(length(ind) != 0){
-            dev_matrix[i,j] <- dev_each[ind]
-          }
-        }
-      }
-      dev[[paste0("dev", ii)]] <- dev_matrix
-    }
-    dev_arm <- do.call(rbind, dev)
-  } else{
-    dev <- lapply(samples, function(x) { x[,grep("dev\\[", dimnames(samples[[1]])[[2]])]})
-    dev <- do.call(rbind, dev)
-    dev <- apply(dev, 2, mean)
-
-    dev_matrix <- matrix(NA, nrow =  network$nstudy, ncol = max(network$na))
-    for(i in 1:dim(dev_matrix)[1]){
-      for(j in 1:dim(dev_matrix)[2]){
-        ind <- which(paste("dev[", i, ",", j, "]", sep = "") == names(dev))
-        if(length(ind) != 0){
-          dev_matrix[i,j] <- dev[ind]
-        }
+  dev <- lapply(samples, function(x) { x[,grep("dev\\[", dimnames(samples[[1]])[[2]])]})
+  dev <- do.call(rbind, dev)
+  dev <- apply(dev, 2, mean)
+  
+  dev_matrix <- matrix(NA, nrow =  network$nstudy, ncol = max(network$na))
+  for(i in 1:dim(dev_matrix)[1]){
+    for(j in 1:dim(dev_matrix)[2]){
+      ind <- which(paste("dev[", i, ",", j, "]", sep = "") == names(dev))
+      if(length(ind) != 0){
+        dev_matrix[i,j] <- dev[ind]
       }
     }
-    dev_arm <- dev_matrix
   }
+  dev_arm <- dev_matrix
 
   ############find leverage
   if(network$response == "binomial"){
@@ -731,50 +708,21 @@ calculate.deviance <- function(result){
       }
     }
   } else if(network$response == "multinomial"){
-    if(is.null(network$miss.matrix)){ #complete dataset
-      rtilda <- lapply(samples, function(x){ x[,grep("rhat\\[", dimnames(samples[[1]])[[2]])]})
-      rtilda <- do.call(rbind, rtilda)
-      rtilda <- apply(rtilda, 2, mean)
+    rtilda <- lapply(samples, function(x){ x[,grep("rhat\\[", dimnames(samples[[1]])[[2]])]})
+    rtilda <- do.call(rbind, rtilda)
+    rtilda <- apply(rtilda, 2, mean)
 
-      rtilda_arm <- devtilda_category <- array(NA, dim = c(network$nstudy, max(network$na), network$ncat))
-      for(i in 1:network$nstudy){
-        for(j in 1:network$na[i]){
-          for(k in 1:network$ncat){
-            r_value <- network$r[i,j,k]
-            rtilda_arm[i,j,k] <- rtilda[which(paste("rhat[", i, ",", j, ",", k, "]", sep = "") == names(rtilda))]
-            devtilda_category[i,j,k] <- ifelse(r_value != 0,  2 * r_value * log(r_value/rtilda_arm[i,j,k]), 0)
-          }
+    rtilda_arm <- devtilda_category <- array(NA, dim = c(network$nstudy, max(network$na), network$ncat))
+    for(i in 1:network$nstudy){
+      for(j in 1:network$na[i]){
+        for(k in 1:network$ncat){
+          r_value <- network$r[i,j,k]
+          rtilda_arm[i,j,k] <- rtilda[which(paste("rhat[", i, ",", j, ",", k, "]", sep = "") == names(rtilda))]
+          devtilda_category[i,j,k] <- ifelse(r_value != 0,  2 * r_value * log(r_value/rtilda_arm[i,j,k]), 0)
         }
       }
-      devtilda_arm <- apply(devtilda_category, 1:2, sum)
-    } else{ #incomplete datacase
-      devtilda_value <- rtilda_arm <- list()
-      for(ii in seq(network$npattern)){
-        r_values <- network[[paste0("r",ii)]]
-        devtilda_category <- rtilda_matrix <- array(NA, dim = dim(r_values))
-
-        rtilda <- lapply(samples, function(x){ x[,grep(paste0("rhat", ii, "\\["), dimnames(samples[[1]])[[2]])] })
-        rtilda <- do.call(rbind, rtilda)
-        rtilda <- apply(rtilda, 2, mean)
-
-        for(i in 1:dim(r_values)[1]){
-          for(j in 1:dim(r_values)[2]){
-            for(k in 1:dim(r_values)[3]){
-              found <- which(paste("rhat", ii, "[", i, ",", j, ",", k, "]", sep = "") == names(rtilda))
-              r_value <- r_values[i,j,k]
-              if(!is.na(r_value) & length(found) != 0){
-                rtilda_matrix [i,j,k] <- rtilda[found]
-                devtilda_category[i,j,k] <- ifelse(r_value != 0,  2 * r_value * log(r_value/rtilda_matrix[i,j,k]), 0)
-              }
-            }
-          }
-        }
-        devtilda_matrix <- apply(devtilda_category, 1:2, sum)
-        rtilda_arm[[ii]] <- rtilda_matrix
-        devtilda_value[[ii]] <- devtilda_matrix
-      }
-      devtilda_arm <- do.call(rbind, devtilda_value)
     }
+    devtilda_arm <- apply(devtilda_category, 1:2, sum)
   }
   leverage_arm <- dev_arm - devtilda_arm
   pD <- sum(leverage_arm, na.rm = TRUE)

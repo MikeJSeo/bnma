@@ -4,7 +4,9 @@
 \name{certolizumab}
 \alias{certolizumab}
 \title{Trials of certolizumab pegol (CZP) for the treatment of rheumatoid arthritis in patients}
-\format{A list of Outcomes, Treat, Study, N, covariate, and Treat.order}
+\format{
+A list of Outcomes, Treat, Study, N, covariate, and Treat.order
+}
 \usage{
 certolizumab
 }

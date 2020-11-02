@@ -8,6 +8,7 @@
 #' @param N A vector of total number of observations in each arm. Used for binomial and multinomial responses.
 #' @param SE A vector of standard error for each arm. Used only for normal response.
 #' @param response Specification of the outcomes type. Must specify one of the following: "normal", "binomial", or "multinomial".
+#' @param Treat.order Treatment order which determines how treatments are compared. The first treatment that is specified is considered to be the baseline treatment. Default order is alphabetical. If the treatments are coded 1, 2, etc, then the treatment with a value of 1 would be assigned as a baseline treatment.
 #' @param type Type of model fitted: either "random" for random effects model or "fixed" for fixed effects model. Default is "random".
 #' @param mean.mu Prior mean for the study effect (baseline risk)
 #' @param prec.mu Prior precision for the study effect (baseline risk)
@@ -24,11 +25,16 @@
 #' @references S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \emph{Evidence synthesis for decision making 4: inconsistency in networks of evidence based on randomized controlled trials}, Medical Decision Making 33(5):641-656. [\url{https://doi.org/10.1177/0272989X12455847}]
 #' @export
 
-ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, response = NULL, type = "random",
+ume.network.data <- function(Outcomes, Study, Treat, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random",
                              mean.mu = NULL, prec.mu = NULL, mean.d = NULL, prec.d = NULL, hy.prior = list("dunif", 0, 5), dic = TRUE){
   
+  if(!is.null(Treat.order)){
+    Treat <- relabel.vec(Treat, Treat.order)
+    names(Treat.order) <- 1:length(Treat.order)  
+  }
+  
   if(!is.numeric(Treat)){
-    stop("Treatment has to be a numeric sequence; also, for each study, base treatment has be treatment with the lowest value")
+    stop("Treatment has to be a numeric sequence or Treat.order has to be specified; also, for each study, base treatment has be treatment with the lowest value")
   }
   
   if(missing(Study) || missing(Treat) || missing(Outcomes)){

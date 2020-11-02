@@ -4,7 +4,9 @@
 \name{statins}
 \alias{statins}
 \title{Trials of statins for cholesterol lowering vs. placebo or usual care}
-\format{A list of Outcomes, Treat, Study, N, covariate, and Treat.order}
+\format{
+A list of Outcomes, Treat, Study, N, covariate, and Treat.order
+}
 \usage{
 statins
 }

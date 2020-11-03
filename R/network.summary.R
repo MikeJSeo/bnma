@@ -658,16 +658,15 @@ calculate.deviance <- function(result){
   dev <- do.call(rbind, dev)
   dev <- apply(dev, 2, mean)
   
-  dev_matrix <- matrix(NA, nrow =  network$nstudy, ncol = max(network$na))
-  for(i in 1:dim(dev_matrix)[1]){
-    for(j in 1:dim(dev_matrix)[2]){
+  dev_arm <- matrix(NA, nrow =  network$nstudy, ncol = max(network$na))
+  for(i in 1:dim(dev_arm)[1]){
+    for(j in 1:dim(dev_arm)[2]){
       ind <- which(paste("dev[", i, ",", j, "]", sep = "") == names(dev))
       if(length(ind) != 0){
-        dev_matrix[i,j] <- dev[ind]
+        dev_arm[i,j] <- dev[ind]
       }
     }
   }
-  dev_arm <- dev_matrix
 
   ############find leverage
   if(network$response == "binomial"){
@@ -1110,11 +1109,11 @@ network.inconsistency.plot <- function(result1, result2, with.label = T){
   max_point <- ceiling(max(c(dev, dev2))) #for same scale
   
   if(with.label == T){
-    plot(dev2 ~ dev, col="lightblue", pch=19, cex=2, xlim = c(0, max_point), ylim = c(0, max_point), xlab = "consistency model", ylab = "inconsistency model")
+    plot(dev2 ~ dev, col="lightblue", pch=19, cex=2, xlim = c(0, max_point), ylim = c(0, max_point), xlab = "consistency model", ylab = "inconsistency model", cex.lab = 0.75, cex.axis = 0.75)
     abline(0, 1, lty = "dotted")  
     text(dev2 ~ dev, labels = names(dev), cex = 0.8)  
   } else{
-    plot(dev2 ~ dev, xlim = c(0, max_point), ylim = c(0, max_point), xlab = "consistency model", ylab = "inconsistency model")
+    plot(dev2 ~ dev, xlim = c(0, max_point), ylim = c(0, max_point), xlab = "consistency model", ylab = "inconsistency model", cex.lab = 0.75, cex.axis = 0.75)
     abline(0, 1, lty = "dotted")  
   }
 }

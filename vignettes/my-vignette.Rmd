@@ -66,16 +66,20 @@ result <- network.run(network, n.run = 30000)
 
 ## Model Summary
 
-Package includes many summary tools that can be used. One of the useful summary might be the forest plot.
+Package includes many summary tools that can be used. One useful summary might be the forest plot.
 
-```{r, fig.width = 6, fig.height = 6}
-network.forest.plot(result)
+```{r, fig.height=10, fig.width=10, out.height=600, out.width=600}
+network.forest.plot(result, label.margin = 15)
+# relative.effects.table(result)
 # draw.network.graph(network)
+# network.gelman.plot(result)
 # network.autocorr.diag(result)
 # network.autocorr.plot(result)
+# network.rank.tx.plot(result)
 # network.cumrank.tx.plot(result)
+# sucra(result)
 # network.deviance.plot(result)
-# network.gelman.plot(result)
+# network.leverage.plot(result)
 ```
 
 ## Multinomial model
@@ -101,7 +105,7 @@ summary(result)
 
 Covariate plot shows you how the relative treatment effect changes as the covariate varies.
 
-```{r, fig.width = 6, fig.height = 6}
+```{r, fig.height=10, fig.width=10, out.height=600, out.width=600}
 network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment = "Statin")
 ```
 
@@ -132,6 +136,9 @@ network1 <- with(smoking, {
   network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")
 })
 result1 <- network.run(network1)
+```
+
+```{r, fig.height=10, fig.width=10, out.height=600, out.width=600}
 network.inconsistency.plot(result1, result2)
 ```
 

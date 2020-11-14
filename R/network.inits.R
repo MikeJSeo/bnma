@@ -73,7 +73,6 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
     if(length(coef(fit)[,1]) == (ntreat -1)){
       d[-1] <- coef(fit)[,1]
       se.d[-1] <- coef(fit)[,2]  
-      print("D TRUE")
     } else{
       d[-1] <- rep(0, ntreat -1)
       se.d[-1] <- rep(1, ntreat -1) 
@@ -99,16 +98,17 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
           summary(lm(y ~ design.mat:x.cen[,i] - 1))
         }
         
-        if(length(coef(fit2)[,1]) == (ntreat-1) ){
+        if(length(coef(fit2)[,1]) == (ntreat-1) & baseline=="independent"){
           slope[-1,i] <- coef(fit2)[,1]
           se.slope[-1,i] <- coef(fit2)[,2]  
-          print("SLOPE TRUE")
+        } else if(length(coef(fit2)[,1]) == 1 & baseline %in% c("common", "exchangeable")){
+          slope[-1,i] <- rep(coef(fit2)[,1], ntreat-1)
+          se.slope[-1,i] <- rep(coef(fit2)[,2], ntreat-1)  
         } else{
+          print("slope fail")
           slope[-1,i] <- rep(0, ntreat-1)
           se.slope[-1,i] <- rep(1, ntreat-1)  
         }
-        
-        
       }
     }
     
@@ -132,7 +132,6 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
         baseline.slope[-1] <- rep(coef(fit3)[,1], ntreat-1)
         baseline.se.slope[-1] <- rep(coef(fit3)[,2], ntreat-1) 
       } else{
-        print("Initial values randomly assigned")
         baseline.slope[-1] <- rep(0, ntreat - 1)
         baseline.se.slope[-1] <- rep(1, ntreat - 1)
       }

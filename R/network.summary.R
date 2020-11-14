@@ -121,7 +121,7 @@ network.gelman.plot <- function(result, extra.pars = NULL, only.pars = NULL){
 #' })
 #' \donttest{
 #' result <- network.run(network)
-#' network.gelman.diag(result, extra.pars = "eta")
+#' network.gelman.diag(result, extra.pars = c("Eta"))
 #' }
 #' @export
 

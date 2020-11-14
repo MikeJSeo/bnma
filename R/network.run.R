@@ -115,9 +115,6 @@ network.run <- function(network, inits = NULL, RNG.inits = NULL, n.chains = 3, m
     
     if(baseline != "none"){
       pars.save <- c(pars.save, "b_bl")
-      if(baseline %in% c("common", "exchangeable")){
-        pars.save <- c(pars.save, "B")
-      }
       if(baseline == "exchangeable"){
         if(response == "multinomial"){
           pars.save <- c(pars.save, "sigmaB")
@@ -189,25 +186,15 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
     if(network$type == "fixed"){
       conv.save <- conv.save[!conv.save %in% c("logvar", "sigma_transformed")]
     }  
-    if(baseline != "none"){
+    if(network$baseline != "none"){
       conv.save <- c(conv.save, "b_bl")
-      if(baseline %in% c("common", "exchangeable")){
-        conv.save <- c(conv.save, "B")
-      }
-      if(baseline == "exchangeable"){
-        if(response == "multinomial"){
-          conv.save <- c(conv.save, "sigmaB")
-        } else{
-          conv.save <- c(conv.save, "sdB")  
-        }
-      }
     }
-    if(!is.null(covariate)){
-      for(i in seq(dim(covariate)[2])){
+    
+    if(!is.null(network$covariate)){
+      for(i in seq(dim(network$covariate)[2])){
         conv.save = c(conv.save, paste("beta",i,sep = ""))
       }
     }
-    
   } else if(class(network) == "contrast.network.data" || class(network) == "ume.network.data"){
     conv.save <- pars.save
   } else if(class(network) == "nodesplit.network.data"){

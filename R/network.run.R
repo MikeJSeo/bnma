@@ -179,9 +179,9 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
   if(class(network) == "network.data"){
     
     conv.save <- if(network$response == "multinomial"){
-      c("d", "eta", "sigma_transformed")
+      c("d", "Eta", "sigma_transformed")
     } else if(network$response == "binomial" || network$response == "normal"){
-      c("d", "eta", "logvar")
+      c("d", "Eta", "logvar")
     }
     if(network$type == "fixed"){
       conv.save <- conv.save[!conv.save %in% c("logvar", "sigma_transformed")]

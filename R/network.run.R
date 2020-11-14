@@ -178,6 +178,7 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
     }
   }
   
+  # conv.save are the variables that are used to check convergence
   if(class(network) == "network.data"){
     
     conv.save <- if(network$response == "multinomial"){
@@ -188,12 +189,30 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
     if(network$type == "fixed"){
       conv.save <- conv.save[!conv.save %in% c("logvar", "sigma_transformed")]
     }  
+    if(baseline != "none"){
+      conv.save <- c(conv.save, "b_bl")
+      if(baseline %in% c("common", "exchangeable")){
+        conv.save <- c(conv.save, "B")
+      }
+      if(baseline == "exchangeable"){
+        if(response == "multinomial"){
+          conv.save <- c(conv.save, "sigmaB")
+        } else{
+          conv.save <- c(conv.save, "sdB")  
+        }
+      }
+    }
+    if(!is.null(covariate)){
+      for(i in seq(dim(covariate)[2])){
+        conv.save = c(conv.save, paste("beta",i,sep = ""))
+      }
+    }
+    
   } else if(class(network) == "contrast.network.data" || class(network) == "ume.network.data"){
     conv.save <- pars.save
   } else if(class(network) == "nodesplit.network.data"){
     conv.save <- c("d", "sd", "diff")
   }
-  
   
   samples <- rjags::coda.samples(model = mod, variable.names = pars.save, n.iter = setsize)
   varnames <- dimnames(samples[[1]])[[2]]

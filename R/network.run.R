@@ -146,7 +146,11 @@ network.run <- function(network, inits = NULL, RNG.inits = NULL, n.chains = 3, m
       }
     }
     
-    inits <- mapply(c, inits, RNG.inits, SIMPLIFY = FALSE)
+    if(!is.null(inits)){
+      inits <- mapply(c, inits, RNG.inits, SIMPLIFY = FALSE)  
+    } else {
+      inits <- RNG.inits
+    }
     
     samples <- jags.fit(network, data, pars.save, inits, n.chains, max.run, setsize, n.run, conv.limit)
     

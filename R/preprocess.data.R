@@ -20,6 +20,11 @@ preprocess.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NUL
   transform <- transform.data(network)
   data <- transform$data
 
+  # If baseline = "exchangeable" or "independent, add a fictitious arm with overall reference treatment
+  if(baseline %in% c("exchangeable", "independent")){
+    data <- add.fictitious.row(network, data)
+  }
+  
   # If baseline.risk = "exchangeable", add a fictitious arm with overall reference treatment
   if(baseline.risk == "exchangeable"){
     data <- add.fictitious.row(network, data)

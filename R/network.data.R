@@ -196,7 +196,7 @@ calculate.baseline.log.odds <- function(network){
         ndummy[r[,1] == 0 & !is.na(r[,1])] = ndummy[r[,1] == 0 & !is.na(r[,1])] + 1
         
         #take only the non-active control group (treatment A) to calculate the observed mean log odds
-        p = (rdummy[!is.na(rdummy)]/ndummy[!is.na(rdummy)]) #[t[,1][!is.na(rdummy)]==1]
+        p = (rdummy[!is.na(rdummy)]/ndummy[!is.na(rdummy)])[t[,1][!is.na(rdummy)]==1]
         lodds = log(p/(1-p))
         lodds <- lodds[is.finite(lodds)]
         return(mean(lodds, na.rm = TRUE))

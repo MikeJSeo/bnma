@@ -1,10 +1,10 @@
 # bnma 1.4.0
 
 * Added different treatment comparisons for RR, RD, and NNT
-* Fixed error in running fixed effects ume model
 * Added Treat.order variable in ume model
 * Revised the function network.leverage.plot to include per arm contributions
 * Added a plot that compares posterior mean deviance of inconsistency model and consistency model
+* When fitting meta regression on baseline risk, made adjustments when the baseline treatment is not the control treatment in each trial (i.e. by adding a fictitious row).
 
 # bnma 1.3.0
 

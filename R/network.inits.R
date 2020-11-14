@@ -105,7 +105,6 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
           slope[-1,i] <- rep(coef(fit2)[,1], ntreat-1)
           se.slope[-1,i] <- rep(coef(fit2)[,2], ntreat-1)  
         } else{
-          print("slope fail")
           slope[-1,i] <- rep(0, ntreat-1)
           se.slope[-1,i] <- rep(0.1, ntreat-1)  
         }
@@ -254,7 +253,7 @@ multinomial.inits <- function(network, n.chains)
         se.d[-1,k] <- coef(fit)[1:(ntreat-1), 2]
       } else{
         d[-1,k] <- rep(0, ntreat - 1)
-        se.d[-1,k] <- rep(1, ntreat -1)
+        se.d[-1,k] <- rep(0.1, ntreat -1)
       }
       resid.var[k] <- fit$sigma^2
     }
@@ -278,12 +277,15 @@ multinomial.inits <- function(network, n.chains)
             summary(lm(y[,k] ~ x.cen[,i] - 1))
           }
           
-          if(length( coef(fit2)[,1]) == (ntreat-1)){
+          if(length(coef(fit2)[,1]) == (ntreat-1) & covariate.model=="independent"){
             slope[-1,i,k] <- coef(fit2)[,1]
-            se.slope[-1,i,k] <- coef(fit2)[,2]
+            se.slope[-1,i,k] <- coef(fit2)[,2]  
+          } else if(length(coef(fit2)[,1]) == 1 & covariate.model %in% c("common", "exchangeable")){
+            slope[-1,i,k] <- rep(coef(fit2)[,1], ntreat -1)
+            se.slope[-1,i,k] <- rep(coef(fit2)[,2], ntreat -1)
           } else{
             slope[-1,i,k] <- rep(0, ntreat -1)
-            se.slope[-1,i,k] <- rep(1, ntreat -1)
+            se.slope[-1,i,k] <- rep(0.1, ntreat -1)  
           }
         }
       }
@@ -304,14 +306,17 @@ multinomial.inits <- function(network, n.chains)
           summary(lm(y[,k] ~ design.mat:baseline.cen[,k] - 1))
         }
         
-        if(length( coef(fit3)[,1]) == (ntreat-1)){
+        if(length(coef(fit3)[,1]) == (ntreat-1) & baseline == "independent"){
           baseline.slope[-1, k] <- coef(fit3)[,1]
           baseline.se.slope[-1, k] <- coef(fit3)[,2]
+        } else if(length(coef(fit3)[,1]) ==1 & baseline %in% c("common", "exchangeable")){
+          baseline.slope[-1, k] <- rep(coef(fit3)[,1], ntreat-1)
+          baseline.se.slope[-1, k] <- rep(coef(fit3)[,2], ntreat-1)
         } else{
-          baseline.slope[-1, k] <- rep(0, ntreat -1)
-          baseline.se.slope[-1, k] <- rep(1, ntreat - 1)
-          
+          baseline.slope[-1, k] <- rep(0, ntreat - 1)
+          baseline.se.slope[-1, k] <- rep(0.1, ntreat - 1)
         }
+      
       }
     }
     

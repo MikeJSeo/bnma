@@ -13,7 +13,7 @@ smoking
 \description{
 Twenty-four studies, including 2 three-arm trials, compared 4 smoking cessation counseling programs and recorded the number of
 individuals with successful smoking cessation at 6 to 12 month. Counseling programs include 1 = no intervention, 2 = self-help,
-3 = individual counseling, and 4 - group counseling.
+3 = individual counseling, and 4 = group counseling.
 }
 \references{
 S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]

@@ -48,6 +48,22 @@ Another important preprocessing step that is done in `network.data` function is 
 network$r
 ```
 
+## Datasets
+
+Here are all the datasets available in the package for testing.
+
+```{r}
+#blocker (binomial)
+#cardiovascular (multinomial)
+#certolizumab (binomial with a covariate)
+#parkinsons (normal)
+#parkinsons_contrast (normal- for contrast model)
+#smoking (binomial)
+#statins (binomial with a covariate)
+#thrombolytic (binomial)
+```
+
+
 ## Priors
 
 Priors can be set in the `network.data` function. If left unspecified, default values are used. For heterogeneity parameters of the random effects model, we follow the data format from a similar Bayesian network meta-analysis R package `gemtc`. It should be a list of length 3 where the first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. Here is an example of assigning a half-normal distribution with mean 0 and standard deviation 5. 

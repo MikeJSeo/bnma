@@ -135,9 +135,6 @@ network.run <- function(network, inits = NULL, RNG.inits = NULL, n.chains = 3, m
     
     if(is.null(inits)){
       inits <- network.inits(network, n.chains)
-     # if(!any(is.na(network$data))){ #this is the case when fictitious data has been generated
-    #    inits
-    #  }
     }
     
     if(is.null(RNG.inits)){

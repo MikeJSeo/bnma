@@ -69,7 +69,7 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
     fit <- summary(lm(y ~ design.mat - 1))
     d <- se.d <- rep(NA, ntreat)
     
-    # in case regression fails due to lack of data...
+    # in case regression fails due to lack of data
     if(length(coef(fit)[,1]) == (ntreat -1)){
       d[-1] <- coef(fit)[,1]
       se.d[-1] <- coef(fit)[,2]  
@@ -124,15 +124,18 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
       } else if(baseline == "independent"){
         summary(lm(y ~ design.mat:baseline.cen - 1))
       }
-      if(length(coef(fit3)[,1]) == (ntreat -1)){
+      
+      if(length(coef(fit3)[,1]) == (ntreat-1) & baseline=="independent"){
         baseline.slope[-1] <- coef(fit3)[,1]
         baseline.se.slope[-1] <- coef(fit3)[,2] 
-        print("BASELINe TRUE")
-      } else {
+      } else if(length(coef(fit3)[,1]) == 1 & baseline %in% c("common", "exchangeable")){
+        baseline.slope[-1] <- rep(coef(fit3)[,1], ntreat-1)
+        baseline.se.slope[-1] <- rep(coef(fit3)[,2], ntreat-1) 
+      } else{
+        print("Initial values randomly assigned")
         baseline.slope[-1] <- rep(0, ntreat - 1)
         baseline.se.slope[-1] <- rep(1, ntreat - 1)
       }
-      
     }
     
     ############## Generate initial values

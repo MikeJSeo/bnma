@@ -75,7 +75,7 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
       se.d[-1] <- coef(fit)[,2]  
     } else{
       d[-1] <- rep(0, ntreat -1)
-      se.d[-1] <- rep(1, ntreat -1) 
+      se.d[-1] <- rep(0.1, ntreat -1) 
     }
         
     
@@ -107,7 +107,7 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
         } else{
           print("slope fail")
           slope[-1,i] <- rep(0, ntreat-1)
-          se.slope[-1,i] <- rep(1, ntreat-1)  
+          se.slope[-1,i] <- rep(0.1, ntreat-1)  
         }
       }
     }
@@ -133,7 +133,7 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
         baseline.se.slope[-1] <- rep(coef(fit3)[,2], ntreat-1) 
       } else{
         baseline.slope[-1] <- rep(0, ntreat - 1)
-        baseline.se.slope[-1] <- rep(1, ntreat - 1)
+        baseline.se.slope[-1] <- rep(0.1, ntreat - 1)
       }
     }
     

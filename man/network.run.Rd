@@ -31,7 +31,7 @@ network.run(
 
 \item{n.run}{Final number of iterations that the user wants to store. If after the algorithm converges, user wants less number of iterations, we thin the sequence. If the user wants more iterations, we run extra iterations to reach the specified number of runs}
 
-\item{conv.limit}{Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used (instead of 95 percent C.I.) to test convergence of parameters for study effect (eta), relative effect (d), and heterogeneity (log variance (logvar)).}
+\item{conv.limit}{Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used (instead of 95 percent C.I.) to test convergence of parameters for study-specific baselines (eta), average treatment effect (d), between-study heterogeneity (log variance (logvar)), and regression parameters when covariates (beta) or baseline risk (b_bl).}
 
 \item{extra.pars.save}{Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.}
 }

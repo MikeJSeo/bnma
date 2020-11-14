@@ -68,8 +68,16 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
     
     fit <- summary(lm(y ~ design.mat - 1))
     d <- se.d <- rep(NA, ntreat)
-    d[-1] <- coef(fit)[,1]
-    se.d[-1] <- coef(fit)[,2]    
+    
+    # in case regression fails due to lack of data...
+    if(length(coef(fit)[,1]) == (ntreat -1)){
+      d[-1] <- coef(fit)[,1]
+      se.d[-1] <- coef(fit)[,2]  
+    } else{
+      d[-1] <- rep(0, ntreat -1)
+      se.d[-1] <- rep(1, ntreat -1) 
+    }
+        
     
     resid.var <- fit$sigma^2
     
@@ -89,8 +97,16 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
         } else if(covariate.model == "independent"){
           summary(lm(y ~ design.mat:x.cen[,i] - 1))
         }
-        slope[-1,i] <- coef(fit2)[,1]
-        se.slope[-1,i] <- coef(fit2)[,2]
+        
+        if(length(coef(fit2)[,1]) == (ntreat-1) ){
+          slope[-1,i] <- coef(fit2)[,1]
+          se.slope[-1,i] <- coef(fit2)[,2]  
+        } else{
+          slope[-1,i] <- rep(0, ntreat-1)
+          se.slope[-1,i] <- rep(1, ntreat-1)  
+        }
+        
+        
       }
     }
     
@@ -106,8 +122,14 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
       } else if(baseline == "independent"){
         summary(lm(y ~ design.mat:baseline.cen - 1))
       }
-      baseline.slope[-1] <- coef(fit3)[,1]
-      baseline.se.slope[-1] <- coef(fit3)[,2]
+      if(length(coef(fit3)[,1]) == (ntreat -1)){
+        baseline.slope[-1] <- coef(fit3)[,1]
+        baseline.se.slope[-1] <- coef(fit3)[,2]  
+      } else {
+        baseline.slope[-1] <- rep(0, ntreat - 1)
+        baseline.se.slope[-1] <- rep(1, ntreat - 1)
+      }
+      
     }
     
     ############## Generate initial values
@@ -221,8 +243,14 @@ multinomial.inits <- function(network, n.chains)
     
     for(k in 1:(ncat - 1)){
       fit <- summary(lm(y[,k] ~ design.mat - 1))
-      d[-1,k] <- coef(fit)[1:(ntreat-1), 1]
-      se.d[-1,k] <- coef(fit)[1:(ntreat-1), 2]
+      
+      if(length( coef(fit)[1:(ntreat-1), 1]) == (ntreat-1)){
+        d[-1,k] <- coef(fit)[1:(ntreat-1), 1]
+        se.d[-1,k] <- coef(fit)[1:(ntreat-1), 2]
+      } else{
+        d[-1,k] <- rep(0, ntreat - 1)
+        se.d[-1,k] <- rep(1, ntreat -1)
+      }
       resid.var[k] <- fit$sigma^2
     }
     
@@ -244,8 +272,14 @@ multinomial.inits <- function(network, n.chains)
           } else if(covariate.model == "common"){
             summary(lm(y[,k] ~ x.cen[,i] - 1))
           }
-          slope[-1,i,k] <- coef(fit2)[,1]
-          se.slope[-1,i,k] <- coef(fit2)[,2]
+          
+          if(length( coef(fit2)[,1]) == (ntreat-1)){
+            slope[-1,i,k] <- coef(fit2)[,1]
+            se.slope[-1,i,k] <- coef(fit2)[,2]
+          } else{
+            slope[-1,i,k] <- rep(0, ntreat -1)
+            se.slope[-1,i,k] <- rep(1, ntreat -1)
+          }
         }
       }
     }
@@ -264,8 +298,15 @@ multinomial.inits <- function(network, n.chains)
         } else if(baseline == "independent"){
           summary(lm(y[,k] ~ design.mat:baseline.cen[,k] - 1))
         }
-        baseline.slope[-1, k] <- coef(fit3)[,1]
-        baseline.se.slope[-1, k] <- coef(fit3)[,2]
+        
+        if(length( coef(fit3)[,1]) == (ntreat-1)){
+          baseline.slope[-1, k] <- coef(fit3)[,1]
+          baseline.se.slope[-1, k] <- coef(fit3)[,2]
+        } else{
+          baseline.slope[-1, k] <- rep(0, ntreat -1)
+          baseline.se.slope[-1, k] <- rep(1, ntreat - 1)
+          
+        }
       }
     }
     

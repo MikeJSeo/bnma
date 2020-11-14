@@ -73,6 +73,7 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
     if(length(coef(fit)[,1]) == (ntreat -1)){
       d[-1] <- coef(fit)[,1]
       se.d[-1] <- coef(fit)[,2]  
+      print("D TRUE")
     } else{
       d[-1] <- rep(0, ntreat -1)
       se.d[-1] <- rep(1, ntreat -1) 
@@ -101,6 +102,7 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
         if(length(coef(fit2)[,1]) == (ntreat-1) ){
           slope[-1,i] <- coef(fit2)[,1]
           se.slope[-1,i] <- coef(fit2)[,2]  
+          print("SLOPE TRUE")
         } else{
           slope[-1,i] <- rep(0, ntreat-1)
           se.slope[-1,i] <- rep(1, ntreat-1)  
@@ -124,7 +126,8 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
       }
       if(length(coef(fit3)[,1]) == (ntreat -1)){
         baseline.slope[-1] <- coef(fit3)[,1]
-        baseline.se.slope[-1] <- coef(fit3)[,2]  
+        baseline.se.slope[-1] <- coef(fit3)[,2] 
+        print("BASELINe TRUE")
       } else {
         baseline.slope[-1] <- rep(0, ntreat - 1)
         baseline.se.slope[-1] <- rep(1, ntreat - 1)

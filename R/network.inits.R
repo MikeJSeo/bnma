@@ -98,10 +98,10 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
           summary(lm(y ~ design.mat:x.cen[,i] - 1))
         }
         
-        if(length(coef(fit2)[,1]) == (ntreat-1) & baseline=="independent"){
+        if(length(coef(fit2)[,1]) == (ntreat-1) & covariate.model=="independent"){
           slope[-1,i] <- coef(fit2)[,1]
           se.slope[-1,i] <- coef(fit2)[,2]  
-        } else if(length(coef(fit2)[,1]) == 1 & baseline %in% c("common", "exchangeable")){
+        } else if(length(coef(fit2)[,1]) == 1 & covariate.model %in% c("common", "exchangeable")){
           slope[-1,i] <- rep(coef(fit2)[,1], ntreat-1)
           se.slope[-1,i] <- rep(coef(fit2)[,2], ntreat-1)  
         } else{

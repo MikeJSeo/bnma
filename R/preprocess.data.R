@@ -75,7 +75,11 @@ add.fictitious.row <- function(network, data){
     ncol <- dim(as.matrix(Outcomes))[2]
     if(length(no_reference) != 0){
       for(i in 1:length(no_reference)){
-        store <- rbind(store, c(rep(NA, ncol), 1, no_reference[i], 1))
+        if(response %in% c("binomial", "multinomial")){
+          store <- rbind(store, c(rep(NA, ncol), 1, no_reference[i], 1))  
+        } else if (response == "normal"){
+          store <-  rbind(store, c(0, 1000000, no_reference[i], 1))  
+        }
       }
     }
 

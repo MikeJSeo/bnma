@@ -228,7 +228,7 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
   end <- mcpar(samples[[1]])[2]
   mid <- (end + start-1)/2
   burnin <- ceiling(end - mid)
-  samples <- window(samples, mid+1, end, 1) #keep the last half of the converged sequence
+  samples <- window(samples, mid+1, end, 1) #keep the last half of the converged sequence as per Gelman and Rubin 1992
   samples <- new.mcmc(samples)
   
   n.thin <- 1

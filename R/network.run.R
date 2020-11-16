@@ -137,6 +137,20 @@ network.run <- function(network, inits = NULL, RNG.inits = NULL, n.chains = 3, m
       for(i in seq(dim(covariate)[2])){
         pars.save = c(pars.save, paste("beta",i,sep = ""))
       }
+      
+      if(covariate.model == "exchangeable"){
+        if(response == "multinomial"){
+          for(i in seq(dim(covariate)[2])){
+            pars.save = c(pars.save, paste("C",i,sep = ""))
+            pars.save = c(pars.save, paste("sigmaC",i,sep = ""))
+          }
+        } else if (response %in% c("binomial", "normal")){
+          for(i in seq(dim(covariate)[2])){
+            pars.save = c(pars.save, paste("C",i,sep = ""))
+            pars.save = c(pars.save, paste("sdC",i,sep = ""))
+          }
+        }
+      }
     }
     pars.save <- unique(pars.save)
     

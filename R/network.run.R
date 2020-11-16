@@ -118,11 +118,21 @@ network.run <- function(network, inits = NULL, RNG.inits = NULL, n.chains = 3, m
       if(baseline == "exchangeable"){
         if(response == "multinomial"){
           pars.save <- c(pars.save, "sigmaB")
-        } else{
+        } else if (response %in% c("binomial", "normal")){
           pars.save <- c(pars.save, "sdB")  
         }
       }
     }
+    
+    if(baseline.risk == "exchangeable"){
+      if(response == "multinomial"){
+        pars.save <- c(pars.save, "E", "sigmaE")  
+      } else if (response %in% c("binomial", "normal")){
+        pars.save <- c(pars.save, "E", "sdE")
+      }
+      
+    }
+    
     if(!is.null(covariate)){
       for(i in seq(dim(covariate)[2])){
         pars.save = c(pars.save, paste("beta",i,sep = ""))

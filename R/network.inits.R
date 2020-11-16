@@ -61,8 +61,9 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
       studytx <- Treat[(end.Study[i]+1):end.Study[i+1]]  #treatments in ith Study
       nonbase.tx <- studytx[studytx!=base.tx[i]]    #non-baseline treatments for ith Study
       design.mat[(1+rows[i]):rows[i+1],base.tx[i]] <- -1
-      for (j in seq(length(nonbase.tx)))
+      for (j in seq(length(nonbase.tx))){
         design.mat[j+rows[i],nonbase.tx[j]] <- 1
+      }
     }
     design.mat <- design.mat[,-1,drop=F]
     
@@ -78,7 +79,6 @@ make.inits <- function(network, n.chains, delta, Eta, se.Eta){
       se.d[-1] <- rep(0.1, ntreat -1) 
     }
         
-    
     resid.var <- fit$sigma^2
     
     # covariate

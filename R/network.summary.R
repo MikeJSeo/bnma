@@ -10,7 +10,7 @@ pick.summary.variables <- function(result, extra.pars = NULL, only.pars = NULL){
     }
   }
   if(is.null(only.pars)){
-    pars <- c("d", "sd", "sigma", "b_bl", "beta", "B", "sdB")
+    pars <- c("d", "sd", "sigma", "b_bl", "beta", "B", "sdB", "sigmaB", "E", "sdE", "sigmaE")
   } else{
     pars <- only.pars
   }

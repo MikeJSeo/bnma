@@ -795,6 +795,8 @@ network.leverage.plot <- function(result, per.study = FALSE){
     mtext("Per-arm contribution")  
   }
   
+  x <- NULL
+  
   for(i in 1: floor(max(c(leverage,4)))){
     curve(i-x^2, from=0, to = max(c(dev, 2.5)), add = TRUE)
   }

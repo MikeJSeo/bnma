@@ -115,7 +115,7 @@ NULL
 "thrombolytic"
 
 
-#' @importFrom graphics axis legend lines mtext plot points title
+#' @importFrom graphics axis legend lines mtext plot points title abline curve text
 NULL
 
 #' @importFrom stats coef end lm quantile rchisq rnorm sd start window aggregate

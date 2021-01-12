@@ -30,7 +30,7 @@ S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \
 
 C.H. Schmid, T.A. Trikalinos, I. Olkin (2014), \emph{Bayesian network meta-analysis for unordered categorical outcomes with incomplete data}, Research Synthesis Methods 5(2):162-185. [\url{https://doi.org/10.1002/jrsm.1103}]
 
-A. Gelman, D.B. Rubin (1992), \emph{Inference from iterative simulation using multiple sequences}, Statistical Science 7(4):457-472. [\url{http://doi.org/10.1214/ss/1177011136}]
+A. Gelman, D.B. Rubin (1992), \emph{Inference from iterative simulation using multiple sequences}, Statistical Science 7(4):457-472. [\url{https://doi.org/10.1214/ss/1177011136}]
 
 D.J. Spiegelhalter, N.G. Best, and B.P. Carlin (1998), \emph{Bayesian deviance, the effective nunmber of parameters, and the comparison of arbitrarily complex models}, Technical report, MRC Biostatistics Unit, Cambridge, UK.
 

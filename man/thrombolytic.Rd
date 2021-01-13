@@ -17,6 +17,6 @@ There are 9 treatments in total: streptokinase (1), alteplase (2), accelerated a
 reteplase (5), tenecteplase (6), percutaneous transluminal coronary angioplasty (7), urokinase (8), anistreptilase (9)
 }
 \references{
-S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. \doi{10.1177/0272989X12458724}
 }
 \keyword{datasets}

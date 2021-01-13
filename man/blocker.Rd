@@ -14,4 +14,7 @@ blocker
 A dataset of 22 trials investigating beta blockers versus control to prevent mortality after myocardial
 infarction. Control is coded as 1 and beta blocker treatment is coded as 2.
 }
+\references{
+S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. \doi{10.1177/0272989X12458724}
+}
 \keyword{datasets}

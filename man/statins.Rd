@@ -17,6 +17,6 @@ secondary prevention (patients had previous heart disease). Dummy variable is co
 if a study is a secondary prevention study and 0 if a study is a primary prevention study.
 }
 \references{
-S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013b), \emph{Heterogeneity-Subgroups, Meta-Regression, Bias, and Bias-Adjustment}, Medical Decision Making 33(5):618-640. [\url{https://doi.org/10.1177/0272989X13485157}]
+S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013b), \emph{Heterogeneity-Subgroups, Meta-Regression, Bias, and Bias-Adjustment}, Medical Decision Making 33(5):618-640. \doi{10.1177/0272989X13485157}
 }
 \keyword{datasets}

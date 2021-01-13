@@ -34,7 +34,7 @@
 #'  nodesplit.network.data(Outcomes, Study, Treat, N, response = "binomial", pair = c(3,9))
 #' })
 #' network
-#' @references S. Dias, N.J. Welton, D.M. Caldwellb, A.E. Ades (2010), \emph{Checking consistency in mixed treatment}, Statistics in Medicine 29(7-8, Sp. Iss. SI): 932-944. [\url{https://doi.org/10.1002/sim.3767}]
+#' @references S. Dias, N.J. Welton, D.M. Caldwellb, A.E. Ades (2010), \emph{Checking consistency in mixed treatment}, Statistics in Medicine 29(7-8, Sp. Iss. SI): 932-944. \doi{10.1002/sim.3767}
 #' @export
 
 nodesplit.network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL,  Treat.order = NULL,

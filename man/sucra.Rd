@@ -31,7 +31,7 @@ sucra(result)
 }
 }
 \references{
-G. Salanti, A.E. Ades, J.P.A. Ioannidisa (2011), \emph{Graphical methods and numerical summaries for presenting results from multiple-treatment meta-analysis: an overview and tutorial}, Journal of Clinical Epidemiology 64(2):163-71. [\url{https://doi.org/10.1016/j.jclinepi.2010.03.016}]
+G. Salanti, A.E. Ades, J.P.A. Ioannidisa (2011), \emph{Graphical methods and numerical summaries for presenting results from multiple-treatment meta-analysis: an overview and tutorial}, Journal of Clinical Epidemiology 64(2):163-71. \doi{10.1016/j.jclinepi.2010.03.016}
 }
 \seealso{
 \code{\link{rank.tx}}

@@ -584,7 +584,7 @@ network.cumrank.tx.plot <- function(result, txnames = NULL, catnames = NULL, leg
 #' sucra(result)
 #' }
 #' @seealso \code{\link{rank.tx}}
-#' @references G. Salanti, A.E. Ades, J.P.A. Ioannidisa (2011), \emph{Graphical methods and numerical summaries for presenting results from multiple-treatment meta-analysis: an overview and tutorial}, Journal of Clinical Epidemiology 64(2):163-71. [\url{https://doi.org/10.1016/j.jclinepi.2010.03.016}]
+#' @references G. Salanti, A.E. Ades, J.P.A. Ioannidisa (2011), \emph{Graphical methods and numerical summaries for presenting results from multiple-treatment meta-analysis: an overview and tutorial}, Journal of Clinical Epidemiology 64(2):163-71. \doi{10.1016/j.jclinepi.2010.03.016}
 #' @export
 
 sucra = function(result, txnames = NULL, catnames = NULL)
@@ -642,7 +642,7 @@ sucra = function(result, txnames = NULL, catnames = NULL)
 #' result <- network.run(network)
 #' calculate.deviance(result)
 #' }
-#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. \doi{10.1177/0272989X12458724}
 #' @export
 
 calculate.deviance <- function(result){
@@ -937,7 +937,7 @@ variance.tx.effects = function(result)
 #' result <- network.run(network)
 #' network.forest.plot(result)
 #' }
-#' @references W. Viechtbauer (2010), \emph{Conducting meta-analyses in R with the metafor package}, Journal of Statistical Software, 36(3):1-48. [\url{https://doi.org/10.18637/jss.v036.i03}]
+#' @references W. Viechtbauer (2010), \emph{Conducting meta-analyses in R with the metafor package}, Journal of Statistical Software, 36(3):1-48. \doi{10.18637/jss.v036.i03}
 #' @export
 
 network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, label.multiplier = 0.2, label.margin = 10, title = "Network Meta-analysis Forest plot", only.reference.treatment = FALSE){
@@ -1075,7 +1075,7 @@ draw.network.graph <- function(network, label.dist = 2){
 #' @param result2 inconsistency model result from running \code{\link{ume.network.data}} function
 #' @param with.label indicator to show the study number; default is true.
 #' @return None
-#' @references S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \emph{Evidence synthesis for decision making 4: inconsistency in networks of evidence based on randomized controlled trials}, Medical Decision Making 33(5):641-656. [\url{https://doi.org/10.1177/0272989X12455847}]
+#' @references S. Dias, N.J. Welton, A.J. Sutton, D.M. Caldwell, G. Lu, and A.E. Ades (2013), \emph{Evidence synthesis for decision making 4: inconsistency in networks of evidence based on randomized controlled trials}, Medical Decision Making 33(5):641-656. \doi{10.1177/0272989X12455847}
 #' @examples
 #' network1 <- with(smoking, {
 #'  network.data(Outcomes, Study, Treat, N = N, response = "binomial", type = "random")

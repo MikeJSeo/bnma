@@ -46,5 +46,5 @@ network.forest.plot(result)
 }
 }
 \references{
-W. Viechtbauer (2010), \emph{Conducting meta-analyses in R with the metafor package}, Journal of Statistical Software, 36(3):1-48. [\url{https://doi.org/10.18637/jss.v036.i03}]
+W. Viechtbauer (2010), \emph{Conducting meta-analyses in R with the metafor package}, Journal of Statistical Software, 36(3):1-48. \doi{10.18637/jss.v036.i03}
 }

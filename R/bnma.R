@@ -34,6 +34,7 @@ NULL
 #'
 #' A dataset of 22 trials investigating beta blockers versus control to prevent mortality after myocardial
 #' infarction. Control is coded as 1 and beta blocker treatment is coded as 2.
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. \doi{10.1177/0272989X12458724}
 #' @format A list of Outcomes, Treat, Study, and N.
 "blocker"
 
@@ -42,7 +43,7 @@ NULL
 #' A dataset of 12 trials for investigating CZP for the treatment for those who had failed on disease-modifying antirheumatic drugs, including methotrexate (MTX).
 #' Data provides the number of patients who have improved and there are 6 different treatments with placebo. Mean disease duration (years) is provided as a covariate.
 #'
-#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013b), \emph{Heterogeneity-Subgroups, Meta-Regression, Bias, and Bias-Adjustment}, Medical Decision Making 33(5):618-640. [\url{https://doi.org/10.1177/0272989X13485157}]
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013b), \emph{Heterogeneity-Subgroups, Meta-Regression, Bias, and Bias-Adjustment}, Medical Decision Making 33(5):618-640. \doi{10.1177/0272989X13485157}
 #' @format A list of Outcomes, Treat, Study, N, covariate, and Treat.order
 "certolizumab"
 
@@ -53,7 +54,7 @@ NULL
 #' secondary prevention (patients had previous heart disease). Dummy variable is coded such that covariate is equal to 1
 #' if a study is a secondary prevention study and 0 if a study is a primary prevention study.
 #'
-#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013b), \emph{Heterogeneity-Subgroups, Meta-Regression, Bias, and Bias-Adjustment}, Medical Decision Making 33(5):618-640. [\url{https://doi.org/10.1177/0272989X13485157}]
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013b), \emph{Heterogeneity-Subgroups, Meta-Regression, Bias, and Bias-Adjustment}, Medical Decision Making 33(5):618-640. \doi{10.1177/0272989X13485157}
 #' @format A list of Outcomes, Treat, Study, N, covariate, and Treat.order
 "statins"
 
@@ -63,7 +64,7 @@ NULL
 #' 4 dopamine agonists and placebo as adjunct therapy for Parkinson's disease.
 #' There is placebo and four active drugs coded 2 to 5.
 #'
-#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. \doi{10.1177/0272989X12458724}
 #' @format A list of Outcomes, Treat, Study, N, covariate, and Treat.order
 "parkinsons"
 
@@ -74,7 +75,7 @@ NULL
 #' 4 dopamine agonists and placebo as adjunct therapy for Parkinson's disease. Placebo is coded as 1, and four active drugs are coded 2 to 5.
 #' There is placebo, coded as 1, and four active drugs coded 2 to 5.
 #'
-#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. \doi{10.1177/0272989X12458724}
 #' @format A list of Outcomes, Treat, SE, na, and V
 "parkinsons_contrast"
 
@@ -87,7 +88,7 @@ NULL
 #' First column of the outcome is the patients who are still alive (ALIVE). Second column is fatal non-cardiovascular disease (FnCVD).
 #' And, the last column is fatal cardiovascular disease (FCVD).
 #'
-#' @references C.H. Schmid, T.A. Trikalinos, I. Olkin (2014), \emph{Bayesian network meta-analysis for unordered categorical outcomes with incomplete data}, Research Synthesis Methods 5(2):162-185. [\url{https://doi.org/10.1002/jrsm.1103}]
+#' @references C.H. Schmid, T.A. Trikalinos, I. Olkin (2014), \emph{Bayesian network meta-analysis for unordered categorical outcomes with incomplete data}, Research Synthesis Methods 5(2):162-185. \doi{10.1002/jrsm.1103}
 #' @format A list of Outcomes, Treat, Study, and N
 "cardiovascular"
 
@@ -98,7 +99,7 @@ NULL
 #' individuals with successful smoking cessation at 6 to 12 month. Counseling programs include 1 = no intervention, 2 = self-help,
 #' 3 = individual counseling, and 4 = group counseling. 
 #'
-#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. \doi{10.1177/0272989X12458724}
 #' @format A list of Outcomes, Treat, Study, and N
 "smoking"
 
@@ -110,7 +111,7 @@ NULL
 #' There are 9 treatments in total: streptokinase (1), alteplase (2), accelerated alteplase (3), streptokinase + alteplase (4),
 #' reteplase (5), tenecteplase (6), percutaneous transluminal coronary angioplasty (7), urokinase (8), anistreptilase (9)
 #' 
-#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. [\url{https://doi.org/10.1177/0272989X12458724}]
+#' @references S. Dias, A.J. Sutton, A.E. Ades, and N.J. Welton (2013a), \emph{A Generalized Linear Modeling Framework for Pairwise and Network Meta-analysis of Randomized Controlled Trials}, Medical Decision Making 33(5):607-617. \doi{10.1177/0272989X12458724}
 #' @format A list of Outcomes, Treat, Study, and N
 "thrombolytic"
 

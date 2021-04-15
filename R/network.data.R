@@ -34,6 +34,8 @@
 #' @param hy.prior Prior for the heterogeneity parameter. Supports uniform, gamma, and half normal for normal and binomial response and wishart for multinomial response. It should be a list of length 3, where first element should be the distribution (one of dunif, dgamma, dhnorm, dwish) and the next two are the parameters associated with the distribution. For example, list("dunif", 0, 5) give uniform prior with lower bound 0 and upper bound 5 for the heterogeneity parameter. For wishart distribution, the last two parameter would be the scale matrix and the degrees of freedom.
 #' @param mean.A Mean effect of 'standard' treatment (i.e. placebo). It is in logit scale for binomial and continuous scale for normal. For binomial outcome, this additional input is used to calculate the risk difference, relative risk, or number needed to treat. This should be informed from external evidence or can be found by meta-analyzing single proportions. For number needed to treat, we assume that events are "good". Reversal of sign is needed if the events are "bad".
 #' @param prec.A Precision of 'standard' treatment. Similarly, it is in logit scale for binomial and continuous scale for normal.
+#' @param Z When calculating treatment effect on the natural scale, this is a scalar or a vector of covariates value(s) that you want to calculate treatment effect at.
+#' @param Z_bl When calculating treatment effect on the natural scale, this is a scalar of baseline risk (Eta) that you want to calculate treatment effect at.
 #' @return Creates list of variables that are used to run the model using \code{\link{network.run}}
 #' \item{data}{Data combining all the input data. User can check this to insure the data is correctly specified. For modelling purposes, character valued studies or treatment variables are changed to numeric values based on alphabetical order.}
 #' \item{nrow}{Total number of arms in the meta-analysis}
@@ -63,12 +65,12 @@
 network.data <- function(Outcomes = NULL, Study = NULL, Treat = NULL, N = NULL, SE = NULL, response = NULL, Treat.order = NULL, type = "random", rank.preference = "higher",
                          baseline = "none", baseline.risk = "independent", covariate = NULL, covariate.type = NULL, covariate.model = NULL,
                          mean.d = NULL, prec.d = NULL, mean.Eta = NULL, prec.Eta = NULL, hy.prior.Eta = NULL, mean.bl = NULL, prec.bl = NULL, hy.prior.bl = NULL,
-                         mean.cov = NULL, prec.cov = NULL, hy.prior.cov = NULL, hy.prior = NULL, mean.A = NULL, prec.A = NULL) {
+                         mean.cov = NULL, prec.cov = NULL, hy.prior.cov = NULL, hy.prior = NULL, mean.A = NULL, prec.A = NULL, Z = NULL, Z_bl = NULL) {
 
   # rename the variables and order them based on specified treatment order
   network <- preprocess.data(Outcomes = Outcomes, Study = Study, Treat = Treat, N = N, SE = SE, response = response, Treat.order = Treat.order, type = type, rank.preference = rank.preference,
                   baseline = baseline, baseline.risk = baseline.risk, covariate = covariate, covariate.type = covariate.type, covariate.model = covariate.model,
-                  hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior, mean.A = mean.A, prec.A = prec.A)
+                  hy.prior.Eta = hy.prior.Eta, hy.prior.bl = hy.prior.bl, hy.prior.cov = hy.prior.cov, hy.prior = hy.prior, mean.A = mean.A, prec.A = prec.A, Z = Z, Z_bl = Z_bl)
   
   # find characteristic values associated with the network, i.e. number of studies, number of treatments, etc
   characteristics <- find.characteristics(network)

@@ -114,12 +114,12 @@ model.normal <- function(network){
       
       if(!is.null(covariate) & !is.null(Z)){
         for(i in 1:dim(covariate)[2]){
-          code <- paste0(code, " + (beta", i, "[k]- beta", i, "[1]) * (", Z[i], "-mx", i, ")")
+          code <- paste0(code, " + (beta", i, "[k]- beta", i, "[1]) * (", Z[i], " - mx", i, ")")
         }
       }
       
       if(baseline != "none" & !is.null(Z_bl)){
-        code <- paste0(code, " + (b_bl[k] - b_bl[1]) * (", Z_bl, "- mx_bl)")
+        code <- paste0(code, " + (b_bl[k] - b_bl[1]) * (", Z_bl, " - mx_bl)")
       }
       code <- paste0(code, " }")
     }
@@ -230,12 +230,12 @@ model.binomial <- function(network)
       
       if(!is.null(covariate) & !is.null(Z)){
         for(i in 1:dim(covariate)[2]){
-          code <- paste0(code, " + (beta", i, "[k]- beta", i, "[1]) * (", Z[i], "-mx", i, ")")
+          code <- paste0(code, " + (beta", i, "[k]- beta", i, "[1]) * (", Z[i], " - mx", i, ")")
         }
       }
 
       if(baseline != "none" & !is.null(Z_bl)){
-        code <- paste0(code, " + (b_bl[k] - b_bl[1]) * (", Z_bl, "- mx_bl)")
+        code <- paste0(code, " + (b_bl[k] - b_bl[1]) * (", Z_bl, " - mx_bl)")
       }
       code <- paste0(code, " }")
       

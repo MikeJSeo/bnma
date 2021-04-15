@@ -107,9 +107,21 @@ model.normal <- function(network){
     }
     
     if(!is.null(mean.A) & !is.null(prec.A)){
+      
       code <- paste0(code,
                      "\n\tA ~ dnorm(mean.A, prec.A)",
-                     "\n\tfor(k in 1:", ntreat, ") { T[k] <- A + d[k] }")
+                     "\n\tfor(k in 1:", ntreat, ") { T[k] <- A + d[k]")
+      
+      if(!is.null(covariate) & !is.null(Z)){
+        for(i in 1:dim(covariate)[2]){
+          code <- paste0(code, " + (beta", i, "[k]- beta", i, "[1]) * (Z[i]-mx", i, ")")
+        }
+      }
+      
+      if(baseline != "none" & !is.null(Z_bl)){
+        code <- paste0(code, " + (b_bl[k] - b_bl[1]) * (Z_bl[i] - mx_bl)")
+      }
+      code <- paste0(code, " }")
     }
     
     return(code)

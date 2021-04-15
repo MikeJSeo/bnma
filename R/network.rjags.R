@@ -226,7 +226,7 @@ model.binomial <- function(network)
       
       code <- paste0(code,
                      "\n\tA ~ dnorm(mean.A, prec.A)",
-                     "\n\tfor(k in 1:", ntreat, ") { T[k] <- A + d[k]")
+                     "\n\tfor(k in 1:", ntreat, ") { logit(T[k]) <- A + d[k]")
       
       if(!is.null(covariate) & !is.null(Z)){
         for(i in 1:dim(covariate)[2]){

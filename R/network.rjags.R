@@ -119,7 +119,7 @@ model.normal <- function(network){
       }
       
       if(baseline != "none" & !is.null(Z_bl)){
-        code <- paste0(code, " + (b_bl[k] - b_bl[1]) * (Z_bl[i] - mx_bl)")
+        code <- paste0(code, " + (b_bl[k] - b_bl[1]) * (", Z_bl, "- mx_bl)")
       }
       code <- paste0(code, " }")
     }
@@ -235,7 +235,7 @@ model.binomial <- function(network)
       }
 
       if(baseline != "none" & !is.null(Z_bl)){
-        code <- paste0(code, " + (b_bl[k] - b_bl[1]) * (Z_bl - mx_bl)")
+        code <- paste0(code, " + (b_bl[k] - b_bl[1]) * (", Z_bl, "- mx_bl)")
       }
       code <- paste0(code, " }")
       

@@ -32,7 +32,9 @@ network.data(
   hy.prior.cov = NULL,
   hy.prior = NULL,
   mean.A = NULL,
-  prec.A = NULL
+  prec.A = NULL,
+  Z = NULL,
+  Z_bl = NULL
 )
 }
 \arguments{
@@ -91,6 +93,10 @@ network.data(
 \item{mean.A}{Mean effect of 'standard' treatment (i.e. placebo). It is in logit scale for binomial and continuous scale for normal. For binomial outcome, this additional input is used to calculate the risk difference, relative risk, or number needed to treat. This should be informed from external evidence or can be found by meta-analyzing single proportions. For number needed to treat, we assume that events are "good". Reversal of sign is needed if the events are "bad".}
 
 \item{prec.A}{Precision of 'standard' treatment. Similarly, it is in logit scale for binomial and continuous scale for normal.}
+
+\item{Z}{When calculating treatment effect on the natural scale, this is a scalar or a vector of covariates value(s) that you want to calculate treatment effect at.}
+
+\item{Z_bl}{When calculating treatment effect on the natural scale, this is a scalar of baseline risk (Eta) that you want to calculate treatment effect at.}
 }
 \value{
 Creates list of variables that are used to run the model using \code{\link{network.run}}

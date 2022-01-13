@@ -188,7 +188,7 @@ summary(result, extra.pars = c("RR"))
 
 ## Generating reproducible results: initializing the random number generators
 
-Generating reproducible results requires to set two set of seed values. First, the set.seed() function is used to allow bnma to generate reproducible initial values. Second, there is the JAGS RNG seed that need to be set. Setting the JAGS RNG seed is not necessary in bnma as the program assigns default JAGS RNG seeds. However, users can specify their own seed if needed.
+Generating reproducible results requires to set two set of seed values. First, the set.seed() function is used to allow bnma to generate reproducible initial values. Second, there is the JAGS RNG seed that needs to be set. Setting the JAGS RNG seed is not necessary in bnma as the program assigns default JAGS RNG seeds. However, users can specify their own seed if needed.
 
 ```{r}
 set.seed(1234) # seed for generating reproducible initial values

@@ -208,10 +208,6 @@ contrast.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 
       pars.save <- c(pars.save, extra.pars.save)
     }
     
-    if(is.null(inits)){
-      inits <- contrast.inits(network, n.chains)
-    }
-    
     #reproducible results
     RNG.inits <- list()
     for(i in 1:n.chains){

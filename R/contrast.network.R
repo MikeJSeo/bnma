@@ -211,6 +211,19 @@ contrast.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 
     if(is.null(inits)){
       inits <- contrast.inits(network, n.chains)
     }
+    
+    #reproducible results
+    RNG.inits <- list()
+    for(i in 1:n.chains){
+      RNG.inits[[i]] <- list(".RNG.name" = "base::Wichmann-Hill", ".RNG.seed" = i)
+    }
+    
+    if(!is.null(inits)){
+      inits <- mapply(c, inits, RNG.inits, SIMPLIFY = FALSE)  
+    } else {
+      inits <- RNG.inits
+    }
+    
     samples <- jags.fit(network, data, pars.save, inits, n.chains, max.run, setsize, n.run, conv.limit)
     result <- list(network = network, data.rjags = data, inits = inits, pars.save = pars.save)
     result <- c(result, samples)

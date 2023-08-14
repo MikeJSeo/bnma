@@ -203,6 +203,11 @@ contrast.network.run <- function(network, inits = NULL, n.chains = 3, max.run = 
       pars.save <- c(pars.save, "sd", "delta")  
     }
     
+    if(is.null(inits)){
+      inits <- contrast.inits(network, n.chains)
+    }
+    print(inits)
+    
     if(!is.null(extra.pars.save)) {
       extra.pars.save.check(extra.pars.save, pars.save)
       pars.save <- c(pars.save, extra.pars.save)

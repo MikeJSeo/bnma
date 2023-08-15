@@ -698,7 +698,7 @@ calculate.deviance <- function(result){
         r_value <- network$r[i,j]
         se_value <- network$se[i,j]
 
-        if(class(network) == "nodesplit.network.data"){
+        if(inherits(network, "nodesplit.network.data")){
           ybar_arm[i,j] <- ybar[which(paste("theta[", i, ",", network$t[i,j], "]", sep = "") == names(ybar))]
         } else{
           ybar_arm[i,j] <- ybar[which(paste("theta[", i, ",", j, "]", sep = "") == names(ybar))]
@@ -1049,7 +1049,7 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
 
 draw.network.graph <- function(network, label.dist = 2){
 
-  if(class(network) == "contrast.network.data"){
+  if(inherits(network, "contrast.network.data")){
     Treat <- c(t(network$Treat))[!is.na(c(t(network$Treat)))]
     Study <- rep(1:length(network$na), times = network$na)
   } else{
@@ -1093,11 +1093,11 @@ draw.network.graph <- function(network, label.dist = 2){
 
 network.inconsistency.plot <- function(result1, result2, with.label = T){
   
-  if(class(result1) != "network.result"){
+  if(inherits(result1, "network.result")){
     stop("result1 has to be a consistency model result")
   }
   
-  if(class(result2) != "ume.network.result"){
+  if(inherits(result2, "ume.network.result")){
     stop("result2 has to be an inconsistency model result")
   }
  

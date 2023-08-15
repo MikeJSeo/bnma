@@ -1093,11 +1093,11 @@ draw.network.graph <- function(network, label.dist = 2){
 
 network.inconsistency.plot <- function(result1, result2, with.label = T){
   
-  if(inherits(result1, "network.result")){
+  if(!inherits(result1, "network.result")){
     stop("result1 has to be a consistency model result")
   }
   
-  if(inherits(result2, "ume.network.result")){
+  if(!inherits(result2, "ume.network.result")){
     stop("result2 has to be an inconsistency model result")
   }
  

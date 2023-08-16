@@ -1,6 +1,10 @@
+# bnma 1.6.0
+
+* Modified reference line for continuous outcome to be at 0 instead of 1.
+
 # bnma 1.5.1
 
-* Modified contrast.network.run to avoid error
+* Modified contrast.network.run to avoid error.
 
 # bnma 1.5.0
 

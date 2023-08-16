@@ -998,11 +998,17 @@ network.forest.plot <- function(result, level = 0.95, ticks.position = NULL, lab
       ticks <- ticks.position
     }
 
+    if(result$network$response %in% c("binomial", "multinomial")){
+      yintercept <- 1
+    } else if(result$network$response == "normal"){
+      yintercept <- 0  
+    }
+    
     p <- ggplot(odds, aes(y = OR, x = name)) +
       geom_point() +
       geom_errorbar(aes(ymin = lower, ymax = upper), width = .2) +
       scale_x_discrete(limits = name) +
-      geom_hline(yintercept = 1, linetype = 2) +
+      geom_hline(yintercept = yintercept, linetype = 2) +
       coord_flip() +
       theme_bw() +
       theme(plot.margin = unit(c(1,label.margin,1,1), "lines"))

@@ -1,6 +1,6 @@
 # bnma 1.5.1
 
-* Fixed error in contrast.network.data
+* Modified contrast.network.run to avoid error
 
 # bnma 1.5.0
 

@@ -200,7 +200,7 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
   }
   
   # conv.save are the variables that are used to check convergence
-  if(class(network) == "network.data"){
+  if(inherits(network, "network.data")){
     
     conv.save <- if(network$response == "multinomial"){
       c("d", "Eta", "sigma_transformed")
@@ -219,9 +219,9 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
         conv.save = c(conv.save, paste("beta",i,sep = ""))
       }
     }
-  } else if(class(network) == "contrast.network.data" || class(network) == "ume.network.data"){
+  } else if(inherits(network, "contrast.network.data") || inherits(network, "ume.network.data")){
     conv.save <- pars.save
-  } else if(class(network) == "nodesplit.network.data"){
+  } else if(inherits(network, "nodesplit.network.data")){
     conv.save <- c("d", "sd", "diff")
   }
   

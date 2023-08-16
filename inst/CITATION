@@ -1,19 +1,8 @@
-citHeader("To cite the 'bnma' package in publications use:")
-
-year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
-vers <- paste("R package version", meta$Version)
-
-citEntry(entry="Manual",
-         title = "bnma: Bayesian Network Meta-Analysis using 'JAGS'",
-         author = c(person("Michael", "Seo"),
-                    person("Christopher", "Schmid")),
-         year = year,
-         note = vers,
-		 url = "https://CRAN.R-project.org/package=bnma",
-
-         textVersion =
-         paste("Michael Seo and Christopher Schmid (",
-               year,
-               "). bnma: Bayesian Network Meta-Analysis using 'JAGS'. ",
-               vers, ". ", 
-			   "https://CRAN.R-project.org/package=bnma.", sep=""))
+bibentry(
+  bibtype = "Manual",
+  title = "bnma: Bayesian Network Meta-Analysis using 'JAGS'",
+  author = c(person("Michael", "Seo"),
+             person("Christopher", "Schmid")),
+  year = sub("-.*", "", meta$Date),
+  note = sprintf("R package version %s", meta$Version),
+  url = "https://CRAN.R-project.org/package=bnma")

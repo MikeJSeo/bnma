@@ -830,7 +830,7 @@ network.leverage.plot <- function(result, per.study = FALSE){
 
 network.covariate.plot <- function(result, base.treatment = NULL, comparison.treatment= NULL, base.category = NULL, comparison.category = NULL, covariate.name = NULL){
 
-  if(is.null(network$covariate)){
+  if(is.null(result$network$covariate)){
     stop("need to provide covariate information to make this plot")
   }
   if(result$network$response != "multinomial"){

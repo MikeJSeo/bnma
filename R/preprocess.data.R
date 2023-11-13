@@ -177,6 +177,10 @@ check.for.errors <- function(network){
       if(!all(apply(as.matrix(covariate), 2, is.numeric))){
         stop("covariate has to be numeric type")
       }
+      
+      if(is.null(covariate.type) || !all(covariate.type %in% c("continuous", "discrete"))){
+        stop("covariate type has to be either continuous or discrete")
+      }
     }
 
     if(!is.null(Treat.order)){

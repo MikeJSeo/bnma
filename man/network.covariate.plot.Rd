@@ -38,7 +38,7 @@ The function uses the \code{\link{relative.effects}} to calculate the correct re
 ########### certolizumab (with covariate)
 network <- with(certolizumab, {
  network.data(Outcomes, Study, Treat, N=N, response="binomial", Treat.order,
- covariate = covariate, hy.prior = list("dhnorm", 0, 9.77))
+ covariate = covariate, covariate.type = "continuous", hy.prior = list("dhnorm", 0, 9.77))
 })
 \donttest{
 result <- network.run(network)

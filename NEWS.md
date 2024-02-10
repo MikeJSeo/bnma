@@ -1,6 +1,8 @@
 # bnma 1.6.0
 
-* Modified reference line for continuous outcome to be at 0 instead of 1.
+* Modified reference line for continuous outcome to be at 0 instead of 1 in the network.forest.plot.
+* Updated baseline risk section in the vignette.
+* Modified network.run function so that the function returns the variables that were tested for convergence using Gelman and Rubin's diagnostic. Now it returns conv.save which stores the variables tested.
 
 # bnma 1.5.1
 

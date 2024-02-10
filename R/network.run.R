@@ -20,6 +20,7 @@
 #' \item{n.thin}{If the number of iterations user wants (n.run) is less than the number of converged sequence after burnin, we thin the sequence and store the thinning interval}
 #' \item{samples}{MCMC samples stored using jags. The returned samples have the form of mcmc.list and can be directly applied to coda functions}
 #' \item{max.gelman}{Maximum Gelman and Rubin's convergence diagnostic calculated for the final sample}
+#' \item{conv.save}{Variables that were tested for convergence using Gelman and Rubin's diagnostic}
 #' \item{deviance}{Contains deviance statistics such as pD (effective number of parameters) and DIC (Deviance Information Criterion)}
 #' \item{rank.tx}{Rank probability calculated for each treatments. \code{rank.preference} parameter in \code{\link{network.data}} is used to define whether higher or lower value is preferred. The numbers are probabilities that a given treatment has been in certain rank in the sequence.}
 #' @examples
@@ -274,7 +275,7 @@ jags.fit <- function(network, data, pars.save, inits, n.chains, max.run, setsize
   max.gelman <- find.max.gelman(samples, conv.save.variables)
   print(max.gelman)
   
-  out <-list(burnin = burnin, n.thin = n.thin, samples = samples, max.gelman = max.gelman)
+  out <-list(burnin = burnin, n.thin = n.thin, samples = samples, max.gelman = max.gelman, conv.save = conv.save)
   return(out)
 }
 

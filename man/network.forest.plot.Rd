@@ -38,7 +38,7 @@ Draws forest plot of pooled treatment effect. Reports odds ratio for binomial an
 \examples{
 network <- with(certolizumab, {
  network.data(Outcomes, Study, Treat, N=N, response="binomial", Treat.order,
- covariate = covariate, hy.prior = list("dhnorm", 0, 9.77))
+ covariate = covariate, covariate.type = "continous", hy.prior = list("dhnorm", 0, 9.77))
 })
 \donttest{
 result <- network.run(network)

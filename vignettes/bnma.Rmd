@@ -129,7 +129,7 @@ network.covariate.plot(result, base.treatment = "Placebo", comparison.treatment 
 
 Another useful addition of this network package is the ability to model baseline risk. We can have "common", "independent", or "exchangeable" assumption on the baseline slopes and "independent" and "exchangeable" assumption on the baseline risk. Here we demonstrate a common baseline slope and independent baseline risk model.
 
-Note that Abe 2006 study is problematic in the certolizumab dataset because it has 0 events. If we specify an informative prior on the baseline risk (i.e. prec.Eta), this helps with the convergence of the model.
+Note that Abe 2006 study is problematic in the certolizumab dataset because it has 0 event. If we specify an informative prior on the baseline risk (i.e. prec.Eta), this helps with the convergence of the model.
 
 ```{r} 
 network <- with(certolizumab, network.data(Outcomes = Outcomes, Treat = Treat, Study = Study, N = N, response = "binomial", Treat.order = Treat.order, baseline = "common", baseline.risk = "independent", prec.Eta = 0.1))

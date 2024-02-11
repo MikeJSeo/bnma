@@ -242,9 +242,9 @@ model.binomial <- function(network)
       code <- paste0(code,
                      "\n\tfor(k in 1:", ntreat, ") {",
                      "\n\t\tfor(kk in (k+1):", ntreat, ") {",
-                     "\n\t\tNNT[kk,k] <- 1/(T[kk] - T[k])",
-                     "\n\t\tRD[kk,k] <- T[kk] - T[k]",
-                     "\n\t\tRR[kk,k] <- T[kk]/T[k]",
+                     "\n\t\t\tNNT[kk,k] <- 1/(T[kk] - T[k])",
+                     "\n\t\t\tRD[kk,k] <- T[kk] - T[k]",
+                     "\n\t\t\tRR[kk,k] <- T[kk]/T[k]",
                      "\n\t\t}",
                      "\n\t}")
     }

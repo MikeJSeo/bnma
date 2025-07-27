@@ -1,3 +1,7 @@
+# bnma 1.6.1
+
+* Minor update fixing the link in the description
+
 # bnma 1.6.0
 
 * Modified reference line for continuous outcome to be at 0 instead of 1 in the network.forest.plot.

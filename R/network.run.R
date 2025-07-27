@@ -12,7 +12,7 @@
 #' @param conv.limit Convergence limit for Gelman and Rubin's convergence diagnostic. Point estimate is used (instead of 95 percent C.I.) to test convergence of parameters for study-specific baselines (eta), average treatment effect (d), between-study heterogeneity (log variance (logvar)), and regression parameters when covariates (beta) or baseline risk (b_bl).
 #' @param extra.pars.save Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.
 #' @return
-#' \item{data_rjags}{Data that is put into rjags function \code{\link{jags.model}}}
+#' \item{data_rjags}{Data that is put into rjags function \code{\link[rjags]{jags.model}}}
 #' \item{inits}{Initial values that are either specified by the user or generated as a default}
 #' \item{RNG.inits}{List of .RNG.name and .RNG.seed used for reproducibility}
 #' \item{pars.save}{Parameters that are saved. Add more parameters in extra.pars.save if other variables are desired}

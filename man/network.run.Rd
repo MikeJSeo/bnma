@@ -36,7 +36,7 @@ network.run(
 \item{extra.pars.save}{Parameters that user wants to save besides the default parameters saved. See code using \code{cat(network$code)} to see which parameters can be saved.}
 }
 \value{
-\item{data_rjags}{Data that is put into rjags function \code{\link{jags.model}}}
+\item{data_rjags}{Data that is put into rjags function \code{\link[rjags]{jags.model}}}
 \item{inits}{Initial values that are either specified by the user or generated as a default}
 \item{RNG.inits}{List of .RNG.name and .RNG.seed used for reproducibility}
 \item{pars.save}{Parameters that are saved. Add more parameters in extra.pars.save if other variables are desired}
